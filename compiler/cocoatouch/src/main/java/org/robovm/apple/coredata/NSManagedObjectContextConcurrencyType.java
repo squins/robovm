@@ -28,6 +28,7 @@ import org.robovm.rt.bro.*;
 import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
+import org.robovm.apple.corespotlight.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -40,7 +41,7 @@ public enum /*<name>*/NSManagedObjectContextConcurrencyType/*</name>*/ implement
     /*<values>*/
     /**
      * @since Available in iOS 3.0 and later.
-     * @deprecated Deprecated in iOS 9.0.
+     * @deprecated Deprecated in iOS 9.0. Use another NSManagedObjectContextConcurrencyType
      */
     @Deprecated
     Confinement(0L),

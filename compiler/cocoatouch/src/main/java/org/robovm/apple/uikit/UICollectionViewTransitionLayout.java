@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -56,7 +59,7 @@ import org.robovm.apple.corelocation.*;
     @Method(selector = "initWithCurrentLayout:nextLayout:")
     public UICollectionViewTransitionLayout(UICollectionViewLayout currentLayout, UICollectionViewLayout newLayout) { super((SkipInit) null); initObject(init(currentLayout, newLayout)); }
     @Method(selector = "initWithCoder:")
-    public UICollectionViewTransitionLayout(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UICollectionViewTransitionLayout(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "transitionProgress")
@@ -73,7 +76,7 @@ import org.robovm.apple.corelocation.*;
     @Method(selector = "initWithCurrentLayout:nextLayout:")
     protected native @Pointer long init(UICollectionViewLayout currentLayout, UICollectionViewLayout newLayout);
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     @Method(selector = "updateValue:forAnimatedKey:")
     public native void updateValue(@MachineSizedFloat double value, String key);
     @Method(selector = "valueForAnimatedKey:")

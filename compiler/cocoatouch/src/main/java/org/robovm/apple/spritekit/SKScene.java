@@ -36,6 +36,7 @@ import org.robovm.apple.avfoundation.*;
 import org.robovm.apple.glkit.*;
 import org.robovm.apple.scenekit.*;
 import org.robovm.apple.gameplaykit.*;
+import org.robovm.apple.metal.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -55,6 +56,8 @@ import org.robovm.apple.gameplaykit.*;
     protected SKScene(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithSize:")
     public SKScene(@ByVal CGSize size) { super((SkipInit) null); initObject(init(size)); }
+    @Method(selector = "initWithCoder:")
+    public SKScene(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "size")

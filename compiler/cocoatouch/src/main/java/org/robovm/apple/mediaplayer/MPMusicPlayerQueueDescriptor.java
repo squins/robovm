@@ -46,7 +46,7 @@ import org.robovm.apple.coregraphics.*;
     /*<bind>*/static { ObjCRuntime.bind(MPMusicPlayerQueueDescriptor.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public MPMusicPlayerQueueDescriptor() {}
+    protected MPMusicPlayerQueueDescriptor() {}
     protected MPMusicPlayerQueueDescriptor(Handle h, long handle) { super(h, handle); }
     protected MPMusicPlayerQueueDescriptor(SkipInit skipInit) { super(skipInit); }
     /*</constructors>*/

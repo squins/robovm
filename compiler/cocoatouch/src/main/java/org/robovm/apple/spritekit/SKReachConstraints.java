@@ -36,6 +36,7 @@ import org.robovm.apple.avfoundation.*;
 import org.robovm.apple.glkit.*;
 import org.robovm.apple.scenekit.*;
 import org.robovm.apple.gameplaykit.*;
+import org.robovm.apple.metal.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -46,7 +47,7 @@ import org.robovm.apple.gameplaykit.*;
 /*<annotations>*/@Library("SpriteKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/SKReachConstraints/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class SKReachConstraintsPtr extends Ptr<SKReachConstraints, SKReachConstraintsPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(SKReachConstraints.class); }/*</bind>*/
@@ -69,6 +70,8 @@ import org.robovm.apple.gameplaykit.*;
     public native @MachineSizedFloat double getUpperAngleLimit();
     @Property(selector = "setUpperAngleLimit:")
     public native void setUpperAngleLimit(@MachineSizedFloat double v);
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

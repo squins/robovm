@@ -35,14 +35,14 @@ import org.robovm.apple.addressbook.*;
 /*<javadoc>*/
 /**
  * @since Available in iOS 2.0 and later.
- * @deprecated Deprecated in iOS 9.0.
+ * @deprecated Deprecated in iOS 9.0. Use +[CNContactViewController viewControllerForContact:] from ContactsUI.framework instead
  */
 @Deprecated
 /*</javadoc>*/
 /*<annotations>*/@Library("AddressBookUI") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/ABPersonViewController/*</name>*/ 
     extends /*<extends>*/UIViewController/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements UIViewControllerRestoration/*</implements>*/ {
 
     /*<ptr>*/public static class ABPersonViewControllerPtr extends Ptr<ABPersonViewController, ABPersonViewControllerPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(ABPersonViewController.class); }/*</bind>*/
@@ -51,6 +51,10 @@ import org.robovm.apple.addressbook.*;
     public ABPersonViewController() {}
     protected ABPersonViewController(Handle h, long handle) { super(h, handle); }
     protected ABPersonViewController(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithNibName:bundle:")
+    public ABPersonViewController(String nibNameOrNil, NSBundle nibBundleOrNil) { super(nibNameOrNil, nibBundleOrNil); }
+    @Method(selector = "initWithCoder:")
+    public ABPersonViewController(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "personViewDelegate")
@@ -98,5 +102,7 @@ import org.robovm.apple.addressbook.*;
     /*<methods>*/
     @Method(selector = "setHighlightedItemForProperty:withIdentifier:")
     public native void setHighlightedItem(ABPersonProperty property, int identifier);
+    @Method(selector = "viewControllerWithRestorationIdentifierPath:coder:")
+    public static native UIViewController viewControllerWithRestorationIdentifier(NSArray<NSString> identifierComponents, NSCoder coder);
     /*</methods>*/
 }

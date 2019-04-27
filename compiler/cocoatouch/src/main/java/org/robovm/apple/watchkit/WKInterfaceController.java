@@ -92,7 +92,7 @@ import org.robovm.apple.corelocation.*;
     @Method(selector = "presentTextInputControllerWithSuggestions:allowedInputMode:completion:")
     public native void presentTextInputController(@org.robovm.rt.bro.annotation.Marshaler(NSArray.AsStringListMarshaler.class) List<String> suggestions, WKTextInputMode inputMode, @Block VoidBlock1<NSArray<?>> completion);
     @Method(selector = "presentTextInputControllerWithSuggestionsForLanguage:allowedInputMode:completion:")
-    public native void presentTextInputController(@Block Block1<String, NSArray<?>> suggestionsHandler, WKTextInputMode inputMode, @Block VoidBlock1<NSArray<?>> completion);
+    public native void presentTextInputController(@Block Block1<NSString, NSArray<?>> suggestionsHandler, WKTextInputMode inputMode, @Block VoidBlock1<NSArray<?>> completion);
     @Method(selector = "dismissTextInputController")
     public native void dismissTextInputController();
     @Method(selector = "contextForSegueWithIdentifier:")
@@ -115,16 +115,20 @@ import org.robovm.apple.corelocation.*;
     public native void updateUserActivity(String type, NSDictionary<?, ?> userInfo, NSURL webpageURL);
     @Method(selector = "invalidateUserActivity")
     public native void invalidateUserActivity();
+    @Method(selector = "beginGlanceUpdates")
+    public native void beginGlanceUpdates();
+    @Method(selector = "endGlanceUpdates")
+    public native void endGlanceUpdates();
     /**
      * @since Available in iOS 8.2 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. use UNUserNotificationCenterDelegate
      */
     @Deprecated
     @Method(selector = "handleActionWithIdentifier:forRemoteNotification:")
     public native void handleAction(String identifier, UIRemoteNotification remoteNotification);
     /**
      * @since Available in iOS 8.2 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. use UNUserNotificationCenterDelegate
      */
     @Deprecated
     @Method(selector = "handleActionWithIdentifier:forLocalNotification:")

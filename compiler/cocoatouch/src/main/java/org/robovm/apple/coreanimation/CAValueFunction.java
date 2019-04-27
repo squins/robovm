@@ -43,7 +43,7 @@ import org.robovm.apple.metal.*;
 /*<annotations>*/@Library("QuartzCore") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/CAValueFunction/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class CAValueFunctionPtr extends Ptr<CAValueFunction, CAValueFunctionPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(CAValueFunction.class); }/*</bind>*/
@@ -58,6 +58,8 @@ import org.robovm.apple.metal.*;
     /*<properties>*/
     @Property(selector = "name")
     public native CAValueFunctionName getName();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

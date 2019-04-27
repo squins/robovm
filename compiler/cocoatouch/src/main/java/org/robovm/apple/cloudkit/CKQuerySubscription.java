@@ -30,6 +30,7 @@ import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.corelocation.*;
 import org.robovm.apple.contacts.*;
+import org.robovm.apple.fileprovider.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -40,13 +41,13 @@ import org.robovm.apple.contacts.*;
 /*<annotations>*/@Library("CloudKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/CKQuerySubscription/*</name>*/ 
     extends /*<extends>*/CKSubscription/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class CKQuerySubscriptionPtr extends Ptr<CKQuerySubscription, CKQuerySubscriptionPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(CKQuerySubscription.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public CKQuerySubscription() {}
+    protected CKQuerySubscription() {}
     protected CKQuerySubscription(Handle h, long handle) { super(h, handle); }
     protected CKQuerySubscription(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithRecordType:predicate:options:")

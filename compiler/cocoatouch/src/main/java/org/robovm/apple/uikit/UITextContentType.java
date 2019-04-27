@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -185,9 +188,25 @@ import org.robovm.apple.corelocation.*;
      * @since Available in iOS 10.0 and later.
      */
     public static final UITextContentType CreditCardNumber = new UITextContentType("CreditCardNumber");
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    public static final UITextContentType Username = new UITextContentType("Username");
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    public static final UITextContentType Password = new UITextContentType("Password");
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    public static final UITextContentType NewPassword = new UITextContentType("NewPassword");
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    public static final UITextContentType OneTimeCode = new UITextContentType("OneTimeCode");
     /*</constants>*/
     
-    private static /*<name>*/UITextContentType/*</name>*/[] values = new /*<name>*/UITextContentType/*</name>*/[] {/*<value_list>*/Name, NamePrefix, GivenName, MiddleName, FamilyName, NameSuffix, Nickname, JobTitle, OrganizationName, Location, FullStreetAddress, StreetAddressLine1, StreetAddressLine2, AddressCity, AddressState, AddressCityAndState, Sublocality, CountryName, PostalCode, TelephoneNumber, EmailAddress, URL, CreditCardNumber/*</value_list>*/};
+    private static /*<name>*/UITextContentType/*</name>*/[] values = new /*<name>*/UITextContentType/*</name>*/[] {/*<value_list>*/Name, NamePrefix, GivenName, MiddleName, FamilyName, NameSuffix, Nickname, JobTitle, OrganizationName, Location, FullStreetAddress, StreetAddressLine1, StreetAddressLine2, AddressCity, AddressState, AddressCityAndState, Sublocality, CountryName, PostalCode, TelephoneNumber, EmailAddress, URL, CreditCardNumber, Username, Password, NewPassword, OneTimeCode/*</value_list>*/};
     
     /*<name>*/UITextContentType/*</name>*/ (String getterName) {
         super(Values.class, getterName);
@@ -325,6 +344,26 @@ import org.robovm.apple.corelocation.*;
          */
         @GlobalValue(symbol="UITextContentTypeCreditCardNumber", optional=true)
         public static native NSString CreditCardNumber();
+        /**
+         * @since Available in iOS 11.0 and later.
+         */
+        @GlobalValue(symbol="UITextContentTypeUsername", optional=true)
+        public static native NSString Username();
+        /**
+         * @since Available in iOS 11.0 and later.
+         */
+        @GlobalValue(symbol="UITextContentTypePassword", optional=true)
+        public static native NSString Password();
+        /**
+         * @since Available in iOS 12.0 and later.
+         */
+        @GlobalValue(symbol="UITextContentTypeNewPassword", optional=true)
+        public static native NSString NewPassword();
+        /**
+         * @since Available in iOS 12.0 and later.
+         */
+        @GlobalValue(symbol="UITextContentTypeOneTimeCode", optional=true)
+        public static native NSString OneTimeCode();
         /*</values>*/
     }
 }

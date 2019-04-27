@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -57,6 +60,8 @@ import org.robovm.apple.corelocation.*;
     public UIPageViewController(UIPageViewControllerTransitionStyle style, UIPageViewControllerNavigationOrientation navigationOrientation, UIPageViewControllerOptions options) { super((SkipInit) null); initObject(init(style, navigationOrientation, options)); }
     @Method(selector = "initWithCoder:")
     public UIPageViewController(NSCoder coder) { super((SkipInit) null); initObject(init(coder)); }
+    @Method(selector = "initWithNibName:bundle:")
+    public UIPageViewController(String nibNameOrNil, NSBundle nibBundleOrNil) { super(nibNameOrNil, nibBundleOrNil); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "delegate")

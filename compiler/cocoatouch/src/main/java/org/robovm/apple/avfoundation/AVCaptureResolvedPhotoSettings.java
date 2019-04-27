@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -68,10 +67,30 @@ import org.robovm.apple.audiounit.*;
     public native @ByVal CMVideoDimensions getRawPhotoDimensions();
     @Property(selector = "previewDimensions")
     public native @ByVal CMVideoDimensions getPreviewDimensions();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "embeddedThumbnailDimensions")
+    public native @ByVal CMVideoDimensions getEmbeddedThumbnailDimensions();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "rawEmbeddedThumbnailDimensions")
+    public native @ByVal CMVideoDimensions getRawEmbeddedThumbnailDimensions();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "portraitEffectsMatteDimensions")
+    public native @ByVal CMVideoDimensions getPortraitEffectsMatteDimensions();
     @Property(selector = "livePhotoMovieDimensions")
     public native @ByVal CMVideoDimensions getLivePhotoMovieDimensions();
     @Property(selector = "isFlashEnabled")
     public native boolean isFlashEnabled();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "isRedEyeReductionEnabled")
+    public native boolean isRedEyeReductionEnabled();
     @Property(selector = "isStillImageStabilizationEnabled")
     public native boolean isStillImageStabilizationEnabled();
     /**
@@ -79,6 +98,11 @@ import org.robovm.apple.audiounit.*;
      */
     @Property(selector = "isDualCameraFusionEnabled")
     public native boolean isDualCameraFusionEnabled();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "expectedPhotoCount")
+    public native @MachineSizedUInt long getExpectedPhotoCount();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

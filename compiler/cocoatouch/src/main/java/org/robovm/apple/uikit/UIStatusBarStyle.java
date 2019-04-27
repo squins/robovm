@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -49,13 +52,13 @@ public enum /*<name>*/UIStatusBarStyle/*</name>*/ implements ValuedEnum {
     LightContent(1L),
     /**
      * @since Available in iOS 2.0 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Use UIStatusBarStyleLightContent
      */
     @Deprecated
     BlackTranslucent(1L),
     /**
      * @since Available in iOS 2.0 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Use UIStatusBarStyleLightContent
      */
     @Deprecated
     BlackOpaque(2L);

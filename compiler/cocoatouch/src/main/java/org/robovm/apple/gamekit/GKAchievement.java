@@ -39,7 +39,7 @@ import org.robovm.apple.uikit.*;
 /*<annotations>*/@Library("GameKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/GKAchievement/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSCoding, NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class GKAchievementPtr extends Ptr<GKAchievement, GKAchievementPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(GKAchievement.class); }/*</bind>*/
@@ -57,7 +57,7 @@ import org.robovm.apple.uikit.*;
     public GKAchievement(String identifier, GKPlayer player) { super((SkipInit) null); initObject(init(identifier, player)); }
     /**
      * @since Available in iOS 7.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. use initWithIdentifier:player:
      */
     @Deprecated
     @Method(selector = "initWithIdentifier:forPlayer:")
@@ -95,11 +95,13 @@ import org.robovm.apple.uikit.*;
     public native GKPlayer getPlayer();
     /**
      * @since Available in iOS 7.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. use player
      */
     @Deprecated
     @Property(selector = "playerID")
     public native String getPlayerID();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -121,14 +123,14 @@ import org.robovm.apple.uikit.*;
     public static native void reportAchievements(NSArray<GKAchievement> achievements, @Block VoidBlock1<NSError> completionHandler);
     /**
      * @since Available in iOS 4.1 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Use +reportAchievements:withCompletionHandler:
      */
     @Deprecated
     @Method(selector = "reportAchievementWithCompletionHandler:")
     public native void reportAchievement(@Block VoidBlock1<NSError> completionHandler);
     /**
      * @since Available in iOS 7.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. use initWithIdentifier:player:
      */
     @Deprecated
     @Method(selector = "initWithIdentifier:forPlayer:")
@@ -140,7 +142,7 @@ import org.robovm.apple.uikit.*;
     public native UIViewController getChallengeComposeController(String message, NSArray<GKPlayer> players, @Block VoidBlock3<UIViewController, Boolean, NSArray<GKPlayer>> completionHandler);
     /**
      * @since Available in iOS 6.0 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. pass GKPlayers to challengeComposeControllerWithMessage:players:completionHandler: and present the view controller instead
      */
     @Deprecated
     @Method(selector = "issueChallengeToPlayers:message:")
@@ -157,14 +159,14 @@ import org.robovm.apple.uikit.*;
     public static native void reportAchievements(NSArray<GKAchievement> achievements, NSArray<GKChallenge> challenges, @Block VoidBlock1<NSError> completionHandler);
     /**
      * @since Available in iOS 6.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. pass GKPlayers to selectChallengeablePlayers:
      */
     @Deprecated
     @Method(selector = "selectChallengeablePlayerIDs:withCompletionHandler:")
     public native void selectChallengeablePlayerIDs(@org.robovm.rt.bro.annotation.Marshaler(NSArray.AsStringListMarshaler.class) List<String> playerIDs, @Block VoidBlock2<NSArray<NSString>, NSError> completionHandler);
     /**
      * @since Available in iOS 7.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. pass GKPlayers to challengeComposeControllerWithMessage:players:
      */
     @Deprecated
     @Method(selector = "challengeComposeControllerWithPlayers:message:completionHandler:")

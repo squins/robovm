@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -58,6 +57,8 @@ import org.robovm.apple.audiounit.*;
     public AVMutableDateRangeMetadataGroup() {}
     protected AVMutableDateRangeMetadataGroup(Handle h, long handle) { super(h, handle); }
     protected AVMutableDateRangeMetadataGroup(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithItems:startDate:endDate:")
+    public AVMutableDateRangeMetadataGroup(NSArray<AVMetadataItem> items, NSDate startDate, NSDate endDate) { super(items, startDate, endDate); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "startDate")

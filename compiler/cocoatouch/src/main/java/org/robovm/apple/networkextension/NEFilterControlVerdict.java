@@ -39,7 +39,7 @@ import org.robovm.apple.security.*;
 /*<annotations>*/@Library("NetworkExtension") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/NEFilterControlVerdict/*</name>*/ 
     extends /*<extends>*/NEFilterNewFlowVerdict/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class NEFilterControlVerdictPtr extends Ptr<NEFilterControlVerdict, NEFilterControlVerdictPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(NEFilterControlVerdict.class); }/*</bind>*/
@@ -58,12 +58,12 @@ import org.robovm.apple.security.*;
      * @since Available in iOS 9.0 and later.
      */
     @Method(selector = "allowVerdictWithUpdateRules:")
-    public static native NEFilterControlVerdict allowVerdictWithUpdateRules(boolean updateRules);
+    public static native NEFilterControlVerdict createAllowVerdict(boolean updateRules);
     /**
      * @since Available in iOS 9.0 and later.
      */
     @Method(selector = "dropVerdictWithUpdateRules:")
-    public static native NEFilterControlVerdict dropVerdictWithUpdateRules(boolean updateRules);
+    public static native NEFilterControlVerdict createDropVerdict(boolean updateRules);
     /**
      * @since Available in iOS 9.0 and later.
      */

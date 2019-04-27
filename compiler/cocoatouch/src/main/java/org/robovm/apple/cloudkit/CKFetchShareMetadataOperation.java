@@ -30,6 +30,7 @@ import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.corelocation.*;
 import org.robovm.apple.contacts.*;
+import org.robovm.apple.fileprovider.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -50,7 +51,7 @@ import org.robovm.apple.contacts.*;
     protected CKFetchShareMetadataOperation(Handle h, long handle) { super(h, handle); }
     protected CKFetchShareMetadataOperation(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithShareURLs:")
-    public CKFetchShareMetadataOperation(NSArray<NSURL> shareURLs) { super((SkipInit) null); initObject(initWithShareURLs(shareURLs)); }
+    public CKFetchShareMetadataOperation(NSArray<NSURL> shareURLs) { super((SkipInit) null); initObject(init(shareURLs)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "shareURLs")
@@ -62,9 +63,9 @@ import org.robovm.apple.contacts.*;
     @Property(selector = "setShouldFetchRootRecord:")
     public native void setShouldFetchRootRecord(boolean v);
     @Property(selector = "rootRecordDesiredKeys")
-    public native NSArray<?> getRootRecordDesiredKeys();
+    public native NSArray<NSString> getRootRecordDesiredKeys();
     @Property(selector = "setRootRecordDesiredKeys:")
-    public native void setRootRecordDesiredKeys(NSArray<?> v);
+    public native void setRootRecordDesiredKeys(NSArray<NSString> v);
     @Property(selector = "perShareMetadataBlock")
     public native @Block VoidBlock3<NSURL, CKShareMetadata, NSError> getPerShareMetadataBlock();
     @Property(selector = "setPerShareMetadataBlock:")
@@ -77,6 +78,6 @@ import org.robovm.apple.contacts.*;
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "initWithShareURLs:")
-    protected native @Pointer long initWithShareURLs(NSArray<NSURL> shareURLs);
+    protected native @Pointer long init(NSArray<NSURL> shareURLs);
     /*</methods>*/
 }

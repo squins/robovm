@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -60,10 +59,19 @@ import org.robovm.apple.audiounit.*;
     protected AVAudioSessionPortDescription(SkipInit skipInit) { super(skipInit); }
     /*</constructors>*/
     /*<properties>*/
+    /**
+     * @since Available in iOS 6.0 and later.
+     */
     @Property(selector = "portType")
     public native AVAudioSessionPort getPortType();
+    /**
+     * @since Available in iOS 6.0 and later.
+     */
     @Property(selector = "portName")
     public native String getPortName();
+    /**
+     * @since Available in iOS 6.0 and later.
+     */
     @Property(selector = "UID")
     public native String getUID();
     /**
@@ -71,6 +79,9 @@ import org.robovm.apple.audiounit.*;
      */
     @Property(selector = "hasHardwareVoiceCallProcessing")
     public native boolean hasHardwareVoiceCallProcessing();
+    /**
+     * @since Available in iOS 6.0 and later.
+     */
     @Property(selector = "channels")
     public native NSArray<AVAudioSessionChannelDescription> getChannels();
     /**

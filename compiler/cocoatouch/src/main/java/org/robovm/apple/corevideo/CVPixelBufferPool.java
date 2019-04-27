@@ -32,6 +32,7 @@ import org.robovm.apple.corefoundation.*;
 import org.robovm.apple.coregraphics.*;
 import org.robovm.apple.opengles.*;
 import org.robovm.apple.metal.*;
+import org.robovm.apple.iosurface.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -98,11 +99,6 @@ import org.robovm.apple.metal.*;
      */
     @GlobalValue(symbol="kCVPixelBufferPoolFreeBufferNotification", optional=true)
     public static native NSString FreeBufferNotification();
-    /**
-     * @since Available in iOS 4.0 and later.
-     */
-    @GlobalValue(symbol="kCVPixelBufferPoolFreeBufferNotification", optional=true)
-    public static native void FreeBufferNotification(NSString v);
     
     /**
      * @since Available in iOS 4.0 and later.

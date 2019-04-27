@@ -28,6 +28,7 @@ import org.robovm.rt.bro.*;
 import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
+import org.robovm.apple.corespotlight.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -192,6 +193,16 @@ import org.robovm.apple.foundation.*;
      */
     @Property(selector = "setAutomaticallyMergesChangesFromParent:")
     public native void setAutomaticallyMergesChangesFromParent(boolean v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "transactionAuthor")
+    public native String getTransactionAuthor();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setTransactionAuthor:")
+    public native void setTransactionAuthor(String v);
     /*</properties>*/
     /*<members>*//*</members>*/
     public void observeValue(String keyPath, NSObject object, NSKeyValueChangeInfo change) {}
@@ -326,21 +337,21 @@ import org.robovm.apple.foundation.*;
     public native void refreshAllObjects();
     /**
      * @since Available in iOS 3.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. Use a queue style context and -performBlockAndWait: instead
      */
     @Deprecated
     @Method(selector = "lock")
     public native void lock();
     /**
      * @since Available in iOS 3.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. Use a queue style context and -performBlockAndWait: instead
      */
     @Deprecated
     @Method(selector = "unlock")
     public native void unlock();
     /**
      * @since Available in iOS 3.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. Use a queue style context and -performBlock: instead
      */
     @Deprecated
     @Method(selector = "tryLock")

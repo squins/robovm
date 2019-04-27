@@ -68,6 +68,17 @@ import org.robovm.apple.messages.*;
     public MFMessageComposeViewController() {}
     protected MFMessageComposeViewController(Handle h, long handle) { super(h, handle); }
     protected MFMessageComposeViewController(SkipInit skipInit) { super(skipInit); }
+    /**
+     * @since Available in iOS 5.0 and later.
+     */
+    @Method(selector = "initWithNavigationBarClass:toolbarClass:")
+    public MFMessageComposeViewController(Class<? extends UINavigationBar> navigationBarClass, Class<? extends UIToolbar> toolbarClass) { super(navigationBarClass, toolbarClass); }
+    @Method(selector = "initWithRootViewController:")
+    public MFMessageComposeViewController(UIViewController rootViewController) { super(rootViewController); }
+    @Method(selector = "initWithNibName:bundle:")
+    public MFMessageComposeViewController(String nibNameOrNil, NSBundle nibBundleOrNil) { super(nibNameOrNil, nibBundleOrNil); }
+    @Method(selector = "initWithCoder:")
+    public MFMessageComposeViewController(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "messageComposeDelegate")
@@ -82,10 +93,19 @@ import org.robovm.apple.messages.*;
     public native String getBody();
     @Property(selector = "setBody:")
     public native void setBody(String v);
+    /**
+     * @since Available in iOS 7.0 and later.
+     */
     @Property(selector = "subject")
     public native String getSubject();
+    /**
+     * @since Available in iOS 7.0 and later.
+     */
     @Property(selector = "setSubject:")
     public native void setSubject(String v);
+    /**
+     * @since Available in iOS 7.0 and later.
+     */
     @Property(selector = "attachments")
     public native @org.robovm.rt.bro.annotation.Marshaler(MFMessageComposeViewControllerAttachment.AsListMarshaler.class) List<MFMessageComposeViewControllerAttachment> getAttachments();
     /**
@@ -127,9 +147,6 @@ import org.robovm.apple.messages.*;
      */
     @Method(selector = "addAttachmentData:typeIdentifier:filename:")
     public native boolean addAttachment(NSData attachmentData, String uti, String filename);
-    /**
-     * @since Available in iOS 4.0 and later.
-     */
     @Method(selector = "canSendText")
     public static native boolean canSendText();
     /**

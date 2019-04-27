@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -96,7 +99,7 @@ import org.robovm.apple.corelocation.*;
     private static native boolean read(NSMutableAttributedString thiz, NSData data, NSAttributedStringDocumentAttributes opts, NSDictionary.NSDictionaryPtr<?, ?> dict, NSError.NSErrorPtr error);
     /**
      * @since Available in iOS 7.0 and later.
-     * @deprecated Deprecated in iOS 9.0.
+     * @deprecated Deprecated in iOS 9.0. Use -readFromURL:options:documentAttributes:error: instead
      */
     @Deprecated
     public static boolean readFromFileURL(NSMutableAttributedString thiz, NSURL url, NSAttributedStringDocumentAttributes opts, NSDictionary.NSDictionaryPtr<?, ?> dict) throws NSErrorException {
@@ -107,7 +110,7 @@ import org.robovm.apple.corelocation.*;
     }
     /**
      * @since Available in iOS 7.0 and later.
-     * @deprecated Deprecated in iOS 9.0.
+     * @deprecated Deprecated in iOS 9.0. Use -readFromURL:options:documentAttributes:error: instead
      */
     @Deprecated
     @Method(selector = "readFromFileURL:options:documentAttributes:error:")

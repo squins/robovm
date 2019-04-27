@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -55,9 +54,13 @@ import org.robovm.apple.audiounit.*;
     /*<bind>*/static { ObjCRuntime.bind(AVContentKeySession.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public AVContentKeySession() {}
+    protected AVContentKeySession() {}
     protected AVContentKeySession(Handle h, long handle) { super(h, handle); }
     protected AVContentKeySession(SkipInit skipInit) { super(skipInit); }
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    public AVContentKeySession(String keySystem) { super((Handle) null, create(keySystem)); retain(getHandle()); }
     public AVContentKeySession(String keySystem, NSURL storageURL) { super((Handle) null, create(keySystem, storageURL)); retain(getHandle()); }
     /*</constructors>*/
     /*<properties>*/
@@ -81,9 +84,29 @@ import org.robovm.apple.audiounit.*;
     @Method(selector = "expire")
     public native void expire();
     @Method(selector = "processContentKeyRequestWithIdentifier:initializationData:options:")
-    public native void processContentKeyRequestWithIdentifier(NSObject identifier, NSData initializationData, NSDictionary<?, ?> options);
+    public native void processContentKeyRequestWithIdentifier(NSObject identifier, NSData initializationData, NSDictionary<NSString, ?> options);
     @Method(selector = "renewExpiringResponseDataForContentKeyRequest:")
     public native void renewExpiringResponseDataForContentKeyRequest(AVContentKeyRequest contentKeyRequest);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "makeSecureTokenForExpirationDateOfPersistableContentKey:completionHandler:")
+    public native void makeSecureTokenForExpirationDateOfPersistableContentKey(NSData persistableContentKeyData, @Block VoidBlock2<NSData, NSError> handler);
+    /**
+     * @since Available in iOS 12.2 and later.
+     */
+    @Method(selector = "invalidatePersistableContentKey:options:completionHandler:")
+    public native void invalidatePersistableContentKey(NSData persistableContentKeyData, NSDictionary<NSString, ?> options, @Block VoidBlock2<NSData, NSError> handler);
+    /**
+     * @since Available in iOS 12.2 and later.
+     */
+    @Method(selector = "invalidateAllPersistableContentKeysForApp:options:completionHandler:")
+    public native void invalidateAllPersistableContentKeys(NSData appIdentifier, NSDictionary<NSString, ?> options, @Block VoidBlock2<NSData, NSError> handler);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "contentKeySessionWithKeySystem:")
+    protected static native @Pointer long create(String keySystem);
     @Method(selector = "contentKeySessionWithKeySystem:storageDirectoryAtURL:")
     protected static native @Pointer long create(String keySystem, NSURL storageURL);
     @Method(selector = "addContentKeyRecipient:")
@@ -91,8 +114,8 @@ import org.robovm.apple.audiounit.*;
     @Method(selector = "removeContentKeyRecipient:")
     public native void removeContentKeyRecipient(AVContentKeyRecipient recipient);
     @Method(selector = "pendingExpiredSessionReportsWithAppIdentifier:storageDirectoryAtURL:")
-    public static native NSArray<NSDictionary> pendingExpiredSessionReportsWithAppIdentifier(NSData appIdentifier, NSURL storageURL);
+    public static native NSArray<NSData> pendingExpiredSessionReportsWithAppIdentifier(NSData appIdentifier, NSURL storageURL);
     @Method(selector = "removePendingExpiredSessionReports:withAppIdentifier:storageDirectoryAtURL:")
-    public static native void removePendingExpiredSessionReports(NSArray<NSDictionary> expiredSessionReports, NSData appIdentifier, NSURL storageURL);
+    public static native void removePendingExpiredSessionReports(NSArray<NSData> expiredSessionReports, NSData appIdentifier, NSURL storageURL);
     /*</methods>*/
 }

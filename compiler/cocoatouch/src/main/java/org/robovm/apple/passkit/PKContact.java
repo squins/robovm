@@ -60,24 +60,24 @@ import org.robovm.apple.contacts.*;
     public native CNPostalAddress getPostalAddress();
     @Property(selector = "setPostalAddress:")
     public native void setPostalAddress(CNPostalAddress v);
-    @Property(selector = "emailAddress")
-    public native String getEmailAddress();
-    @Property(selector = "setEmailAddress:")
-    public native void setEmailAddress(String v);
     @Property(selector = "phoneNumber")
     public native CNPhoneNumber getPhoneNumber();
     @Property(selector = "setPhoneNumber:")
     public native void setPhoneNumber(CNPhoneNumber v);
+    @Property(selector = "emailAddress")
+    public native String getEmailAddress();
+    @Property(selector = "setEmailAddress:")
+    public native void setEmailAddress(String v);
     /**
      * @since Available in iOS 9.2 and later.
-     * @deprecated Deprecated in iOS 10.3.
+     * @deprecated Deprecated in iOS 10.3. Use subLocality and subAdministrativeArea on -postalAddress instead
      */
     @Deprecated
     @Property(selector = "supplementarySubLocality")
     public native String getSupplementarySubLocality();
     /**
      * @since Available in iOS 9.2 and later.
-     * @deprecated Deprecated in iOS 10.3.
+     * @deprecated Deprecated in iOS 10.3. Use subLocality and subAdministrativeArea on -postalAddress instead
      */
     @Deprecated
     @Property(selector = "setSupplementarySubLocality:")

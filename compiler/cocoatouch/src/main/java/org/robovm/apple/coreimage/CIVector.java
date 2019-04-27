@@ -35,6 +35,7 @@ import org.robovm.apple.corevideo.*;
 import org.robovm.apple.imageio.*;
 import org.robovm.apple.uikit.*;
 import org.robovm.apple.metal.*;
+import org.robovm.apple.iosurface.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -45,7 +46,7 @@ import org.robovm.apple.metal.*;
 /*<annotations>*/@Library("CoreImage") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/CIVector/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class CIVectorPtr extends Ptr<CIVector, CIVectorPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(CIVector.class); }/*</bind>*/
@@ -79,6 +80,8 @@ import org.robovm.apple.metal.*;
     public CIVector(@ByVal CGAffineTransform r) { super((SkipInit) null); initObject(init(r)); }
     @Method(selector = "initWithString:")
     public CIVector(String representation) { super((SkipInit) null); initObject(init(representation)); }
+    @Method(selector = "initWithCoder:")
+    public CIVector(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
 
     public CIVector(double[] values) {
@@ -129,6 +132,8 @@ import org.robovm.apple.metal.*;
     public native @ByVal CGAffineTransform getCGAffineTransformValue();
     @Property(selector = "stringRepresentation")
     public native String getStringRepresentation();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -161,5 +166,9 @@ import org.robovm.apple.metal.*;
     protected native @Pointer long init(String representation);
     @Method(selector = "valueAtIndex:")
     public native @MachineSizedFloat double getValueAtIndex(@MachineSizedUInt long index);
+    @Method(selector = "encodeWithCoder:")
+    public native void encode(NSCoder coder);
+    @Method(selector = "initWithCoder:")
+    protected native @Pointer long init(NSCoder decoder);
     /*</methods>*/
 }

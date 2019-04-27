@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -53,6 +56,17 @@ import org.robovm.apple.corelocation.*;
     public UIVideoEditorController() {}
     protected UIVideoEditorController(Handle h, long handle) { super(h, handle); }
     protected UIVideoEditorController(SkipInit skipInit) { super(skipInit); }
+    /**
+     * @since Available in iOS 5.0 and later.
+     */
+    @Method(selector = "initWithNavigationBarClass:toolbarClass:")
+    public UIVideoEditorController(Class<? extends UINavigationBar> navigationBarClass, Class<? extends UIToolbar> toolbarClass) { super(navigationBarClass, toolbarClass); }
+    @Method(selector = "initWithRootViewController:")
+    public UIVideoEditorController(UIViewController rootViewController) { super(rootViewController); }
+    @Method(selector = "initWithNibName:bundle:")
+    public UIVideoEditorController(String nibNameOrNil, NSBundle nibBundleOrNil) { super(nibNameOrNil, nibBundleOrNil); }
+    @Method(selector = "initWithCoder:")
+    public UIVideoEditorController(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "delegate")

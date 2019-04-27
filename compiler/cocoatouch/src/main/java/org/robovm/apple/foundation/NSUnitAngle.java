@@ -46,15 +46,19 @@ import org.robovm.apple.dispatch.*;
 /*<annotations>*/@Library("Foundation") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/NSUnitAngle/*</name>*/ 
     extends /*<extends>*/NSDimension/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class NSUnitAnglePtr extends Ptr<NSUnitAngle, NSUnitAnglePtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(NSUnitAngle.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public NSUnitAngle() {}
+    protected NSUnitAngle() {}
     protected NSUnitAngle(Handle h, long handle) { super(h, handle); }
     protected NSUnitAngle(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithSymbol:converter:")
+    public NSUnitAngle(String symbol, NSUnitConverter converter) { super(symbol, converter); }
+    @Method(selector = "initWithSymbol:")
+    public NSUnitAngle(String symbol) { super(symbol); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "degrees")

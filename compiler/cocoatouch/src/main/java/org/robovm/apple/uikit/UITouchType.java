@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -46,6 +49,10 @@ public enum /*<name>*/UITouchType/*</name>*/ implements ValuedEnum {
     /*<values>*/
     Direct(0L),
     Indirect(1L),
+    /**
+     * @since Available in iOS 9.1 and later.
+     */
+    Pencil(2L),
     /**
      * @since Available in iOS 9.1 and later.
      */

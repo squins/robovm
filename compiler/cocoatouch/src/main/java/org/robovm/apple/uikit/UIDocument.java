@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -44,7 +47,7 @@ import org.robovm.apple.corelocation.*;
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UIDocument/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements NSFilePresenter, NSProgressReporting/*</implements>*/ {
+    /*<implements>*/implements NSFilePresenter, NSProgressReporting, UIUserActivityRestoring/*</implements>*/ {
 
     public static class Notifications {
         /**
@@ -109,6 +112,11 @@ import org.robovm.apple.corelocation.*;
     public native NSURL getPresentedItemURL();
     @Property(selector = "presentedItemOperationQueue")
     public native NSOperationQueue getPresentedItemOperationQueue();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "observedPresentedItemUbiquityAttributes")
+    public native NSSet<NSString> getObservedPresentedItemUbiquityAttributes();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -225,6 +233,11 @@ import org.robovm.apple.corelocation.*;
     public native void presentedItemDidMoveToURL(NSURL newURL);
     @Method(selector = "presentedItemDidChange")
     public native void presentedItemDidChange();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "presentedItemDidChangeUbiquityAttributes:")
+    public native void presentedItemDidChangeUbiquityAttributes(NSSet<NSString> attributes);
     @Method(selector = "presentedItemDidGainVersion:")
     public native void presentedItemDidGainVersion(NSFileVersion version);
     @Method(selector = "presentedItemDidLoseVersion:")

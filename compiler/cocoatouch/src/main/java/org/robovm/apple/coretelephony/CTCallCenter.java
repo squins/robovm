@@ -34,7 +34,9 @@ import org.robovm.apple.corefoundation.*;
 /*<javadoc>*/
 /**
  * @since Available in iOS 4.0 and later.
+ * @deprecated Deprecated in iOS 10.0. Replaced by CXCallObserver from CallKit.framework
  */
+@Deprecated
 /*</javadoc>*/
 /*<annotations>*/@Library("CoreTelephony") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/CTCallCenter/*</name>*/ 
@@ -52,21 +54,21 @@ import org.robovm.apple.corefoundation.*;
     /*<properties>*/
     /**
      * @since Available in iOS 4.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Replaced by <CallKit/CXCallObserver.h>
      */
     @Deprecated
     @Property(selector = "currentCalls")
     public native NSSet<CTCall> getCurrentCalls();
     /**
      * @since Available in iOS 4.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Replaced by <CallKit/CXCallObserver.h>
      */
     @Deprecated
     @Property(selector = "callEventHandler")
     public native @Block VoidBlock1<CTCall> getCallEventHandler();
     /**
      * @since Available in iOS 4.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Replaced by <CallKit/CXCallObserver.h>
      */
     @Deprecated
     @Property(selector = "setCallEventHandler:")

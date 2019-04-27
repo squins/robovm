@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -44,7 +47,7 @@ import org.robovm.apple.corelocation.*;
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UIBarButtonItem/*</name>*/
     extends /*<extends>*/UIBarItem/*</extends>*/
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSCoding, UISpringLoadedInteractionSupporting/*</implements>*/ {
 
     /*<ptr>*/public static class UIBarButtonItemPtr extends Ptr<UIBarButtonItem, UIBarButtonItemPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(UIBarButtonItem.class); }/*</bind>*/
@@ -124,7 +127,7 @@ import org.robovm.apple.corelocation.*;
     protected UIBarButtonItem(Handle h, long handle) { super(h, handle); }
     protected UIBarButtonItem(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithCoder:")
-    public UIBarButtonItem(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UIBarButtonItem(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     @Method(selector = "initWithImage:style:target:action:")
     public UIBarButtonItem(UIImage image, UIBarButtonItemStyle style, NSObject target, Selector action) { super((SkipInit) null); initObject(init(image, style, target, action)); }
     /**
@@ -191,11 +194,21 @@ import org.robovm.apple.corelocation.*;
      */
     @Property(selector = "buttonGroup")
     public native UIBarButtonItemGroup getButtonGroup();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "isSpringLoaded")
+    public native boolean isSpringLoaded();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setSpringLoaded:")
+    public native void setSpringLoaded(boolean v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     @Method(selector = "initWithImage:style:target:action:")
     protected native @Pointer long init(UIImage image, UIBarButtonItemStyle style, NSObject target, Selector action);
     /**
@@ -279,7 +292,5 @@ import org.robovm.apple.corelocation.*;
      */
     @Method(selector = "backButtonBackgroundVerticalPositionAdjustmentForBarMetrics:")
     public native @MachineSizedFloat double getBackButtonBackgroundVerticalPositionAdjustment(UIBarMetrics barMetrics);
-    @Method(selector = "encodeWithCoder:")
-    public native void encode(NSCoder coder);
     /*</methods>*/
 }

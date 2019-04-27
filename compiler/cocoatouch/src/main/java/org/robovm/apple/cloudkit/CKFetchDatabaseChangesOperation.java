@@ -30,6 +30,7 @@ import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.corelocation.*;
 import org.robovm.apple.contacts.*;
+import org.robovm.apple.fileprovider.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -50,7 +51,7 @@ import org.robovm.apple.contacts.*;
     protected CKFetchDatabaseChangesOperation(Handle h, long handle) { super(h, handle); }
     protected CKFetchDatabaseChangesOperation(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithPreviousServerChangeToken:")
-    public CKFetchDatabaseChangesOperation(CKServerChangeToken previousServerChangeToken) { super((SkipInit) null); initObject(initWithPreviousServerChangeToken(previousServerChangeToken)); }
+    public CKFetchDatabaseChangesOperation(CKServerChangeToken previousServerChangeToken) { super((SkipInit) null); initObject(init(previousServerChangeToken)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "previousServerChangeToken")
@@ -73,6 +74,16 @@ import org.robovm.apple.contacts.*;
     public native @Block VoidBlock1<CKRecordZoneID> getRecordZoneWithIDWasDeletedBlock();
     @Property(selector = "setRecordZoneWithIDWasDeletedBlock:")
     public native void setRecordZoneWithIDWasDeletedBlock(@Block VoidBlock1<CKRecordZoneID> v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "recordZoneWithIDWasPurgedBlock")
+    public native @Block VoidBlock1<CKRecordZoneID> getRecordZoneWithIDWasPurgedBlock();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setRecordZoneWithIDWasPurgedBlock:")
+    public native void setRecordZoneWithIDWasPurgedBlock(@Block VoidBlock1<CKRecordZoneID> v);
     @Property(selector = "changeTokenUpdatedBlock")
     public native @Block VoidBlock1<CKServerChangeToken> getChangeTokenUpdatedBlock();
     @Property(selector = "setChangeTokenUpdatedBlock:")
@@ -85,6 +96,6 @@ import org.robovm.apple.contacts.*;
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "initWithPreviousServerChangeToken:")
-    protected native @Pointer long initWithPreviousServerChangeToken(CKServerChangeToken previousServerChangeToken);
+    protected native @Pointer long init(CKServerChangeToken previousServerChangeToken);
     /*</methods>*/
 }

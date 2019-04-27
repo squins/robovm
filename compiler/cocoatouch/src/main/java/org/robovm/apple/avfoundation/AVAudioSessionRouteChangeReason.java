@@ -38,13 +38,10 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
-/**
- * @since Available in iOS 6.0 and later.
- */
+
 /*</javadoc>*/
 /*<annotations>*/@Marshaler(ValuedEnum.AsMachineSizedUIntMarshaler.class)/*</annotations>*/
 public enum /*<name>*/AVAudioSessionRouteChangeReason/*</name>*/ implements ValuedEnum {
@@ -56,9 +53,6 @@ public enum /*<name>*/AVAudioSessionRouteChangeReason/*</name>*/ implements Valu
     Override(4L),
     WakeFromSleep(6L),
     NoSuitableRouteForCategory(7L),
-    /**
-     * @since Available in iOS 7.0 and later.
-     */
     RouteConfigurationChange(8L);
     /*</values>*/
 

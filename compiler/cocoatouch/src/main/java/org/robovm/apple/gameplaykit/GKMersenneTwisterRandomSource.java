@@ -29,6 +29,8 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.spritekit.*;
+import org.robovm.apple.scenekit.*;
+import org.robovm.apple.uikit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -50,6 +52,8 @@ import org.robovm.apple.spritekit.*;
     protected GKMersenneTwisterRandomSource(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithSeed:")
     public GKMersenneTwisterRandomSource(long seed) { super((SkipInit) null); initObject(init(seed)); }
+    @Method(selector = "initWithCoder:")
+    public GKMersenneTwisterRandomSource(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "seed")

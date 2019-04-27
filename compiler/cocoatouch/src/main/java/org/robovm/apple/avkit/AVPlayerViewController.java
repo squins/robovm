@@ -51,6 +51,10 @@ import org.robovm.apple.iad.*;
     public AVPlayerViewController() {}
     protected AVPlayerViewController(Handle h, long handle) { super(h, handle); }
     protected AVPlayerViewController(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithNibName:bundle:")
+    public AVPlayerViewController(String nibNameOrNil, NSBundle nibBundleOrNil) { super(nibNameOrNil, nibBundleOrNil); }
+    @Method(selector = "initWithCoder:")
+    public AVPlayerViewController(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "player")
@@ -91,6 +95,26 @@ import org.robovm.apple.iad.*;
      */
     @Property(selector = "setUpdatesNowPlayingInfoCenter:")
     public native void setUpdatesNowPlayingInfoCenter(boolean v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "entersFullScreenWhenPlaybackBegins")
+    public native boolean isEntersFullScreenWhenPlaybackBegins();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setEntersFullScreenWhenPlaybackBegins:")
+    public native void setEntersFullScreenWhenPlaybackBegins(boolean v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "exitsFullScreenWhenPlaybackEnds")
+    public native boolean isExitsFullScreenWhenPlaybackEnds();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setExitsFullScreenWhenPlaybackEnds:")
+    public native void setExitsFullScreenWhenPlaybackEnds(boolean v);
     /**
      * @since Available in iOS 9.0 and later.
      */

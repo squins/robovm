@@ -32,6 +32,14 @@ enums:
     NWUDPSessionState: {}
     NWPathStatus: {}
 
+    NEDNSProxyManagerError: { nserror: true } #since 11.0
+    NEFilterAction: {} #since 11.0
+    NEHotspotConfigurationEAPType: {} #since 11.0
+    NEHotspotConfigurationTTLSInnerAuthenticationType: {prefix: NEHotspotConfigurationEAPTTLSInnerAuthentication} #since 11.0
+    NEHotspotConfigurationEAPTLSVersion: {prefix: NEHotspotConfigurationEAPTLS} #since 11.0
+    NEHotspotConfigurationError: {} #since 11.0 # TODO: this to be connected with NSERROR but currently domain is not known
+    NEVPNIKEv2TLSVersion: {} #since 11.0
+
 classes:
     NEProvider:
         methods:
@@ -41,14 +49,22 @@ classes:
                 name: createUDPSession
             '-displayMessage:completionHandler:':
                 name: displayMessage
+            '-sleepWithCompletionHandler:':
+                name: sleep
     NETunnelProvider:
         methods:
             '-handleAppMessage:completionHandler:':
                 trim_after_first_colon: true
             '-setTunnelNetworkSettings:completionHandler:':
                 trim_after_first_colon: true
-    NETunnelNetworkSettings: {}
-    NEAppRule: {}
+    NETunnelNetworkSettings: #since 9.0
+        methods:
+            '-initWithTunnelRemoteAddress:':
+                name: init
+    NEAppRule: #since 9.0
+        methods:
+            '-initWithSigningIdentifier:':
+                name: init
     NEFilterFlow: {}
     NEFilterBrowserFlow: {}
     NEFilterSocketFlow: {}
@@ -79,9 +95,21 @@ classes:
                 name: URLAppendStringVerdict
             '+filterDataVerdictWithFilterInbound:peekInboundBytes:filterOutbound:peekOutboundBytes:':
                 name: filterDataVerdict
-    NEFilterControlVerdict: {}
+    NEFilterControlVerdict: #since 9.0
+        methods:
+            '+allowVerdictWithUpdateRules:':
+                name: createAllowVerdict
+            '+dropVerdictWithUpdateRules:':
+                name: createDropVerdict
     NEFilterRemediationVerdict: {}
-    NEFilterManager: {}
+    NEFilterManager: #since 8.0
+        methods:
+            '-loadFromPreferencesWithCompletionHandler:':
+                name: loadFromPreferences
+            '-removeFromPreferencesWithCompletionHandler:':
+                name: removeFromPreferences
+            '-saveToPreferencesWithCompletionHandler:':
+                name: saveToPreferences
     NEFilterProviderConfiguration: {}
     NEHotspotNetwork: {}
     NEHotspotHelperCommand: {}
@@ -117,7 +145,10 @@ classes:
         methods:
             '+endpointWithHostname:port:':
                 name: create
-    NEDNSSettings: {}
+    NEDNSSettings: #since 9.0
+        methods:
+            '-initWithServers:':
+                name: init
     NWTLSParameters: {}
     NEProxyServer:
         methods:
@@ -190,12 +221,18 @@ classes:
         methods:
             '-openWithLocalEndpoint:completionHandler:':
                 name: open
+            '-closeReadWithError:':
+                name: closeRead
+            '-closeWriteWithError:':
+                name: closeWrite
     NEAppProxyProvider:
         methods:
             '-startProxyWithOptions:completionHandler:':
                 name: startProxy
             '-stopProxyWithReason:completionHandler:':
                 name: stopProxy
+            '-cancelProxyWithError:':
+                name: cancelProxy
     NEAppProxyProviderManager:
         methods:
             '+loadAllFromPreferencesWithCompletionHandler:':
@@ -258,6 +295,8 @@ classes:
                 name: createTCPConnection
             '-createUDPSessionThroughTunnelToEndpoint:fromEndpoint:':
                 name: createUDPSession
+            '-cancelTunnelWithError:':
+                name: cancelTunnel
     NETunnelProviderManager:
         methods:
             '+loadAllFromPreferencesWithCompletionHandler:':
@@ -274,6 +313,39 @@ classes:
             '+endpointWithName:type:domain:':
                 name: create
                 constructor: true
+    NEDNSProxyManager: #since 11.0
+        methods:
+            '-loadFromPreferencesWithCompletionHandler:':
+                name: loadFromPreferences
+            '-removeFromPreferencesWithCompletionHandler:':
+                name: removeFromPreferences
+            '-saveToPreferencesWithCompletionHandler:':
+                name: saveToPreferences
+    NEDNSProxyProvider: #since 11.0
+        methods:
+            '-startProxyWithOptions:completionHandler:':
+                name: startProxy
+            '-stopProxyWithReason:completionHandler:':
+                name: stopProxy
+            '-cancelProxyWithError:':
+                name: cancelProxy
+    NEDNSProxyProviderProtocol: {} #since 11.0
+    NEFilterReport: {} #since 11.0
+    NEHotspotConfiguration: #since 11.0
+        methods:
+            '-init.*':
+                name: init
+    NEHotspotConfigurationManager: #since 11.0
+        methods:
+            '-applyConfiguration:completionHandler:':
+                trim_after_first_colon: true
+            '-getConfiguredSSIDsWithCompletionHandler:':
+                name: getConfiguredSSIDs
+    NEHotspotEAPSettings: {} #since 11.0
+    NEHotspotHS20Settings: #since 11.0
+        methods:
+            '-initWithDomainName:roamingEnabled:':
+                name: init
 
 protocols:
     NWTCPConnectionAuthenticationDelegate:
@@ -300,6 +372,10 @@ values:
 
     NETunnelProviderErrorDomain:
         class: NETunnelProviderError
+        name: getClassDomain
+
+    NEDNSProxyErrorDomain:
+        class: NEDNSProxyManagerError
         name: getClassDomain
 
     NEAppProxyErrorDomain:
@@ -334,12 +410,20 @@ values:
         class: NEHotspotHelper
         name: '#{g[0]}'
 
+    NEDNSProxyConfigurationDidChangeNotification:
+        class: NEDNSProxyManager
+        name: ConfigurationDidChange
+
     # Make sure we don't miss any values if new ones are introduced in a later version
     (k?NE.*):
         class: NetworkExtension
         name: 'Value__#{g[0]}'
 
 constants:
+    NEFilterProviderRemediationURL(.*):
+        class: NEFilterProvider
+        name: 'RemediationURL#{g[0]}'
+
     NEFilterFlowBytesMax:
         exclude: true
 

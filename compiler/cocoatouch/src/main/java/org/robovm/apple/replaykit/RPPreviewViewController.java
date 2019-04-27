@@ -29,6 +29,7 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.uikit.*;
+import org.robovm.apple.coremedia.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -46,6 +47,10 @@ import org.robovm.apple.uikit.*;
     public RPPreviewViewController() {}
     protected RPPreviewViewController(Handle h, long handle) { super(h, handle); }
     protected RPPreviewViewController(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithNibName:bundle:")
+    public RPPreviewViewController(String nibNameOrNil, NSBundle nibBundleOrNil) { super(nibNameOrNil, nibBundleOrNil); }
+    @Method(selector = "initWithCoder:")
+    public RPPreviewViewController(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "previewControllerDelegate")

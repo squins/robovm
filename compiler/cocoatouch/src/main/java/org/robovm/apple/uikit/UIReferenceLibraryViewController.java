@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -56,7 +59,7 @@ import org.robovm.apple.corelocation.*;
     @Method(selector = "initWithTerm:")
     public UIReferenceLibraryViewController(String term) { super((SkipInit) null); initObject(init(term)); }
     @Method(selector = "initWithCoder:")
-    public UIReferenceLibraryViewController(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UIReferenceLibraryViewController(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     
@@ -66,7 +69,7 @@ import org.robovm.apple.corelocation.*;
     @Method(selector = "initWithTerm:")
     protected native @Pointer long init(String term);
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     @Method(selector = "dictionaryHasDefinitionForTerm:")
     public static native boolean dictionaryHasDefinitionForTerm(String term);
     /*</methods>*/

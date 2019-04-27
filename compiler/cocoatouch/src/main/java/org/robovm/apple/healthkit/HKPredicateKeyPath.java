@@ -148,9 +148,9 @@ import org.robovm.apple.foundation.*;
      */
     public static final HKPredicateKeyPath WorkoutTotalSwimmingStrokeCount = new HKPredicateKeyPath("WorkoutTotalSwimmingStrokeCount");
     /**
-     * @since Available in iOS 8.0 and later.
+     * @since Available in iOS 11.0 and later.
      */
-    public static final HKPredicateKeyPath CategoryValue = new HKPredicateKeyPath("CategoryValue");
+    public static final HKPredicateKeyPath WorkoutTotalFlightsClimbed = new HKPredicateKeyPath("WorkoutTotalFlightsClimbed");
     /**
      * @since Available in iOS 10.0 and later.
      */
@@ -170,10 +170,26 @@ import org.robovm.apple.foundation.*;
     /**
      * @since Available in iOS 8.0 and later.
      */
+    public static final HKPredicateKeyPath CategoryValue = new HKPredicateKeyPath("CategoryValue");
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    public static final HKPredicateKeyPath ClinicalRecordFHIRResourceIdentifier = new HKPredicateKeyPath("ClinicalRecordFHIRResourceIdentifier");
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    public static final HKPredicateKeyPath ClinicalRecordFHIRResourceType = new HKPredicateKeyPath("ClinicalRecordFHIRResourceType");
+    /**
+     * @since Available in iOS 8.0 and later.
+     */
     public static final HKPredicateKeyPath Quantity = new HKPredicateKeyPath("Quantity");
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    public static final HKPredicateKeyPath Sum = new HKPredicateKeyPath("Sum");
     /*</constants>*/
     
-    private static /*<name>*/HKPredicateKeyPath/*</name>*/[] values = new /*<name>*/HKPredicateKeyPath/*</name>*/[] {/*<value_list>*/DateComponents, UUID, Source, Metadata, Correlation, Workout, Device, SourceRevision, StartDate, EndDate, WorkoutDuration, WorkoutTotalDistance, WorkoutTotalEnergyBurned, WorkoutType, WorkoutTotalSwimmingStrokeCount, CategoryValue, Title, PatientName, AuthorName, CustodianName, Quantity/*</value_list>*/};
+    private static /*<name>*/HKPredicateKeyPath/*</name>*/[] values = new /*<name>*/HKPredicateKeyPath/*</name>*/[] {/*<value_list>*/DateComponents, UUID, Source, Metadata, Correlation, Workout, Device, SourceRevision, StartDate, EndDate, WorkoutDuration, WorkoutTotalDistance, WorkoutTotalEnergyBurned, WorkoutType, WorkoutTotalSwimmingStrokeCount, WorkoutTotalFlightsClimbed, Title, PatientName, AuthorName, CustodianName, CategoryValue, ClinicalRecordFHIRResourceIdentifier, ClinicalRecordFHIRResourceType, Quantity, Sum/*</value_list>*/};
     
     /*<name>*/HKPredicateKeyPath/*</name>*/ (String getterName) {
         super(Values.class, getterName);
@@ -272,10 +288,10 @@ import org.robovm.apple.foundation.*;
         @GlobalValue(symbol="HKPredicateKeyPathWorkoutTotalSwimmingStrokeCount", optional=true)
         public static native NSString WorkoutTotalSwimmingStrokeCount();
         /**
-         * @since Available in iOS 8.0 and later.
+         * @since Available in iOS 11.0 and later.
          */
-        @GlobalValue(symbol="HKPredicateKeyPathCategoryValue", optional=true)
-        public static native NSString CategoryValue();
+        @GlobalValue(symbol="HKPredicateKeyPathWorkoutTotalFlightsClimbed", optional=true)
+        public static native NSString WorkoutTotalFlightsClimbed();
         /**
          * @since Available in iOS 10.0 and later.
          */
@@ -299,8 +315,28 @@ import org.robovm.apple.foundation.*;
         /**
          * @since Available in iOS 8.0 and later.
          */
+        @GlobalValue(symbol="HKPredicateKeyPathCategoryValue", optional=true)
+        public static native NSString CategoryValue();
+        /**
+         * @since Available in iOS 12.0 and later.
+         */
+        @GlobalValue(symbol="HKPredicateKeyPathClinicalRecordFHIRResourceIdentifier", optional=true)
+        public static native NSString ClinicalRecordFHIRResourceIdentifier();
+        /**
+         * @since Available in iOS 12.0 and later.
+         */
+        @GlobalValue(symbol="HKPredicateKeyPathClinicalRecordFHIRResourceType", optional=true)
+        public static native NSString ClinicalRecordFHIRResourceType();
+        /**
+         * @since Available in iOS 8.0 and later.
+         */
         @GlobalValue(symbol="HKPredicateKeyPathQuantity", optional=true)
         public static native NSString Quantity();
+        /**
+         * @since Available in iOS 12.0 and later.
+         */
+        @GlobalValue(symbol="HKPredicateKeyPathSum", optional=true)
+        public static native NSString Sum();
         /*</values>*/
     }
 }

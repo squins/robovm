@@ -30,6 +30,7 @@ import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.corelocation.*;
 import org.robovm.apple.contacts.*;
+import org.robovm.apple.fileprovider.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -46,7 +47,7 @@ import org.robovm.apple.contacts.*;
     /*<bind>*/static { ObjCRuntime.bind(CKQueryNotification.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public CKQueryNotification() {}
+    protected CKQueryNotification() {}
     protected CKQueryNotification(Handle h, long handle) { super(h, handle); }
     protected CKQueryNotification(SkipInit skipInit) { super(skipInit); }
     /*</constructors>*/
@@ -59,7 +60,7 @@ import org.robovm.apple.contacts.*;
     public native CKRecordID getRecordID();
     /**
      * @since Available in iOS 8.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Use databaseScope instead
      */
     @Deprecated
     @Property(selector = "isPublicDatabase")

@@ -70,6 +70,10 @@ import org.robovm.apple.dispatch.*;
     public native @MachineSizedUInt long getSampleCount();
     @Property(selector = "setSampleCount:")
     public native void setSampleCount(@MachineSizedUInt long v);
+    @Property(selector = "rasterSampleCount")
+    public native @MachineSizedUInt long getRasterSampleCount();
+    @Property(selector = "setRasterSampleCount:")
+    public native void setRasterSampleCount(@MachineSizedUInt long v);
     @Property(selector = "isAlphaToCoverageEnabled")
     public native boolean isAlphaToCoverageEnabled();
     @Property(selector = "setAlphaToCoverageEnabled:")
@@ -92,6 +96,16 @@ import org.robovm.apple.dispatch.*;
     public native MTLPixelFormat getStencilAttachmentPixelFormat();
     @Property(selector = "setStencilAttachmentPixelFormat:")
     public native void setStencilAttachmentPixelFormat(MTLPixelFormat v);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "inputPrimitiveTopology")
+    public native MTLPrimitiveTopologyClass getInputPrimitiveTopology();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "setInputPrimitiveTopology:")
+    public native void setInputPrimitiveTopology(MTLPrimitiveTopologyClass v);
     /**
      * @since Available in iOS 10.0 and later.
      */
@@ -162,6 +176,26 @@ import org.robovm.apple.dispatch.*;
      */
     @Property(selector = "setTessellationOutputWindingOrder:")
     public native void setTessellationOutputWindingOrder(MTLWinding v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "vertexBuffers")
+    public native MTLPipelineBufferDescriptorArray getVertexBuffers();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "fragmentBuffers")
+    public native MTLPipelineBufferDescriptorArray getFragmentBuffers();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "supportIndirectCommandBuffers")
+    public native boolean isSupportIndirectCommandBuffers();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "setSupportIndirectCommandBuffers:")
+    public native void setSupportIndirectCommandBuffers(boolean v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

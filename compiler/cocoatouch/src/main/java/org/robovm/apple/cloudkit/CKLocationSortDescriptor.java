@@ -30,6 +30,7 @@ import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.corelocation.*;
 import org.robovm.apple.contacts.*;
+import org.robovm.apple.fileprovider.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -40,7 +41,7 @@ import org.robovm.apple.contacts.*;
 /*<annotations>*/@Library("CloudKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/CKLocationSortDescriptor/*</name>*/ 
     extends /*<extends>*/NSSortDescriptor/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class CKLocationSortDescriptorPtr extends Ptr<CKLocationSortDescriptor, CKLocationSortDescriptorPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(CKLocationSortDescriptor.class); }/*</bind>*/
@@ -54,6 +55,15 @@ import org.robovm.apple.contacts.*;
     public CKLocationSortDescriptor(String key, CLLocation relativeLocation) { super((SkipInit) null); initObject(init(key, relativeLocation)); }
     @Method(selector = "initWithCoder:")
     public CKLocationSortDescriptor(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    @Method(selector = "initWithKey:ascending:")
+    public CKLocationSortDescriptor(String key, boolean ascending) { super(key, ascending); }
+    @Method(selector = "initWithKey:ascending:selector:")
+    public CKLocationSortDescriptor(String key, boolean ascending, Selector selector) { super(key, ascending, selector); }
+    /**
+     * @since Available in iOS 4.0 and later.
+     */
+    @Method(selector = "initWithKey:ascending:comparator:")
+    public CKLocationSortDescriptor(String key, boolean ascending, @Block Block2<NSObject, NSObject, NSComparisonResult> cmptr) { super(key, ascending, cmptr); }
     /*</constructors>*/
     public CKLocationSortDescriptor(NSSortIdentifier key, boolean ascending) {
         this(key.value().toString(), ascending);
@@ -63,19 +73,6 @@ import org.robovm.apple.contacts.*;
     }
     public CKLocationSortDescriptor(NSSortIdentifier key, boolean ascending, @Block Block2<NSObject, NSObject, NSComparisonResult> cmptr) {
         this(key.value().toString(), ascending, cmptr);
-    }
-    /*<constructors>*/
-    public CKLocationSortDescriptor(String key, boolean ascending) { 
-        super(key, ascending);
-    }
-    public CKLocationSortDescriptor(String key, boolean ascending, Selector selector) {
-        super(key, ascending, selector);
-    }
-    /**
-     * @since Available in iOS 4.0 and later.
-     */
-    public CKLocationSortDescriptor(String key, boolean ascending, @Block Block2<NSObject, NSObject, NSComparisonResult> cmptr) { 
-        super(key, ascending, cmptr);
     }
 
     /*<properties>*/

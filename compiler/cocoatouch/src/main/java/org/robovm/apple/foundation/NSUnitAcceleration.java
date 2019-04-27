@@ -46,15 +46,19 @@ import org.robovm.apple.dispatch.*;
 /*<annotations>*/@Library("Foundation") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/NSUnitAcceleration/*</name>*/ 
     extends /*<extends>*/NSDimension/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class NSUnitAccelerationPtr extends Ptr<NSUnitAcceleration, NSUnitAccelerationPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(NSUnitAcceleration.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public NSUnitAcceleration() {}
+    protected NSUnitAcceleration() {}
     protected NSUnitAcceleration(Handle h, long handle) { super(h, handle); }
     protected NSUnitAcceleration(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithSymbol:converter:")
+    public NSUnitAcceleration(String symbol, NSUnitConverter converter) { super(symbol, converter); }
+    @Method(selector = "initWithSymbol:")
+    public NSUnitAcceleration(String symbol) { super(symbol); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "metersPerSecondSquared")

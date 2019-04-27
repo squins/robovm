@@ -46,7 +46,7 @@ import org.robovm.apple.dispatch.*;
     /*<bind>*/static { ObjCRuntime.bind(CBPeripheral.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public CBPeripheral() {}
+    protected CBPeripheral() {}
     protected CBPeripheral(Handle h, long handle) { super(h, handle); }
     protected CBPeripheral(SkipInit skipInit) { super(skipInit); }
     /*</constructors>*/
@@ -68,6 +68,8 @@ import org.robovm.apple.dispatch.*;
     public native CBPeripheralState getState();
     @Property(selector = "services")
     public native NSArray<CBService> getServices();
+    @Property(selector = "canSendWriteWithoutResponse")
+    public native boolean canSendWriteWithoutResponse();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -96,5 +98,10 @@ import org.robovm.apple.dispatch.*;
     public native void readValue(CBDescriptor descriptor);
     @Method(selector = "writeValue:forDescriptor:")
     public native void writeValue(NSData data, CBDescriptor descriptor);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "openL2CAPChannel:")
+    public native void openL2CAPChannel(short PSM);
     /*</methods>*/
 }

@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -53,6 +56,8 @@ import org.robovm.apple.corelocation.*;
     public UIPinchGestureRecognizer() {}
     protected UIPinchGestureRecognizer(Handle h, long handle) { super(h, handle); }
     protected UIPinchGestureRecognizer(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithTarget:action:")
+    public UIPinchGestureRecognizer(NSObject target, Selector action) { super(target, action); }
     /*</constructors>*/
     
     public UIPinchGestureRecognizer(OnGestureListener listener) {

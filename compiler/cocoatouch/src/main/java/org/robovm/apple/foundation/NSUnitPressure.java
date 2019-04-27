@@ -46,15 +46,19 @@ import org.robovm.apple.dispatch.*;
 /*<annotations>*/@Library("Foundation") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/NSUnitPressure/*</name>*/ 
     extends /*<extends>*/NSDimension/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class NSUnitPressurePtr extends Ptr<NSUnitPressure, NSUnitPressurePtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(NSUnitPressure.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public NSUnitPressure() {}
+    protected NSUnitPressure() {}
     protected NSUnitPressure(Handle h, long handle) { super(h, handle); }
     protected NSUnitPressure(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithSymbol:converter:")
+    public NSUnitPressure(String symbol, NSUnitConverter converter) { super(symbol, converter); }
+    @Method(selector = "initWithSymbol:")
+    public NSUnitPressure(String symbol) { super(symbol); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "newtonsPerMetersSquared")

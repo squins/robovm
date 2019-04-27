@@ -30,6 +30,7 @@ import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.corelocation.*;
 import org.robovm.apple.contacts.*;
+import org.robovm.apple.fileprovider.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -40,9 +41,9 @@ import org.robovm.apple.contacts.*;
 /*<annotations>*/@Marshaler(ValuedEnum.AsMachineSizedSIntMarshaler.class)/*</annotations>*/
 public enum /*<name>*/CKQueryNotificationReason/*</name>*/ implements ValuedEnum {
     /*<values>*/
-    Created(1L),
-    Updated(2L),
-    Deleted(3L);
+    RecordCreated(1L),
+    RecordUpdated(2L),
+    RecordDeleted(3L);
     /*</values>*/
 
     /*<bind>*/

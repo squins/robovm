@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -53,6 +56,10 @@ import org.robovm.apple.corelocation.*;
     public UIInputViewController() {}
     protected UIInputViewController(Handle h, long handle) { super(h, handle); }
     protected UIInputViewController(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithNibName:bundle:")
+    public UIInputViewController(String nibNameOrNil, NSBundle nibBundleOrNil) { super(nibNameOrNil, nibBundleOrNil); }
+    @Method(selector = "initWithCoder:")
+    public UIInputViewController(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "inputView")
@@ -65,6 +72,20 @@ import org.robovm.apple.corelocation.*;
     public native String getPrimaryLanguage();
     @Property(selector = "setPrimaryLanguage:")
     public native void setPrimaryLanguage(String v);
+    @Property(selector = "hasDictationKey")
+    public native boolean hasDictationKey();
+    @Property(selector = "setHasDictationKey:")
+    public native void setHasDictationKey(boolean v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "hasFullAccess")
+    public native boolean hasFullAccess();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "needsInputModeSwitchKey")
+    public native boolean needsInputModeSwitchKey();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

@@ -15,7 +15,7 @@ typedefs:
 private_typedefs:
     TriggerValueType: T
     TargetValueType: T
-    
+
 enums:
     HMAccessoryCategoryType: {}
     HMActionSetType: {}
@@ -61,6 +61,14 @@ enums:
     HMErrorCode: {}
     HMCameraAudioStreamSetting: {}
     HMCameraStreamState: {}
+    HMHomeHubState: {} #since 11.0
+    HMEventTriggerActivationState: {}
+    HMPresenceEventType: {}
+    HMPresenceEventUserType: {}
+    HMCharacteristicValueProgramMode: {} #since 11.2
+    HMCharacteristicValueUsageState: {} #since 11.2
+    HMCharacteristicValueValveType: {} #since 11.2
+    HMCharacteristicValueConfigurationState: {} #since 11.2
 
 classes:
     HMError:
@@ -173,6 +181,23 @@ classes:
                 name: getPredicateForEvaluatingTriggerOccurringAfterDate
             '+predicateForEvaluatingTriggerWithCharacteristic:relatedBy:toValue:':
                 name: getPredicateForEvaluatingTrigger
+            '+predicateForEvaluatingTriggerWithPresence:':
+                name: getPredicateForEvaluatingTrigger
+            '-initWithName:events:endEvents:recurrences:predicate:':
+                  name: init
+            '-updateEvents:completionHandler:':
+                trim_after_first_colon: true
+            '-updateEndEvents:completionHandler:':
+                trim_after_first_colon: true
+            '-updateRecurrences:completionHandler:':
+                trim_after_first_colon: true
+            '-updateExecuteOnce:completionHandler:':
+                trim_after_first_colon: true
+            '+predicateForEvaluatingTriggerOccurringBetweenSignificantEvent:secondSignificantEvent:':
+                name: getPredicateForEvaluatingTriggerOccurringBetweenSignificantEvent
+            '+predicateForEvaluatingTriggerOccurringBetweenDateWithComponents:secondDateWithComponents:':
+                name: getPredicateForEvaluatingTriggerOccurringBetweenDate
+
     HMHome: # DONE
         skip_def_constructor: true
         properties:
@@ -245,6 +270,10 @@ classes:
                 trim_after_first_colon: true
             '-removeTrigger:completionHandler:':
                 trim_after_first_colon: true
+            '-addAndSetupAccessoriesWithPayload:completionHandler:':
+                name: addAndSetupAccessories
+            '-addAndSetupAccessoriesWithCompletionHandler:':
+                name: addAndSetupAccessories
     HMHomeAccessControl: # DONE
         skip_def_constructor: true
     HMHomeManager: # DONE
@@ -355,7 +384,49 @@ classes:
     HMCameraSnapshotControl: {}
     HMCameraControl: {}
     HMCameraView: {}
-
+    HMCalendarEvent: #since 11.0
+        methods:
+            '-initWithFireDateComponents:':
+                name: init
+    HMCharacteristicThresholdRangeEvent: #since 11.0
+        methods:
+            '-initWithCharacteristic:thresholdRange:':
+                #trim_after_first_colon: true
+                name: initWithCharacteristic$thresholdRange$
+    HMDurationEvent: #since 11.0
+        methods:
+            '-initWithDuration:':
+                name: init
+    HMMutableCalendarEvent: {} #since 11.0
+    HMMutableCharacteristicEvent: { skip_def_constructor: true } #since 11.0
+    HMMutableCharacteristicThresholdRangeEvent: {} #since 11.0
+    HMMutableDurationEvent: {} #since 11.0
+    HMMutableLocationEvent: { skip_def_constructor: true } #since 11.0
+    HMMutablePresenceEvent: {} #since 11.0
+    HMMutableSignificantTimeEvent: {} #since 11.0
+    HMNumberRange: #since 11.0
+        methods:
+            '+numberRangeWithMinValue:maxValue:':
+                name: create
+                constructor: true
+            '+numberRangeWithMinValue:':
+                name: createWithMinValue
+            '+numberRangeWithMaxValue:':
+                name: createWithMaxValue
+    HMPresenceEvent: #since 11.0
+        methods:
+            '-initWithPresenceEventType:presenceUserType:':
+                name: init
+    HMSignificantTimeEvent: #since 11.0
+        methods:
+            '-initWithSignificantEvent:offset:':
+                name: init
+    HMTimeEvent: {} #since 11.0
+    HMAccessControl: {} #since 11.2
+    HMAccessorySetupPayload: #since 11.3
+        methods:
+            '-initWithURL:':
+                name: init
 protocols:
     HMAccessoryBrowserDelegate: # DONE
         methods:
@@ -377,6 +448,13 @@ protocols:
                 name: didUpdateReachability
             '-accessory:service:didUpdateValueForCharacteristic:':
                 name: didUpdateCharacteristicValue
+            '-accessory:didAddProfile:':
+                name: didAddProfile
+            '-accessory:didRemoveProfile:':
+                name: didRemoveProfile
+            '-accessory:didUpdateFirmwareVersion:':
+                name: didUpdateFirmwareVersion
+
     HMHomeDelegate: # DONE
         methods:
             '-homeDidUpdateName:':
@@ -437,6 +515,9 @@ protocols:
                 name: didUnblockAccessory
             '-home:didEncounterError:forAccessory:':
                 name: didEncounterError
+            '-home:didUpdateHomeHubState:':
+                name: didUpdateHomeHubState
+
     HMHomeManagerDelegate: # DONE
         methods:
             '-homeManagerDidUpdateHomes:':

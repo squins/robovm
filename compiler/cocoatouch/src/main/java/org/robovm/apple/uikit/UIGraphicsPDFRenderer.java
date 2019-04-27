@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -55,6 +58,8 @@ import org.robovm.apple.corelocation.*;
     protected UIGraphicsPDFRenderer(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithBounds:format:")
     public UIGraphicsPDFRenderer(@ByVal CGRect bounds, UIGraphicsPDFRendererFormat format) { super((SkipInit) null); initObject(init(bounds, format)); }
+    @Method(selector = "initWithBounds:")
+    public UIGraphicsPDFRenderer(@ByVal CGRect bounds) { super(bounds); }
     /*</constructors>*/
     /*<properties>*/
     

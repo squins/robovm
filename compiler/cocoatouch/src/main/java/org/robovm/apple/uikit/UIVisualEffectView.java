@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -44,7 +47,7 @@ import org.robovm.apple.corelocation.*;
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UIVisualEffectView/*</name>*/ 
     extends /*<extends>*/UIView/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class UIVisualEffectViewPtr extends Ptr<UIVisualEffectView, UIVisualEffectViewPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(UIVisualEffectView.class); }/*</bind>*/
@@ -56,7 +59,9 @@ import org.robovm.apple.corelocation.*;
     @Method(selector = "initWithEffect:")
     public UIVisualEffectView(UIVisualEffect effect) { super((SkipInit) null); initObject(init(effect)); }
     @Method(selector = "initWithCoder:")
-    public UIVisualEffectView(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UIVisualEffectView(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
+    @Method(selector = "initWithFrame:")
+    public UIVisualEffectView(@ByVal CGRect frame) { super(frame); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "contentView")
@@ -65,12 +70,14 @@ import org.robovm.apple.corelocation.*;
     public native UIVisualEffect getEffect();
     @Property(selector = "setEffect:")
     public native void setEffect(UIVisualEffect v);
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "initWithEffect:")
     protected native @Pointer long init(UIVisualEffect effect);
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     /*</methods>*/
 }

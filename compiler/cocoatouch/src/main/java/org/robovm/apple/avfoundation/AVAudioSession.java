@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -140,6 +139,9 @@ import org.robovm.apple.audiounit.*;
      */
     @Property(selector = "availableCategories")
     public native @org.robovm.rt.bro.annotation.Marshaler(AVAudioSessionCategory.AsListMarshaler.class) List<AVAudioSessionCategory> getAvailableCategories();
+    /**
+     * @since Available in iOS 3.0 and later.
+     */
     @Property(selector = "category")
     public native AVAudioSessionCategory getCategory();
     /**
@@ -147,6 +149,11 @@ import org.robovm.apple.audiounit.*;
      */
     @Property(selector = "categoryOptions")
     public native AVAudioSessionCategoryOptions getCategoryOptions();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "routeSharingPolicy")
+    public native AVAudioSessionRouteSharingPolicy getRouteSharingPolicy();
     /**
      * @since Available in iOS 9.0 and later.
      */
@@ -157,6 +164,11 @@ import org.robovm.apple.audiounit.*;
      */
     @Property(selector = "mode")
     public native AVAudioSessionMode getMode();
+    /**
+     * @since Available in iOS 8.0 and later.
+     */
+    @Property(selector = "recordPermission")
+    public native AVAudioSessionRecordPermission getRecordPermission();
     /**
      * @since Available in iOS 6.0 and later.
      */
@@ -183,10 +195,18 @@ import org.robovm.apple.audiounit.*;
     @Property(selector = "availableInputs")
     public native NSArray<AVAudioSessionPortDescription> getAvailableInputs();
     /**
+     * @since Available in iOS 12.2 and later.
+     */
+    @Property(selector = "promptStyle")
+    public native AVAudioSessionPromptStyle getPromptStyle();
+    /**
      * @since Available in iOS 6.0 and later.
      */
     @Property(selector = "preferredSampleRate")
     public native double getPreferredSampleRate();
+    /**
+     * @since Available in iOS 3.0 and later.
+     */
     @Property(selector = "preferredIOBufferDuration")
     public native double getPreferredIOBufferDuration();
     /**
@@ -313,12 +333,18 @@ import org.robovm.apple.audiounit.*;
     @GlobalValue(symbol="AVAudioSessionSilenceSecondaryAudioHintTypeKey", optional=true)
     protected static native NSString SilenceSecondaryAudioHintTypeKey();
     
+    /**
+     * @since Available in iOS 3.0 and later.
+     */
     public boolean setActive(boolean active) throws NSErrorException {
        NSError.NSErrorPtr ptr = new NSError.NSErrorPtr();
        boolean result = setActive(active, ptr);
        if (ptr.get() != null) { throw new NSErrorException(ptr.get()); }
        return result;
     }
+    /**
+     * @since Available in iOS 3.0 and later.
+     */
     @Method(selector = "setActive:error:")
     private native boolean setActive(boolean active, NSError.NSErrorPtr outError);
     /**
@@ -335,12 +361,18 @@ import org.robovm.apple.audiounit.*;
      */
     @Method(selector = "setActive:withOptions:error:")
     private native boolean setActive(boolean active, AVAudioSessionSetActiveOptions options, NSError.NSErrorPtr outError);
+    /**
+     * @since Available in iOS 3.0 and later.
+     */
     public boolean setCategory(AVAudioSessionCategory category) throws NSErrorException {
        NSError.NSErrorPtr ptr = new NSError.NSErrorPtr();
        boolean result = setCategory(category, ptr);
        if (ptr.get() != null) { throw new NSErrorException(ptr.get()); }
        return result;
     }
+    /**
+     * @since Available in iOS 3.0 and later.
+     */
     @Method(selector = "setCategory:error:")
     private native boolean setCategory(AVAudioSessionCategory category, NSError.NSErrorPtr outError);
     /**
@@ -372,15 +404,19 @@ import org.robovm.apple.audiounit.*;
     @Method(selector = "setCategory:mode:options:error:")
     private native boolean setCategory(AVAudioSessionCategory category, String mode, AVAudioSessionCategoryOptions options, NSError.NSErrorPtr outError);
     /**
-     * @since Available in iOS 8.0 and later.
+     * @since Available in iOS 11.0 and later.
      */
-    @Method(selector = "recordPermission")
-    public native AVAudioSessionRecordPermission getRecordPermission();
+    public boolean setCategory(AVAudioSessionCategory category, String mode, AVAudioSessionRouteSharingPolicy policy, AVAudioSessionCategoryOptions options) throws NSErrorException {
+       NSError.NSErrorPtr ptr = new NSError.NSErrorPtr();
+       boolean result = setCategory(category, mode, policy, options, ptr);
+       if (ptr.get() != null) { throw new NSErrorException(ptr.get()); }
+       return result;
+    }
     /**
-     * @since Available in iOS 7.0 and later.
+     * @since Available in iOS 11.0 and later.
      */
-    @Method(selector = "requestRecordPermission:")
-    public native void requestRecordPermission(@Block VoidBooleanBlock response);
+    @Method(selector = "setCategory:mode:routeSharingPolicy:options:error:")
+    private native boolean setCategory(AVAudioSessionCategory category, String mode, AVAudioSessionRouteSharingPolicy policy, AVAudioSessionCategoryOptions options, NSError.NSErrorPtr outError);
     /**
      * @since Available in iOS 5.0 and later.
      */
@@ -395,6 +431,11 @@ import org.robovm.apple.audiounit.*;
      */
     @Method(selector = "setMode:error:")
     private native boolean setMode(AVAudioSessionMode mode, NSError.NSErrorPtr outError);
+    /**
+     * @since Available in iOS 7.0 and later.
+     */
+    @Method(selector = "requestRecordPermission:")
+    public native void requestRecordPermission(@Block VoidBooleanBlock response);
     /**
      * @since Available in iOS 6.0 and later.
      */
@@ -423,6 +464,9 @@ import org.robovm.apple.audiounit.*;
      */
     @Method(selector = "setPreferredInput:error:")
     private native boolean setPreferredInput(AVAudioSessionPortDescription inPort, NSError.NSErrorPtr outError);
+    /**
+     * @since Available in iOS 3.0 and later.
+     */
     @Method(selector = "sharedInstance")
     public static native AVAudioSession getSharedInstance();
     /**
@@ -439,12 +483,18 @@ import org.robovm.apple.audiounit.*;
      */
     @Method(selector = "setPreferredSampleRate:error:")
     private native boolean setPreferredSampleRate(double sampleRate, NSError.NSErrorPtr outError);
+    /**
+     * @since Available in iOS 3.0 and later.
+     */
     public boolean setPreferredIOBufferDuration(double duration) throws NSErrorException {
        NSError.NSErrorPtr ptr = new NSError.NSErrorPtr();
        boolean result = setPreferredIOBufferDuration(duration, ptr);
        if (ptr.get() != null) { throw new NSErrorException(ptr.get()); }
        return result;
     }
+    /**
+     * @since Available in iOS 3.0 and later.
+     */
     @Method(selector = "setPreferredIOBufferDuration:error:")
     private native boolean setPreferredIOBufferDuration(double duration, NSError.NSErrorPtr outError);
     /**

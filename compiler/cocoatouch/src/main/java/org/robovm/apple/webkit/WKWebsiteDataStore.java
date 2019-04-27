@@ -41,7 +41,7 @@ import org.robovm.apple.security.*;
 /*<annotations>*/@Library("WebKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/WKWebsiteDataStore/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class WKWebsiteDataStorePtr extends Ptr<WKWebsiteDataStore, WKWebsiteDataStorePtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(WKWebsiteDataStore.class); }/*</bind>*/
@@ -56,6 +56,13 @@ import org.robovm.apple.security.*;
     /*<properties>*/
     @Property(selector = "isPersistent")
     public native boolean isPersistent();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "httpCookieStore")
+    public native WKHTTPCookieStore getHttpCookieStore();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -64,7 +71,7 @@ import org.robovm.apple.security.*;
     @Method(selector = "removeDataOfTypes:forDataRecords:completionHandler:")
     public native void removeData(@org.robovm.rt.bro.annotation.Marshaler(WKWebsiteDataType.AsSetMarshaler.class) Set<WKWebsiteDataType> dataTypes, NSArray<WKWebsiteDataRecord> dataRecords, @Block Runnable completionHandler);
     @Method(selector = "removeDataOfTypes:modifiedSince:completionHandler:")
-    public native void removeData(@org.robovm.rt.bro.annotation.Marshaler(WKWebsiteDataType.AsSetMarshaler.class) Set<WKWebsiteDataType> websiteDataTypes, NSDate date, @Block Runnable completionHandler);
+    public native void removeData(@org.robovm.rt.bro.annotation.Marshaler(WKWebsiteDataType.AsSetMarshaler.class) Set<WKWebsiteDataType> dataTypes, NSDate date, @Block Runnable completionHandler);
     @Method(selector = "defaultDataStore")
     public static native WKWebsiteDataStore getDefaultDataStore();
     @Method(selector = "nonPersistentDataStore")

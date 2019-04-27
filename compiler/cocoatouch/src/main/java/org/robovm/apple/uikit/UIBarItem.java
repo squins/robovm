@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 import org.robovm.apple.corefoundation.CFDictionary;
 import org.robovm.apple.coremedia.CMTextMarkupAttributes;
@@ -46,7 +49,7 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UIBarItem/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements UIAppearanceContainer/*</implements>*/ {
+    /*<implements>*/implements NSCoding, UIAppearanceContainer/*</implements>*/ {
 
     /*<ptr>*/public static class UIBarItemPtr extends Ptr<UIBarItem, UIBarItemPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(UIBarItem.class); }/*</bind>*/
@@ -56,7 +59,7 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
     protected UIBarItem(Handle h, long handle) { super(h, handle); }
     protected UIBarItem(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithCoder:")
-    public UIBarItem(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UIBarItem(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "isEnabled")
@@ -81,6 +84,16 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
      */
     @Property(selector = "setLandscapeImagePhone:")
     public native void setLandscapeImagePhone(UIImage v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "largeContentSizeImage")
+    public native UIImage getLargeContentSizeImage();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setLargeContentSizeImage:")
+    public native void setLargeContentSizeImage(UIImage v);
     @Property(selector = "imageInsets")
     public native @ByVal UIEdgeInsets getImageInsets();
     @Property(selector = "setImageInsets:")
@@ -95,6 +108,16 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
      */
     @Property(selector = "setLandscapeImagePhoneInsets:")
     public native void setLandscapeImagePhoneInsets(@ByVal UIEdgeInsets v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "largeContentSizeImageInsets")
+    public native @ByVal UIEdgeInsets getLargeContentSizeImageInsets();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setLargeContentSizeImageInsets:")
+    public native void setLargeContentSizeImageInsets(@ByVal UIEdgeInsets v);
     @Property(selector = "tag")
     public native @MachineSizedSInt long getTag();
     @Property(selector = "setTag:")
@@ -161,7 +184,7 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
     }
     /*<methods>*/
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     /**
      * @since Available in iOS 5.0 and later.
      */
@@ -172,5 +195,7 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
      */
     @Method(selector = "titleTextAttributesForState:")
     public native NSDictionary<NSString, ?> getTitleTextAttributesDictionary(UIControlState state);
+    @Method(selector = "encodeWithCoder:")
+    public native void encode(NSCoder coder);
     /*</methods>*/
 }

@@ -29,6 +29,7 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.uikit.*;
+import org.robovm.apple.coremedia.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -62,18 +63,23 @@ import org.robovm.apple.uikit.*;
     public native RPBroadcastControllerDelegate getDelegate();
     @Property(selector = "setDelegate:", strongRef = true)
     public native void setDelegate(RPBroadcastControllerDelegate v);
+    /**
+     * @since Available in iOS 10.0 and later.
+     * @deprecated Deprecated in iOS 11.0. No longer supported
+     */
+    @Deprecated
     @Property(selector = "broadcastExtensionBundleID")
     public native String getBroadcastExtensionBundleID();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "startBroadcastWithHandler:")
-    public native void startBroadcastWithHandler(@Block VoidBlock1<NSError> handler);
+    public native void startBroadcast(@Block VoidBlock1<NSError> handler);
     @Method(selector = "pauseBroadcast")
     public native void pauseBroadcast();
     @Method(selector = "resumeBroadcast")
     public native void resumeBroadcast();
     @Method(selector = "finishBroadcastWithHandler:")
-    public native void finishBroadcastWithHandler(@Block VoidBlock1<NSError> handler);
+    public native void finishBroadcast(@Block VoidBlock1<NSError> handler);
     /*</methods>*/
 }

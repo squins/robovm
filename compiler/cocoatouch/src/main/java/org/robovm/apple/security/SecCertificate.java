@@ -89,13 +89,27 @@ import org.robovm.apple.dispatch.*;
     @Bridge(symbol="SecCertificateCopyNormalizedSubjectSequence", optional=true)
     public native NSData copyNormalizedSubjectSequence();
     /**
-     * @since Available in iOS 10.3 and later.
+     * @since Available in iOS 12.0 and later.
      */
+    @Bridge(symbol="SecCertificateCopyKey", optional=true)
+    public native SecKey copyKey();
+    /**
+     * @since Available in iOS 10.3 and later.
+     * @deprecated Deprecated in iOS 12.0.
+     */
+    @Deprecated
     @Bridge(symbol="SecCertificateCopyPublicKey", optional=true)
     public native SecKey copyPublicKey();
     /**
-     * @since Available in iOS 10.3 and later.
+     * @since Available in iOS 11.0 and later.
      */
+    @Bridge(symbol="SecCertificateCopySerialNumberData", optional=true)
+    public native NSData copySerialNumberData(NSError error);
+    /**
+     * @since Available in iOS 10.3 and later.
+     * @deprecated Deprecated in iOS 11.0.
+     */
+    @Deprecated
     @Bridge(symbol="SecCertificateCopySerialNumber", optional=true)
     public native NSData copySerialNumber();
     /*</methods>*/

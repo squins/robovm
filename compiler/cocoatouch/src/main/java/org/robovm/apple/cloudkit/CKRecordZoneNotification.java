@@ -30,6 +30,7 @@ import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.corelocation.*;
 import org.robovm.apple.contacts.*;
+import org.robovm.apple.fileprovider.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -46,7 +47,7 @@ import org.robovm.apple.contacts.*;
     /*<bind>*/static { ObjCRuntime.bind(CKRecordZoneNotification.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public CKRecordZoneNotification() {}
+    protected CKRecordZoneNotification() {}
     protected CKRecordZoneNotification(Handle h, long handle) { super(h, handle); }
     protected CKRecordZoneNotification(SkipInit skipInit) { super(skipInit); }
     /*</constructors>*/

@@ -46,15 +46,19 @@ import org.robovm.apple.dispatch.*;
 /*<annotations>*/@Library("Foundation") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/NSUnitElectricResistance/*</name>*/ 
     extends /*<extends>*/NSDimension/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class NSUnitElectricResistancePtr extends Ptr<NSUnitElectricResistance, NSUnitElectricResistancePtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(NSUnitElectricResistance.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public NSUnitElectricResistance() {}
+    protected NSUnitElectricResistance() {}
     protected NSUnitElectricResistance(Handle h, long handle) { super(h, handle); }
     protected NSUnitElectricResistance(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithSymbol:converter:")
+    public NSUnitElectricResistance(String symbol, NSUnitConverter converter) { super(symbol, converter); }
+    @Method(selector = "initWithSymbol:")
+    public NSUnitElectricResistance(String symbol) { super(symbol); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "megaohms")

@@ -29,6 +29,8 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.spritekit.*;
+import org.robovm.apple.scenekit.*;
+import org.robovm.apple.uikit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -64,7 +66,7 @@ import org.robovm.apple.spritekit.*;
     @Method(selector = "removeAllBehaviors")
     public native void removeAllBehaviors();
     @Method(selector = "objectAtIndexedSubscript:")
-    public native GKBehavior objectAtIndexedSubscript(@MachineSizedUInt long idx);
+    public native GKBehavior getBehaviour(@MachineSizedUInt long idx);
     @Method(selector = "setObject:forKeyedSubscript:")
     public native void setObjectforKeyedSubscript(NSNumber weight, GKBehavior behavior);
     @Method(selector = "objectForKeyedSubscript:")

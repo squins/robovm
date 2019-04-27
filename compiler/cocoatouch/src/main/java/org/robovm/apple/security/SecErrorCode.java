@@ -35,11 +35,12 @@ import org.robovm.apple.dispatch.*;
 /*<javadoc>*/
 
 /*</javadoc>*/
-/*<annotations>*//*</annotations>*/
+/*<annotations>*/@Library("Security")/*</annotations>*/
 public enum /*<name>*/SecErrorCode/*</name>*/ implements ValuedEnum {
     /*<values>*/
     Success(0L),
     Unimplemented(-4L),
+    DiskFull(-34L),
     DskFull(-34L),
     IO(-36L),
     OpWr(-49L),
@@ -50,6 +51,7 @@ public enum /*<name>*/SecErrorCode/*</name>*/ implements ValuedEnum {
     BadReq(-909L),
     InternalComponent(-2070L),
     CoreFoundationUnknown(-4960L),
+    MissingEntitlement(-34018L),
     NotAvailable(-25291L),
     ReadOnly(-25292L),
     AuthFailed(-25293L),
@@ -108,7 +110,6 @@ public enum /*<name>*/SecErrorCode/*</name>*/ implements ValuedEnum {
     AppleInvalidKeyEndDate(-67593L),
     ConversionError(-67594L),
     AppleSSLv2Rollback(-67595L),
-    DiskFull(-34L),
     QuotaExceeded(-67596L),
     FileTooBig(-67597L),
     InvalidDatabaseBlob(-67598L),
@@ -414,10 +415,15 @@ public enum /*<name>*/SecErrorCode/*</name>*/ implements ValuedEnum {
     TimestampRevocationNotification(-67898L);
     /*</values>*/
 
-    /*<bind>*/
-    /*</bind>*/
+    /*<bind>*/static { Bro.bind(SecErrorCode.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
-    /*<methods>*//*</methods>*/
+    /*<methods>*/
+    /**
+     * @since Available in iOS 11.3 and later.
+     */
+    @Bridge(symbol="SecCopyErrorMessageString", optional=true)
+    public static native String copyErrorMessageString(OSStatus status, VoidPtr reserved);
+    /*</methods>*/
 
     private final long n;
 

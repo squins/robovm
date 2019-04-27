@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -56,7 +59,7 @@ import org.robovm.apple.corelocation.*;
     @Method(selector = "initWithFrame:")
     public UISwitch(@ByVal CGRect frame) { super((SkipInit) null); initObject(init(frame)); }
     @Method(selector = "initWithCoder:")
-    public UISwitch(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UISwitch(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     /**
@@ -119,7 +122,7 @@ import org.robovm.apple.corelocation.*;
     @Method(selector = "initWithFrame:")
     protected native @Pointer long init(@ByVal CGRect frame);
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     @Method(selector = "setOn:animated:")
     public native void setOn(boolean on, boolean animated);
     /*</methods>*/

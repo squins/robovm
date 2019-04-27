@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -60,8 +59,14 @@ import org.robovm.apple.audiounit.*;
     protected AVAudioSessionRouteDescription(SkipInit skipInit) { super(skipInit); }
     /*</constructors>*/
     /*<properties>*/
+    /**
+     * @since Available in iOS 6.0 and later.
+     */
     @Property(selector = "inputs")
     public native NSArray<AVAudioSessionPortDescription> getInputs();
+    /**
+     * @since Available in iOS 6.0 and later.
+     */
     @Property(selector = "outputs")
     public native NSArray<AVAudioSessionPortDescription> getOutputs();
     /*</properties>*/

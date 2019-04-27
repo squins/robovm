@@ -36,6 +36,7 @@ import org.robovm.apple.avfoundation.*;
 import org.robovm.apple.glkit.*;
 import org.robovm.apple.scenekit.*;
 import org.robovm.apple.gameplaykit.*;
+import org.robovm.apple.metal.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -46,7 +47,7 @@ import org.robovm.apple.gameplaykit.*;
 /*<annotations>*/@Library("SpriteKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/SKAttribute/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class SKAttributePtr extends Ptr<SKAttribute, SKAttributePtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(SKAttribute.class); }/*</bind>*/
@@ -65,6 +66,8 @@ import org.robovm.apple.gameplaykit.*;
     public native String getName();
     @Property(selector = "type")
     public native SKAttributeType getType();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

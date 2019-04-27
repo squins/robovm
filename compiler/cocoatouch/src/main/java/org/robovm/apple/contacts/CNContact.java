@@ -38,7 +38,7 @@ import org.robovm.apple.foundation.*;
 /*<annotations>*/@Library("Contacts") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/CNContact/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding, NSItemProviderReading, NSItemProviderWriting/*</implements>*/ {
 
     /*<ptr>*/public static class CNContactPtr extends Ptr<CNContact, CNContactPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(CNContact.class); }/*</bind>*/
@@ -47,6 +47,8 @@ import org.robovm.apple.foundation.*;
     public CNContact() {}
     protected CNContact(Handle h, long handle) { super(h, handle); }
     protected CNContact(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithCoder:")
+    public CNContact(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "identifier")
@@ -115,6 +117,14 @@ import org.robovm.apple.foundation.*;
     public native NSDateComponents getNonGregorianBirthday();
     @Property(selector = "dates")
     public native NSArray<CNLabeledValue<NSDateComponents>> getDates();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
+    @Property(selector = "readableTypeIdentifiersForItemProvider")
+    public static native NSArray<NSString> getReadableTypeIdentifiersForItemProvider();
+    @Property(selector = "writableTypeIdentifiersForItemProvider")
+    public static native NSArray<NSString> getWritableTypeIdentifiersForItemProvider0();
+    @Property(selector = "writableTypeIdentifiersForItemProvider")
+    public native NSArray<NSString> getWritableTypeIdentifiersForItemProvider();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -132,11 +142,39 @@ import org.robovm.apple.foundation.*;
     public static native String getDescriptorForAllComparatorKeys();
     @Method(selector = "predicateForContactsMatchingName:")
     public static native NSPredicate getPredicateForContacts(String name);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "predicateForContactsMatchingEmailAddress:")
+    public static native NSPredicate predicateForContactsMatchingEmailAddress(String emailAddress);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "predicateForContactsMatchingPhoneNumber:")
+    public static native NSPredicate predicateForContactsMatchingPhoneNumber(CNPhoneNumber phoneNumber);
     @Method(selector = "predicateForContactsWithIdentifiers:")
     public static native NSPredicate getPredicateForContacts(@org.robovm.rt.bro.annotation.Marshaler(NSArray.AsStringListMarshaler.class) List<String> identifiers);
     @Method(selector = "predicateForContactsInGroupWithIdentifier:")
     public static native NSPredicate getPredicateForContactsInGroup(String groupIdentifier);
     @Method(selector = "predicateForContactsInContainerWithIdentifier:")
     public static native NSPredicate getPredicateForContactsInContainer(String containerIdentifier);
+    @Method(selector = "encodeWithCoder:")
+    public native void encode(NSCoder coder);
+    @Method(selector = "initWithCoder:")
+    protected native @Pointer long init(NSCoder decoder);
+    public static CNContact createProviderDataObject(NSData data, String typeIdentifier) throws NSErrorException {
+       NSError.NSErrorPtr ptr = new NSError.NSErrorPtr();
+       CNContact result = createProviderDataObject(data, typeIdentifier, ptr);
+       if (ptr.get() != null) { throw new NSErrorException(ptr.get()); }
+       return result;
+    }
+    @Method(selector = "objectWithItemProviderData:typeIdentifier:error:")
+    private static native CNContact createProviderDataObject(NSData data, String typeIdentifier, NSError.NSErrorPtr outError);
+    @Method(selector = "itemProviderVisibilityForRepresentationWithTypeIdentifier:")
+    public native NSItemProviderRepresentationVisibility getItemProviderVisibility(String typeIdentifier);
+    @Method(selector = "loadDataWithTypeIdentifier:forItemProviderCompletionHandler:")
+    public native NSProgress loadData(String typeIdentifier, @Block VoidBlock2<NSData, NSError> completionHandler);
+    @Method(selector = "itemProviderVisibilityForRepresentationWithTypeIdentifier:")
+    public static native NSItemProviderRepresentationVisibility getItemProviderVisibility0(String typeIdentifier);
     /*</methods>*/
 }

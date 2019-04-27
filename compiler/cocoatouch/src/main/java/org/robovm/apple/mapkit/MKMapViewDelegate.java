@@ -54,6 +54,11 @@ import org.robovm.apple.dispatch.*;
     void willChangeRegion(MKMapView mapView, boolean animated);
     @Method(selector = "mapView:regionDidChangeAnimated:")
     void didChangeRegion(MKMapView mapView, boolean animated);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "mapViewDidChangeVisibleRegion:")
+    void mapViewDidChangeVisibleRegion(MKMapView mapView);
     @Method(selector = "mapViewWillStartLoadingMap:")
     void willStartLoadingMap(MKMapView mapView);
     @Method(selector = "mapViewDidFinishLoadingMap:")
@@ -140,6 +145,11 @@ import org.robovm.apple.dispatch.*;
     @Deprecated
     @Method(selector = "mapView:didAddOverlayViews:")
     void didAddOverlayViews(MKMapView mapView, NSArray<MKOverlayView> overlayViews);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "mapView:clusterAnnotationForMemberAnnotations:")
+    MKClusterAnnotation getClusterAnnotationForMemberAnnotations(MKMapView mapView, NSArray<?> memberAnnotations);
     /*</methods>*/
     /*<adapter>*/
     /*</adapter>*/

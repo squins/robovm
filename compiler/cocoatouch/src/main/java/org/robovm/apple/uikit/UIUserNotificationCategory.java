@@ -34,19 +34,22 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
 /**
  * @since Available in iOS 8.0 and later.
- * @deprecated Deprecated in iOS 10.0.
+ * @deprecated Deprecated in iOS 10.0. Use UserNotifications Framework's UNNotificationCategory
  */
 @Deprecated
 /*</javadoc>*/
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UIUserNotificationCategory/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class UIUserNotificationCategoryPtr extends Ptr<UIUserNotificationCategory, UIUserNotificationCategoryPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(UIUserNotificationCategory.class); }/*</bind>*/
@@ -56,11 +59,13 @@ import org.robovm.apple.corelocation.*;
     protected UIUserNotificationCategory(Handle h, long handle) { super(h, handle); }
     protected UIUserNotificationCategory(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithCoder:")
-    public UIUserNotificationCategory(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UIUserNotificationCategory(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "identifier")
     public native String getIdentifier();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     public void setIdentifier(String v) {
         throw new UnsupportedOperationException("UIUserNotificationCategory is immutable");
@@ -72,8 +77,10 @@ import org.robovm.apple.corelocation.*;
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     @Method(selector = "actionsForContext:")
     public native NSArray<UIUserNotificationAction> getActions(UIUserNotificationActionContext context);
+    @Method(selector = "encodeWithCoder:")
+    public native void encode(NSCoder coder);
     /*</methods>*/
 }

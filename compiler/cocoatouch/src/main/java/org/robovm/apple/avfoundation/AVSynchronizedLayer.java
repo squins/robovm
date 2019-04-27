@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -59,6 +58,8 @@ import org.robovm.apple.audiounit.*;
     protected AVSynchronizedLayer(Handle h, long handle) { super(h, handle); }
     protected AVSynchronizedLayer(SkipInit skipInit) { super(skipInit); }
     public AVSynchronizedLayer(AVPlayerItem playerItem) { super((Handle) null, create(playerItem)); retain(getHandle()); }
+    @Method(selector = "initWithLayer:")
+    public AVSynchronizedLayer(CALayer layer) { super(layer); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "playerItem")

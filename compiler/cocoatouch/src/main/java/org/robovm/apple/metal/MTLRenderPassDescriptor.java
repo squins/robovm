@@ -64,9 +64,98 @@ import org.robovm.apple.dispatch.*;
     public native MTLBuffer getVisibilityResultBuffer();
     @Property(selector = "setVisibilityResultBuffer:")
     public native void setVisibilityResultBuffer(MTLBuffer v);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "renderTargetArrayLength")
+    public native @MachineSizedUInt long getRenderTargetArrayLength();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "setRenderTargetArrayLength:")
+    public native void setRenderTargetArrayLength(@MachineSizedUInt long v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "imageblockSampleLength")
+    public native @MachineSizedUInt long getImageblockSampleLength();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setImageblockSampleLength:")
+    public native void setImageblockSampleLength(@MachineSizedUInt long v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "threadgroupMemoryLength")
+    public native @MachineSizedUInt long getThreadgroupMemoryLength();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setThreadgroupMemoryLength:")
+    public native void setThreadgroupMemoryLength(@MachineSizedUInt long v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "tileWidth")
+    public native @MachineSizedUInt long getTileWidth();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setTileWidth:")
+    public native void setTileWidth(@MachineSizedUInt long v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "tileHeight")
+    public native @MachineSizedUInt long getTileHeight();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setTileHeight:")
+    public native void setTileHeight(@MachineSizedUInt long v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "defaultRasterSampleCount")
+    public native @MachineSizedUInt long getDefaultRasterSampleCount();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setDefaultRasterSampleCount:")
+    public native void setDefaultRasterSampleCount(@MachineSizedUInt long v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "renderTargetWidth")
+    public native @MachineSizedUInt long getRenderTargetWidth();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setRenderTargetWidth:")
+    public native void setRenderTargetWidth(@MachineSizedUInt long v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "renderTargetHeight")
+    public native @MachineSizedUInt long getRenderTargetHeight();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setRenderTargetHeight:")
+    public native void setRenderTargetHeight(@MachineSizedUInt long v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
-    
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setSamplePositions:count:")
+    public native void setSamplePositions(MTLSamplePosition positions, @MachineSizedUInt long count);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "getSamplePositions:count:")
+    public native @MachineSizedUInt long getSamplePositions(MTLSamplePosition positions, @MachineSizedUInt long count);
     /*</methods>*/
 }

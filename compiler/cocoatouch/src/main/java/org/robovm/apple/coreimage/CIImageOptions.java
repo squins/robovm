@@ -35,6 +35,7 @@ import org.robovm.apple.corevideo.*;
 import org.robovm.apple.imageio.*;
 import org.robovm.apple.uikit.*;
 import org.robovm.apple.metal.*;
+import org.robovm.apple.iosurface.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -152,20 +153,35 @@ import org.robovm.apple.metal.*;
         @GlobalValue(symbol="kCIImageColorSpace", optional=true)
         public static native CFString ColorSpace();
         /**
+         * @since Available in iOS 11.0 and later.
+         */
+        @GlobalValue(symbol="kCIImageNearestSampling", optional=true)
+        public static native CFString NearestSampling();
+        /**
          * @since Available in iOS 5.0 and later.
          */
         @GlobalValue(symbol="kCIImageProperties", optional=true)
         public static native CFString Properties();
         /**
-         * @since Available in iOS 9.0 and later.
+         * @since Available in iOS 11.0 and later.
          */
-        @GlobalValue(symbol="kCIImageProviderTileSize", optional=true)
-        public static native CFString ProviderTileSize();
+        @GlobalValue(symbol="kCIImageApplyOrientationProperty", optional=true)
+        public static native CFString ApplyOrientationProperty();
         /**
-         * @since Available in iOS 9.0 and later.
+         * @since Available in iOS 11.0 and later.
          */
-        @GlobalValue(symbol="kCIImageProviderUserInfo", optional=true)
-        public static native CFString ProviderUserInfo();
+        @GlobalValue(symbol="kCIImageAuxiliaryDepth", optional=true)
+        public static native CFString AuxiliaryDepth();
+        /**
+         * @since Available in iOS 11.0 and later.
+         */
+        @GlobalValue(symbol="kCIImageAuxiliaryDisparity", optional=true)
+        public static native CFString AuxiliaryDisparity();
+        /**
+         * @since Available in iOS 12.0 and later.
+         */
+        @GlobalValue(symbol="kCIImageAuxiliaryPortraitEffectsMatte", optional=true)
+        public static native CFString AuxiliaryPortraitEffectsMatte();
     }
     /*</keys>*/
 }

@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -152,6 +151,11 @@ import org.robovm.apple.audiounit.*;
     @Property(selector = "preferredMediaSelection")
     public native AVMediaSelection getPreferredMediaSelection();
     /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "allMediaSelections")
+    public native NSArray<AVMediaSelection> getAllMediaSelections();
+    /**
      * @since Available in iOS 4.2 and later.
      */
     @Property(selector = "hasProtectedContent")
@@ -223,6 +227,16 @@ import org.robovm.apple.audiounit.*;
      */
     @GlobalValue(symbol="AVAssetDurationDidChangeNotification", optional=true)
     public static native NSString DurationDidChangeNotification();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @GlobalValue(symbol="AVAssetContainsFragmentsDidChangeNotification", optional=true)
+    public static native NSString ContainsFragmentsDidChangeNotification();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @GlobalValue(symbol="AVAssetWasDefragmentedNotification", optional=true)
+    public static native NSString WasDefragmentedNotification();
     /**
      * @since Available in iOS 9.0 and later.
      */

@@ -180,13 +180,13 @@ import org.robovm.apple.avfoundation.*;
      * @since Available in iOS 9.0 and later.
      */
     @NotImplemented("nodesInsideFrustumWithPointOfView:")
-    public NSArray<SCNNode> nodesInsideFrustumWithPointOfView(SCNNode pointOfView) { return null; }
+    public NSArray<SCNNode> getNodesInsideFrustum(SCNNode pointOfView) { return null; }
     @NotImplemented("projectPoint:")
     public @ByVal SCNVector3 projectPoint(@ByVal SCNVector3 point) { return null; }
     @NotImplemented("unprojectPoint:")
     public @ByVal SCNVector3 unprojectPoint(@ByVal SCNVector3 point) { return null; }
     @NotImplemented("prepareObject:shouldAbortBlock:")
-    public boolean prepareObject(NSObject object, @Block Block0<Boolean> block) { return false; }
+    public boolean prepareObject(NSObject object, @Block BooleanBlock block) { return false; }
     @NotImplemented("prepareObjects:withCompletionHandler:")
     public void prepareObjects(NSArray<?> objects, @Block VoidBooleanBlock completionHandler) {}
     /*</methods>*/

@@ -29,6 +29,8 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.spritekit.*;
+import org.robovm.apple.scenekit.*;
+import org.robovm.apple.uikit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -52,6 +54,8 @@ import org.robovm.apple.spritekit.*;
     public GKMeshGraph(float bufferRadius, @ByVal VectorFloat2 min, @ByVal VectorFloat2 max, Class<?> nodeClass) { super((SkipInit) null); initObject(init(bufferRadius, min, max, nodeClass)); }
     @Method(selector = "initWithBufferRadius:minCoordinate:maxCoordinate:")
     public GKMeshGraph(float bufferRadius, @ByVal VectorFloat2 min, @ByVal VectorFloat2 max) { super((SkipInit) null); initObject(init(bufferRadius, min, max)); }
+    @Method(selector = "initWithNodes:")
+    public GKMeshGraph(NSArray<GKGraphNode> nodes) { super(nodes); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "obstacles")

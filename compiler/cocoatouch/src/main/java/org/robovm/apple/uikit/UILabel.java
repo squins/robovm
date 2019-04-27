@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -44,7 +47,7 @@ import org.robovm.apple.corelocation.*;
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UILabel/*</name>*/ 
     extends /*<extends>*/UIView/*</extends>*/ 
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSCoding, UIContentSizeCategoryAdjusting/*</implements>*/ {
 
     /*<ptr>*/public static class UILabelPtr extends Ptr<UILabel, UILabelPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(UILabel.class); }/*</bind>*/
@@ -53,13 +56,11 @@ import org.robovm.apple.corelocation.*;
     public UILabel() {}
     protected UILabel(Handle h, long handle) { super(h, handle); }
     protected UILabel(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithFrame:")
+    public UILabel(@ByVal CGRect frame) { super(frame); }
+    @Method(selector = "initWithCoder:")
+    public UILabel(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
-    public UILabel(CGRect frame) {
-        super(frame);
-    }
-    public UILabel(NSCoder decoder) {
-        super(decoder);
-    }
     /*<properties>*/
     @Property(selector = "text")
     public native String getText();
@@ -171,6 +172,10 @@ import org.robovm.apple.corelocation.*;
     @Deprecated
     @Property(selector = "setAdjustsLetterSpacingToFitWidth:")
     public native void setAdjustsLetterSpacingToFitWidth(boolean v);
+    @Property(selector = "adjustsFontForContentSizeCategory")
+    public native boolean adjustsFontForContentSizeCategory();
+    @Property(selector = "setAdjustsFontForContentSizeCategory:")
+    public native void setAdjustsFontForContentSizeCategory(boolean v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

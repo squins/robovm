@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -53,6 +56,8 @@ import org.robovm.apple.corelocation.*;
     public UIScreenEdgePanGestureRecognizer() {}
     protected UIScreenEdgePanGestureRecognizer(Handle h, long handle) { super(h, handle); }
     protected UIScreenEdgePanGestureRecognizer(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithTarget:action:")
+    public UIScreenEdgePanGestureRecognizer(NSObject target, Selector action) { super(target, action); }
     /*</constructors>*/
     
     public UIScreenEdgePanGestureRecognizer(OnGestureListener listener) {

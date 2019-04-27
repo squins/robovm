@@ -30,6 +30,7 @@ import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.addressbook.*;
 import org.robovm.apple.corebluetooth.*;
+import org.robovm.apple.contacts.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -41,7 +42,11 @@ public enum /*<name>*/CLActivityType/*</name>*/ implements ValuedEnum {
     Other(1L),
     AutomotiveNavigation(2L),
     Fitness(3L),
-    OtherNavigation(4L);
+    OtherNavigation(4L),
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    Airborne(5L);
     /*</values>*/
 
     /*<bind>*/

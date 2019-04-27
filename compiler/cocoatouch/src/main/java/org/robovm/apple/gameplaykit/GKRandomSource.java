@@ -29,6 +29,8 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.spritekit.*;
+import org.robovm.apple.scenekit.*;
+import org.robovm.apple.uikit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -39,7 +41,7 @@ import org.robovm.apple.spritekit.*;
 /*<annotations>*/@Library("GameplayKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/GKRandomSource/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements GKRandom/*</implements>*/ {
+    /*<implements>*/implements GKRandom, NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class GKRandomSourcePtr extends Ptr<GKRandomSource, GKRandomSourcePtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(GKRandomSource.class); }/*</bind>*/
@@ -49,15 +51,16 @@ import org.robovm.apple.spritekit.*;
     protected GKRandomSource(Handle h, long handle) { super(h, handle); }
     protected GKRandomSource(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithCoder:")
-    public GKRandomSource(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public GKRandomSource(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
-    
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     @Method(selector = "arrayByShufflingObjectsInArray:")
     public native NSArray<?> shuffleArray(NSArray<?> array);
     @Method(selector = "sharedRandom")
@@ -70,5 +73,7 @@ import org.robovm.apple.spritekit.*;
     public native float nextUniform();
     @Method(selector = "nextBool")
     public native boolean nextBool();
+    @Method(selector = "encodeWithCoder:")
+    public native void encode(NSCoder coder);
     /*</methods>*/
 }

@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -44,7 +47,7 @@ import org.robovm.apple.corelocation.*;
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UITraitCollection/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class UITraitCollectionPtr extends Ptr<UITraitCollection, UITraitCollectionPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(UITraitCollection.class); }/*</bind>*/
@@ -54,7 +57,11 @@ import org.robovm.apple.corelocation.*;
     protected UITraitCollection(Handle h, long handle) { super(h, handle); }
     protected UITraitCollection(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithCoder:")
-    public UITraitCollection(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UITraitCollection(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    public UITraitCollection(UIUserInterfaceStyle userInterfaceStyle) { super((Handle) null, create(userInterfaceStyle)); retain(getHandle()); }
     /**
      * @since Available in iOS 10.0 and later.
      */
@@ -75,6 +82,11 @@ import org.robovm.apple.corelocation.*;
     /*<properties>*/
     @Property(selector = "userInterfaceIdiom")
     public native UIUserInterfaceIdiom getUserInterfaceIdiom();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "userInterfaceStyle")
+    public native UIUserInterfaceStyle getUserInterfaceStyle();
     /**
      * @since Available in iOS 10.0 and later.
      */
@@ -101,17 +113,24 @@ import org.robovm.apple.corelocation.*;
      */
     @Property(selector = "displayGamut")
     public native UIDisplayGamut getDisplayGamut();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     @Method(selector = "containsTraitsInCollection:")
     public native boolean containsTraits(UITraitCollection trait);
     @Method(selector = "traitCollectionWithTraitsFromCollections:")
     public static native UITraitCollection createWithTraits(NSArray<UITraitCollection> traitCollections);
     @Method(selector = "traitCollectionWithUserInterfaceIdiom:")
     public static native UITraitCollection createWithUserInterfaceIdiom(UIUserInterfaceIdiom idiom);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Method(selector = "traitCollectionWithUserInterfaceStyle:")
+    protected static native @Pointer long create(UIUserInterfaceStyle userInterfaceStyle);
     /**
      * @since Available in iOS 10.0 and later.
      */
@@ -138,5 +157,7 @@ import org.robovm.apple.corelocation.*;
      */
     @Method(selector = "traitCollectionWithDisplayGamut:")
     protected static native @Pointer long create(UIDisplayGamut displayGamut);
+    @Method(selector = "encodeWithCoder:")
+    public native void encode(NSCoder coder);
     /*</methods>*/
 }

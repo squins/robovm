@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -53,13 +56,11 @@ import org.robovm.apple.corelocation.*;
     public UIPageControl() {}
     protected UIPageControl(Handle h, long handle) { super(h, handle); }
     protected UIPageControl(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithFrame:")
+    public UIPageControl(@ByVal CGRect frame) { super(frame); }
+    @Method(selector = "initWithCoder:")
+    public UIPageControl(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
-    public UIPageControl(CGRect frame) {
-        super(frame);
-    }
-    public UIPageControl(NSCoder decoder) {
-        super(decoder);
-    }
     /*<properties>*/
     @Property(selector = "numberOfPages")
     public native @MachineSizedSInt long getNumberOfPages();

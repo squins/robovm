@@ -36,6 +36,7 @@ import org.robovm.apple.avfoundation.*;
 import org.robovm.apple.glkit.*;
 import org.robovm.apple.scenekit.*;
 import org.robovm.apple.gameplaykit.*;
+import org.robovm.apple.metal.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -55,6 +56,8 @@ import org.robovm.apple.gameplaykit.*;
     public SKCameraNode() {}
     protected SKCameraNode(Handle h, long handle) { super(h, handle); }
     protected SKCameraNode(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithCoder:")
+    public SKCameraNode(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
     /*<properties>*/
     

@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -52,6 +55,10 @@ import org.robovm.apple.corelocation.*;
     /*<constructors>*/
     protected UIMutableApplicationShortcutItem(Handle h, long handle) { super(h, handle); }
     protected UIMutableApplicationShortcutItem(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithType:localizedTitle:localizedSubtitle:icon:userInfo:")
+    public UIMutableApplicationShortcutItem(String type, String localizedTitle, String localizedSubtitle, UIApplicationShortcutIcon icon, NSDictionary<?, ?> userInfo) { super(type, localizedTitle, localizedSubtitle, icon, userInfo); }
+    @Method(selector = "initWithType:localizedTitle:")
+    public UIMutableApplicationShortcutItem(String type, String localizedTitle) { super(type, localizedTitle); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "type")

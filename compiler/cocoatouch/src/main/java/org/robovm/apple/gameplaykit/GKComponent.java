@@ -29,6 +29,8 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.spritekit.*;
+import org.robovm.apple.scenekit.*;
+import org.robovm.apple.uikit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -39,7 +41,7 @@ import org.robovm.apple.spritekit.*;
 /*<annotations>*/@Library("GameplayKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/GKComponent/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class GKComponentPtr extends Ptr<GKComponent, GKComponentPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(GKComponent.class); }/*</bind>*/
@@ -54,6 +56,8 @@ import org.robovm.apple.spritekit.*;
     /*<properties>*/
     @Property(selector = "entity")
     public native GKEntity getEntity();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

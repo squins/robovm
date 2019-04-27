@@ -1,5 +1,5 @@
 package: org.robovm.apple.uikit
-include: [foundation, coreanimation, coregraphics, coredata, coreimage, coretext, corelocation]
+include: [foundation, coreanimation, coregraphics, coredata, coreimage, coretext, corelocation, cloudkit, fileprovider, intents]
 library: UIKit
 framework: UIKit
 clang_args: ['-x', 'objective-c']
@@ -7,18 +7,6 @@ headers:
     - /System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
 typedefs:
     NSCopying: NSObject
-    'void (^)(UIBackgroundFetchResult)': '@Block VoidBlock1<UIBackgroundFetchResult>'
-    'void (^)(id<UIViewControllerTransitionCoordinatorContext> _Nonnull)': '@Block VoidBlock1<UIViewControllerTransitionCoordinatorContext>'
-    'void (^)(CGRect, CGRect, NSTextContainer * _Nonnull, NSRange, BOOL * _Nonnull)': '@Block("(@ByVal, @ByVal, , @ByVal, )") VoidBlock5<CGRect, CGRect, NSTextContainer, NSRange, BooleanPtr>'
-    'void (^)(CGRect, BOOL * _Nonnull)': '@Block("(@ByVal, )") VoidBlock2<CGRect, BooleanPtr>'
-    'void (^)(void (^)(void))': '@Block("(@Block)") VoidBlock1<Runnable>'
-    'void (^)(NSError *)': '@Block VoidBlock1<NSError>'
-    'void (^)(UILexicon * _Nonnull)': '@Block VoidBlock1<UILexicon>'
-    'void (^)(UIAlertAction * _Nonnull)': '@Block VoidBlock1<UIAlertAction>'
-    'void (^)(UITextField * _Nonnull)': '@Block VoidBlock1<UITextField>'
-    'void (^)(UITableViewRowAction * _Nonnull, NSIndexPath * _Nonnull)': '@Block VoidBlock2<UITableViewRowAction, NSIndexPath>'
-    'void (^)(UIViewAnimatingPosition)': '@Block VoidBlock1<UIViewAnimatingPosition>'
-    'void (^)(UICloudSharingController * _Nonnull, void (^ _Nonnull)(CKShare * _Nullable, CKContainer * _Nullable, NSError * _Nullable))': '@Block(",(@Block)") VoidBlock2<UICloudSharingController, VoidBlock3<CKShare, CKContainer, NSError>>'
     UIGraphicsImageDrawingActions: '@Block VoidBlock1<UIGraphicsImageRendererContext>'
     UIGraphicsPDFDrawingActions: '@Block VoidBlock1<UIGraphicsPDFRendererContext>'
     UITextContentType: UITextContentType
@@ -122,7 +110,7 @@ enums:
     UIPressPhase: {}
     UIPressType: {}
     UIPreviewActionStyle: {}
-    UIPrintErrorCode: {first: UIPrintingNotAvailableError, suffix: Error, UIPrintingNotAvailableError: PrintingNotAvailableError}
+    UIPrintError: {nserror: true, first: UIPrintingNotAvailableError, suffix: Error, UIPrintingNotAvailableError: PrintingNotAvailableError}
     UIPrinterCutterBehavior: {}
     UIPrinterJobTypes: {skip_none: true}
     UIPrintInfoDuplex: {}
@@ -201,6 +189,44 @@ enums:
     UIWebPaginationMode: {}
     UIWebViewNavigationType: {}
     NSWritingDirectionFormatType: {}
+    #ios11 bindings
+    UIScrollViewIndexDisplayMode: {}
+    UIScrollViewContentInsetAdjustmentBehavior: {prefix: UIScrollViewContentInsetAdjustment} #since 11.0
+    UIAccessibilityContainerType: {} #since 11.0
+    UITextSmartQuotesType: {} #since 11.0
+    UITextSmartDashesType: {} #since 11.0
+    UITextSmartInsertDeleteType: {} #since 11.0
+    UIAccessibilityCustomSystemRotorType: {} #since 11.0
+    UIPreferredPresentationStyle: {}
+    UIDropOperation: {} #since 11.0
+    UITextDragOptions: {prefix: UITextDragOption} #since 11.0
+    UITextDropAction: {} #since 11.0
+    UITextDropProgressMode: {} #since 11.0
+    UITextDropPerformer: {} #since 11.0
+    UITextDropEditability: {} #since 11.0
+    UICollectionViewReorderingCadence: {} #since 11.0
+    UICollectionViewDropIntent: {} #since 11.0
+    UICollectionViewCellDragState: {} #since 11.0
+    UICollectionViewFlowLayoutSectionInsetReference: {prefix: UICollectionViewFlowLayoutSectionInset} #since 11.0
+    UIImagePickerControllerImageURLExportPreset: {} #since 11.0
+    UINavigationItemLargeTitleDisplayMode: {}
+    UIContextualActionStyle: {} #since 11.0
+    UITableViewCellDragState: {} #since 11.0
+    UITableViewSeparatorInsetReference: {prefix: UITableViewSeparatorInset} #since 11.0
+    UITableViewDropIntent: {} #since 11.0
+    UISplitViewControllerPrimaryEdge: {} #since 11.0
+    UIDropSessionProgressIndicatorStyle: {} #since 11.0
+    UISpringLoadedInteractionEffectState: {} #since 11.0
+
+    UIGraphicsImageRendererFormatRange: {} #since 12.0
+    UIDocumentBrowserImportMode: {} #since 11.0
+    UIDocumentBrowserUserInterfaceStyle: {} #since 11.0
+    UIDocumentBrowserActionAvailability: {} #since 11.0
+    UIPencilPreferredAction: {} #since 12.1
+    UIGuidedAccessAccessibilityFeature: {} #since 12.2
+
+    UIDocumentBrowserErrorCode: {nserror: true, prefix: UIDocumentBrowserError}
+    UIGuidedAccessErrorCode: {nserror: true, prefix: UIGuidedAccessError} #since 12.2
 
 categories:
     CIColor: # DONE
@@ -361,11 +387,7 @@ classes:
 
     UIRemoteNotification:
         extends: NSDictionaryWrapper
-    
-    UIPrintError:
-        extends: NSError
-        annotations: ['@StronglyLinked']
-        
+
     UIRunLoopMode:
         extends: NSRunLoopMode
 
@@ -373,6 +395,7 @@ classes:
     UIEdgeInsets: {}
     UIFloatRange: {}
     UIOffset: {}
+    NSDirectionalEdgeInsets: {} # since 11.0
 
     NSDataAsset: # DONE
         methods:
@@ -400,6 +423,9 @@ classes:
                         type: NSURLProperties
             '+placeholderURLForURL:':
                 name: getPlaceholderURL
+            '-itemForIdentifier:error:':
+                throws: NSErrorException
+                trim_after_first_colon: true
     NSLayoutAnchor: # DONE
         methods:
             '-constraintEqualToAnchor:':
@@ -455,8 +481,22 @@ classes:
                 name: lessThanOrEqualTo
     NSLayoutXAxisAnchor: # DONE
         extends: NSLayoutAnchor<NSLayoutXAxisAnchor>
+        methods:
+            '-constraintEqualToSystemSpacingAfterAnchor:multiplier:':
+                trim_after_first_colon: true
+            '-constraintGreaterThanOrEqualToSystemSpacingAfterAnchor:multiplier:':
+                trim_after_first_colon: true
+            '-constraintLessThanOrEqualToSystemSpacingAfterAnchor:multiplier:':
+                trim_after_first_colon: true
     NSLayoutYAxisAnchor: # DONE
         extends: NSLayoutAnchor<NSLayoutYAxisAnchor>
+        methods:
+            '-constraintEqualToSystemSpacingBelowAnchor:multiplier:':
+                trim_after_first_colon: true
+            '-constraintGreaterThanOrEqualToSystemSpacingBelowAnchor:multiplier:':
+                trim_after_first_colon: true
+            '-constraintLessThanOrEqualToSystemSpacingBelowAnchor:multiplier:':
+                trim_after_first_colon: true
     NSLayoutConstraint: # DONE
         methods:
             '+constraintWithItem:attribute:relatedBy:toItem:attribute:multiplier:constant:':
@@ -487,8 +527,6 @@ classes:
             'textContainers':
                 type: NSArray<NSTextContainer>
         methods:
-            '-init.*':
-                name: init
             '-addTextContainer:':
                 trim_after_first_colon: true
             '-insertTextContainer:atIndex:':
@@ -766,11 +804,11 @@ classes:
                 name: prepare
     UIActivityIndicatorView: # DONE
         methods:
-            '-init.*':
+            '-initWithActivityIndicatorStyle:':
                 name: init
     UIActivityItemProvider: # DONE
         methods:
-            '-init.*':
+            '-initWithPlaceholderItem:':
                 name: init
     UIActivityViewController: # DONE
         properties:
@@ -787,8 +825,6 @@ classes:
                 parameters:
                     applicationActivities:
                         type: NSArray<UIActivity>
-            '-init.*':
-                name: init
     UIAlertAction: # DONE
         methods:
             '+actionWithTitle:style:handler:':
@@ -813,8 +849,6 @@ classes:
             'delegate':
                 type: UIAlertViewDelegate
         methods:
-            '-init.*':
-                name: init
             '-addButtonWithTitle:':
                 name: addButton
             '-buttonTitleAtIndex:':
@@ -869,14 +903,22 @@ classes:
     UIApplicationShortcutItem: # DONE
         skip_def_constructor: true
         methods:
-            '-init.*':
+            '-initWithType:localizedTitle:localizedSubtitle:icon:userInfo:':
+                name: init
+            '-initWithType:localizedTitle:':
                 name: init
     UIAttachmentBehavior: # DONE
         properties:
             'items':
                 type: List<UIDynamicItem>
         methods:
-            '-init.*':
+            '-initWithItem:attachedToAnchor:':
+                name: init
+            '-initWithItem:offsetFromCenter:attachedToAnchor:':
+                name: init
+            '-initWithItem:attachedToItem:':
+                name: init
+            '-initWithItem:offsetFromCenter:attachedToItem:offsetFromCenter:':
                 name: init
             '+slidingAttachment.*':
                 name: getSlidingAttachment
@@ -900,7 +942,15 @@ classes:
                 name: init
             '-initWithBarButtonSystemItem:target:action:':
                 name: init
-            '-init.*':
+            '-initWithItem:attachedToAnchor:':
+                name: init
+            '-initWithItem:offsetFromCenter:attachedToAnchor:':
+                name: init
+            '-initWithItem:attachedToItem:':
+                name: init
+            '-initWithItem:offsetFromCenter:attachedToItem:offsetFromCenter:':
+                name: init
+            '-initWithCustomView:':
                 name: init
             '-backButtonBackgroundImageForState:barMetrics:':
                 name: getBackButtonBackgroundImage
@@ -940,13 +990,9 @@ classes:
                 parameters:
                     barButtonItems:
                         type: NSArray<UIBarButtonItem>
-            '-init.*':
-                name: init
     UIBarItem: # DONE
-        protocols: [UIAppearanceContainer]
+        protocols: [NSCoding, UIAppearanceContainer]
         methods:
-            '-init.*':
-                name: init
             '-setTitleTextAttributes:forState:':
                 name: setTitleTextAttributesDictionary
                 parameters:
@@ -1033,12 +1079,6 @@ classes:
                 name: getAttributedTitle
             '-(set.*):forState:.*':
                 name: '#{g[0]}'
-   # UICloudSharingController: # DONE
-   #     methods:
-   #         '-init.*':                         >>>>> TODO need to update CloudKit
-    #            name: init     
-    #        '-activityItemSource':
-    #            property: true
     UICollectionReusableView: # DONE
         methods:
             '-didTransitionFromLayout:toLayout:':
@@ -1054,7 +1094,7 @@ classes:
             'transform3D':
                 annotations: ['@WeaklyLinked']
         methods:
-            '-init.*':
+            '-initWithFrame:collectionViewLayout:':
                 name: init
             '-cellForItemAtIndexPath:':
                 name: getCellForItem
@@ -1140,15 +1180,15 @@ classes:
                 name: updateInteractiveMovement
     UICollectionViewCell: # DONE
         methods:
-            '-init.*':
-                name: init
     UICollectionViewController: # DONE
         properties:
             'useLayoutToLayoutNavigationTransitions':
                 name: usesLayoutToLayoutNavigationTransitions
         methods:
-            '-init.*':
+            '-initWithCollectionViewLayout:':
                 name: init
+            '-collectionView:shouldSpringLoadItemAtIndexPath:withContext:':
+                name: shouldSpringLoadItem
     UICollectionViewFlowLayout: {} # DONE
     UICollectionViewFlowLayoutInvalidationContext: # DONE
         properties:
@@ -1176,8 +1216,6 @@ classes:
                 name: getInitialLayoutAttributesForAppearingItem
             '-initialLayoutAttributesForAppearingSupplementaryElementOfKind:atIndexPath:':
                 name: getInitialLayoutAttributesForAppearingSupplementaryElement
-            '-init.*':
-                name: init
             '-layoutAttributesForDecorationViewOfKind:atIndexPath:':
                 name: getLayoutAttributesForDecorationView
             '-layoutAttributesForElementsInRect:':
@@ -1268,7 +1306,7 @@ classes:
                         type: NSArray<NSIndexPath>
     UICollectionViewTransitionLayout: # DONE
         methods:
-            '-init.*':
+            '-initWithCurrentLayout:nextLayout:':
                 name: init
             '-updateValue:forAnimatedKey:':
                 trim_after_first_colon: true
@@ -1329,6 +1367,8 @@ classes:
                 name: fromWhiteAlpha
             '+colorWithDisplayP3Red:green:blue:alpha:':
                 name: fromDisplayP3
+            '+colorNamed:inBundle:compatibleWithTraitCollection:':
+                name: fromResourceBundle
             '-colorWithAlphaComponent:':
                 name: addAlpha
             '-getHue:saturation:brightness:alpha:':
@@ -1382,7 +1422,7 @@ classes:
                 marshaler: NSArray.AsStringListMarshaler
     UIDocument: # DONE
         methods:
-            '-init.*':
+            '-initWithFileURL:':
                 name: init
             '-autosaveWithCompletionHandler:':
                 name: autoSave
@@ -1444,7 +1484,7 @@ classes:
                     allowedUTIs:
                         type: List<String>
                         marshaler: NSArray.AsStringListMarshaler
-            '-init.*':
+            '-initWithURL:inMode:':
                 name: init
             '-addOptionWithTitle:image:order:handler:':
                 name: addOption
@@ -1490,14 +1530,18 @@ classes:
                     allowedUTIs:
                         type: List<String>
                         marshaler: NSArray.AsStringListMarshaler
-            '-init.*':
+            '-initWithURL:inMode:':
+                name: init
+            '-initWithURLs:inMode:':
                 name: init
     UIDynamicAnimator: # DONE
         properties:
             'behaviors':
                 type: NSArray<UIDynamicBehavior>
         methods:
-            '-init.*':
+            '-initWithReferenceView:':
+                name: init
+            '-initWithCollectionViewLayout:':
                 name: init
             '-addBehavior:':
                 trim_after_first_colon: true
@@ -1589,6 +1633,10 @@ classes:
     UIFocusAnimationCoordinator: # DONE
         methods:
             '-addCoordinatedAnimations:completion:':
+                trim_after_first_colon: true
+            '-addCoordinatedFocusingAnimations:completion:':
+                trim_after_first_colon: true
+            '-addCoordinatedUnfocusingAnimations:completion:':
                 trim_after_first_colon: true
     UIFocusGuide: # DONE
         properties:
@@ -1714,6 +1762,37 @@ classes:
                 trim_after_first_colon: true
             '-requireGestureRecognizerToFail:':
                 trim_after_first_colon: true
+            '-ignoreTouch:forEvent:':
+                trim_after_first_colon: true
+                visibility: protected
+            '-ignorePress:forEvent:':
+                trim_after_first_colon: true
+                visibility: protected
+            '-touchesBegan:withEvent:':
+                trim_after_first_colon: true
+                visibility: protected
+            '-touchesMoved:withEvent:':
+                trim_after_first_colon: true
+                visibility: protected
+            '-touchesEnded:withEvent:':
+                trim_after_first_colon: true
+                visibility: protected
+            '-touchesCancelled:withEvent:':
+                trim_after_first_colon: true
+                visibility: protected
+            '-pressesBegan:withEvent:':
+                trim_after_first_colon: true
+                visibility: protected
+            '-pressesChanged:withEvent:':
+                trim_after_first_colon: true
+                visibility: protected
+            '-pressesEnded:withEvent:':
+                trim_after_first_colon: true
+                visibility: protected
+            '-pressesCancelled:withEvent:':
+                trim_after_first_colon: true
+                visibility: protected
+
     UIGraphicsImageRenderer: # DONE
         methods:
             '-init.*':
@@ -1748,7 +1827,15 @@ classes:
     UIGraphicsPDFRendererFormat: {} # DONE
     UIGraphicsRenderer: # DONE
         methods:
-            '-init.*':
+            '-runDrawingActions:completionActions:error:':
+                trim_after_first_colon: true
+            '+prepareCGContext:withRendererContext:':
+                trim_after_first_colon: true
+            '+contextWithFormat:':
+                name: createContext
+            '-initWithBounds:':
+                name: init
+            '-initWithBounds:format:':
                 name: init
     UIGraphicsRendererContext: # DONE
         methods:
@@ -1889,7 +1976,9 @@ classes:
             'highlightedAnimationImages':
                 type: NSArray<UIImage>
         methods:
-            '-init.*':
+            '-initWithImage:':
+                name: init
+            '-initWithImage:highlightedImage:':
                 name: init
     UIImpactFeedbackGenerator: # DONE
         methods:
@@ -1897,7 +1986,7 @@ classes:
                 name: init
     UIInputView: # DONE
         methods:
-            '-init.*':
+            '-initWithFrame:inputViewStyle:':
                 name: init
     UIInputViewController: # DONE
         methods:
@@ -1957,9 +2046,6 @@ classes:
                 getter: regionTriggersOnce
             'region':
                 annotations: ['@WeaklyLinked']
-        methods:
-            '-init.*':
-                name: init
     UILongPressGestureRecognizer: {} # DONE
     UIManagedDocument: # DONE
         properties: 
@@ -2054,7 +2140,7 @@ classes:
                         type: 'Class<? extends UINavigationBar>'
                     toolbarClass:
                         type: 'Class<? extends UIToolbar>'
-            '-init.*':
+            '-initWithRootViewController:':
                 name: init
             '-pushViewController:animated:':
                 trim_after_first_colon: true
@@ -2086,7 +2172,7 @@ classes:
             'leftItemsSupplementBackButton':
                 getter: leftItemsSupplementBackButton
         methods:
-            '-init.*':
+            '-initWithTitle:':
                 name: init
             '-setHidesBackButton:animated:':
                 trim_after_first_colon: true
@@ -2138,8 +2224,6 @@ classes:
                 parameters:
                     options:
                         type: UIPageViewControllerOptions
-            '-init.*':
-                name: init
             '-setViewControllers:direction:animated:completion:':
                 trim_after_first_colon: true
                 parameters:
@@ -2218,6 +2302,10 @@ classes:
                         type: NSArray<NSDictionary>
                     options:
                         type: UIPasteboardOptions
+            '-setItemProviders:localOnly:expirationDate:':
+                trim_after_first_colon: true
+            '-setObjects:localOnly:expirationDate:':
+                trim_after_first_colon: true
     UIPercentDrivenInteractiveTransition: # DONE
         methods:
             '-updateInteractiveTransition:':
@@ -2254,7 +2342,7 @@ classes:
             'popoverBackgroundViewClass':
                 type: 'Class<? extends UIPopoverBackgroundView>'
         methods:
-            '-init.*':
+            '-initWithContentViewController:':
                 name: init
             '-dismissPopoverAnimated:':
                 name: dismiss
@@ -2276,7 +2364,7 @@ classes:
                 type: 'Class<? extends UIPopoverBackgroundView>'
     UIPresentationController: # DONE
         methods:
-            '-init.*':
+            '-initWithPresentedViewController:presentingViewController:':
                 name: init
             '-adaptivePresentationStyleForTraitCollection:':
                 name: getAdaptivePresentationStyleForTraitCollection
@@ -2425,10 +2513,10 @@ classes:
                 constructor: true
     UIProgressView: # DONE
         methods:
-            '-init.*':
-                name: init
             '-setProgress:animated:':
                 trim_after_first_colon: true
+            '-initWithProgressViewStyle:':
+                name: init
     UIPushBehavior: # DONE
         properties:
             'items':
@@ -2451,7 +2539,7 @@ classes:
                 name: setAngleAndMagnitude
     UIReferenceLibraryViewController: # DONE
         methods:
-            '-init.*':
+            '-initWithTerm:':
                 name: init
             '+dictionaryHasDefinitionForTerm:':
                 trim_after_first_colon: true
@@ -2542,8 +2630,6 @@ classes:
                 type: List<String>
                 marshaler: NSArray.AsStringListMarshaler
         methods:
-            '-init.*':
-                name: init
             '-imageForSearchBarIcon:state:':
                 name: getImageForSearchBarIcon
             '-positionAdjustmentForSearchBarIcon:':
@@ -2580,15 +2666,15 @@ classes:
                         type: 'NSDictionary<NSString, ?>'
     UISearchContainerViewController: # DONE
         methods:
-            '-init.*':
+            '-initWithSearchController:':
                 name: init
     UISearchController: # DONE
         methods:
-            '-init.*':
+            '-initWithSearchResultsController:':
                 name: init
     UISearchDisplayController: # DONE
         methods:
-            '-init.*':
+            '-initWithSearchBar:contentsController:':
                 name: init
             '-setActive:animated:':
                 name: setActive
@@ -2599,7 +2685,7 @@ classes:
             'selectedSegmentIndex':
                 name: selectedSegment
         methods:
-            '-init.*':
+            '-initWithItems:':
                 name: init
             '-backgroundImageForState:barMetrics:':
                 name: getBackgroundImage
@@ -2650,7 +2736,9 @@ classes:
     UISelectionFeedbackGenerator: {} # DONE
     UISimpleTextPrintFormatter: # DONE
         methods:
-            '-init.*':
+            '-initWithText:':
+                name: init
+            '-initWithAttributedText:':
                 name: init
     UISlider: # DONE
         methods:
@@ -2678,7 +2766,7 @@ classes:
                 trim_after_first_colon: true
     UISnapBehavior: # DONE
         methods:
-            '-init.*':
+            '-initWithItem:snapToPoint:':
                 name: init
     UISplitViewController: # DONE
         methods:
@@ -2688,20 +2776,26 @@ classes:
                 trim_after_first_colon: true
     UISpringTimingParameters: # DONE
         methods:
-            '-init.*':
+            '-initWithDampingRatio:initialVelocity:':
+                name: init
+            '-initWithMass:stiffness:damping:initialVelocity:':
+                name: init
+            '-initWithDampingRatio:':
                 name: init
     UIStackView: # DONE
         properties:
             'arrangedSubviews':
                 type: NSArray<UIView>
         methods:
-            '-init.*':
+            '-initWithArrangedSubviews:':
                 name: init
             '-addArrangedSubview:':
                 trim_after_first_colon: true
             '-removeArrangedSubview:':
                 trim_after_first_colon: true
             '-insertArrangedSubview:atIndex:':
+                trim_after_first_colon: true
+            '-setCustomSpacing:afterView:':
                 trim_after_first_colon: true
     UIStepper: # DONE
         methods:
@@ -2742,7 +2836,7 @@ classes:
             'destinationViewController':
                 type: UIViewController
         methods:
-            '-init.*':
+            '-initWithIdentifier:source:destination:':
                 name: init
             '+segueWithIdentifier:source:destination:performHandler:':
                 name: create
@@ -2751,8 +2845,6 @@ classes:
     UISwipeGestureRecognizer: {} # DONE
     UISwitch: # DONE
         methods:
-            '-init.*':
-                name: init
             '-setOn:animated:':
                 trim_after_first_colon: true
     UITabBar: # DONE
@@ -2786,7 +2878,11 @@ classes:
                         type: NSArray<UIViewController>
     UITabBarItem: # DONE
         methods:
-            '-init.*':
+            '-initWithTitle:image:tag:':
+                name: init
+            '-initWithTitle:image:selectedImage:':
+                name: init
+            '-initWithTabBarSystemItem:tag:':
                 name: init
             '-finishedSelectedImage':
                 name: getFinishedSelectedImage
@@ -2815,7 +2911,7 @@ classes:
             'cellLayoutMarginsFollowReadableWidth':
                 getter: cellLayoutMarginsFollowReadableWidth
         methods:
-            '-init.*':
+            '-initWithFrame:style:':
                 name: init
             '-cellForRowAtIndexPath:':
                 name: getCellForRow
@@ -2900,9 +2996,11 @@ classes:
                 name: moveSection
             '-setEditing:animated:':
                 name: setEditing
+            '-performBatchUpdates:completion:':
+                trim_after_first_colon: true
     UITableViewCell: # DONE
         methods:
-            '-init.*':
+            '-initWithStyle:reuseIdentifier:':
                 name: init
             '-setSelected:animated:':
                 trim_after_first_colon: true
@@ -2916,12 +3014,12 @@ classes:
                 trim_after_first_colon: true
     UITableViewController: # DONE
         methods:
-            '-init.*':
+            '-initWithStyle:':
                 name: init
     UITableViewFocusUpdateContext: {} # DONE
     UITableViewHeaderFooterView: # DONE
         methods:
-            '-init.*':
+            '-initWithReuseIdentifier:':
                 name: init
     UITableViewRowAction: # DONE
         methods:
@@ -3016,7 +3114,7 @@ classes:
                 name: typingAttributesDictionary
                 type: 'NSDictionary<NSString, ?>'
         methods:
-            '-init.*':
+            '-initWithFrame:textContainer:':
                 name: init
             '-scrollRangeToVisible:':
                 trim_after_first_colon: true
@@ -3057,8 +3155,6 @@ classes:
                 name: getAzimuthUnitVectorInView
     UITraitCollection: # DONE
         methods:
-            '-init.*':
-                name: init
             '-containsTraitsInCollection:':
                 name: containsTraits
             '+traitCollectionWithTraitsFromCollections:':
@@ -3102,14 +3198,9 @@ classes:
                 parameters:
                     actions:
                         type: NSArray<UIUserNotificationAction>
-    UIUserNotificationAction: # DONE
-        methods:
-            '-init.*':
-                name: init
+    UIUserNotificationAction: {} # DONE
     UIUserNotificationCategory: # DONE
         methods:
-            '-init.*':
-                name: init
             '-actionsForContext:':
                 name: getActions
                 return_type: NSArray<UIUserNotificationAction>
@@ -3156,7 +3247,7 @@ classes:
                 type: 'Class<? extends CALayer>'
                 annotations: ['@WeaklyLinked']
         methods:
-            '-init.*':
+            '-initWithFrame:':
                 name: init
             '+animateWithDuration:animations:':
                 name: animate
@@ -3327,7 +3418,7 @@ classes:
                 type: List<UIPreviewActionItem>
                 marshaler: NSArray.AsListMarshaler
         methods:
-            '-init.*':
+            '-initWithNibName:bundle:':
                 name: init
             '-rotatingFooterView':
                 name: getRotatingFooterView
@@ -3439,7 +3530,13 @@ classes:
     UIViewPrintFormatter: {} # DONE
     UIViewPropertyAnimator: # DONE
         methods:
-            '-init.*':
+            '-initWithDuration:timingParameters:':
+                name: init
+            '-initWithDuration:curve:animations:':
+                name: init
+            '-initWithDuration:controlPoint1:controlPoint2:animations:':
+                name: init
+            '-initWithDuration:dampingRatio:animations:':
                 name: init
             '+runningPropertyAnimatorWithDuration:delay:options:animations:completion:':
                 name: getRunningPropertyAnimator
@@ -3453,7 +3550,7 @@ classes:
         skip_handle_constructor: false
     UIVisualEffectView: # DONE
         methods:
-            '-init.*':
+            '-initWithEffect:':
                 name: init
     UIWebView: # DONE
         methods:
@@ -3477,6 +3574,156 @@ classes:
                 name: convertRectToWindow
             '-sendEvent:':
                 trim_after_first_colon: true
+    UIAccessibilityLocationDescriptor: #since 11.0
+        methods:
+            '-initWithName:view:':
+                name: init
+            '-initWithName:point:inView:':
+                name: init
+            '-initWithAttributedName:point:inView:':
+                name: init
+    UICloudSharingController: #since 10.0
+        methods:
+            '-initWithShare:container:':
+                name: init
+            '-initWithPreparationHandler:':
+                name: init
+    UICollectionViewDropPlaceholder: {} #since 11.0
+    UICollectionViewDropProposal: #since 11.0
+        methods:
+            '-initWithDropOperation:intent:':
+                name: init
+    UICollectionViewPlaceholder: #since 11.0
+        methods:
+            '-initWithInsertionIndexPath:reuseIdentifier:':
+                name: init
+    UIContextualAction: #since 11.0
+        methods:
+            '+contextualActionWithStyle:title:handler:':
+                constructor: true
+                name: create
+    UIDragInteraction: #since 11.0
+        methods:
+            '-initWithDelegate:':
+                name: init
+    UIDragItem: #since 11.0
+        methods:
+            '-initWithItemProvider:':
+                name: init
+    UIDragPreview: #since 11.0
+        methods:
+            '-initWithView:':
+                name: init
+            '-initWithView:parameters:':
+                name: init
+            '+previewForURL:title:':
+                constructor: true
+                name: create
+    UIDragPreviewParameters: #since 11.0
+        methods:
+            '-initWithTextLineRects:':
+                name: init
+    UIDragPreviewTarget: #since 11.0
+        methods:
+            '-initWithContainer:center:transform:':
+                name: init
+            '-initWithContainer:center:':
+                name: init
+    UIDropInteraction: #since 11.0
+        methods:
+            '-initWithDelegate:':
+                name: init
+    UIDropProposal: #since 11.0
+        methods:
+            '-initWithDropOperation:':
+                name: init
+    UIFocusDebugger: {} #since 11.0
+    UIFocusSystem: #since 11.0
+        methods:
+            '+environment:containsEnvironment:':
+                name: isEnvironmentContainsEnvironment
+    UIFontMetrics: #since 11.0
+        methods:
+            '-scaledFontForFont:maximumPointSize:':
+                name: scaledFont
+            '-scaledFontForFont:compatibleWithTraitCollection:':
+                name: scaledFont
+            '-scaledFontForFont:maximumPointSize:compatibleWithTraitCollection:':
+                name: scaledFont
+            '-scaledValueForValue:compatibleWithTraitCollection:':
+                name: scaledValue
+    UIPasteConfiguration: #since 11.0
+        methods:
+            '-initWithAcceptableTypeIdentifiers:':
+                name: init
+            '-initWithTypeIdentifiersForAcceptingClass:':
+                name: init
+    UISpringLoadedInteraction: #since 11.0
+        methods:
+            '-initWithInteractionBehavior:interactionEffect:activationHandler:':
+                name: init
+            '-initWithActivationHandler:':
+                name: init
+    UISwipeActionsConfiguration: #since 11.0
+        methods:
+            '+configurationWithActions:':
+                name: create
+                constructor: true
+    UITableViewDropPlaceholder: {} #since 11.0
+    UITableViewDropProposal: #since 11.0
+        methods:
+            '-initWithDropOperation:intent:':
+                name: init
+    UITableViewPlaceholder: #since 11.0
+        methods:
+            '-initWithInsertionIndexPath:reuseIdentifier:rowHeight:':
+                name: init
+    UITargetedDragPreview: #since 11.0
+        methods:
+            '-initWithView:parameters:target:':
+                name: init
+            '-initWithView:parameters:':
+                name: init
+            '-initWithView:':
+                name: init
+            '+previewForURL:target:':
+                constructor: true
+                name: create
+            '+previewForURL:title:target:':
+                constructor: true
+                name: create
+            '-retargetedPreviewWithTarget:':
+                name: retargetedPreview
+    UITextDragPreviewRenderer: #since 11.0
+        methods:
+            '-initWithLayoutManager:range:':
+                name: init
+            '-initWithLayoutManager:range:unifyRects:':
+                name: init
+            '-adjustFirstLineRect:bodyRect:lastLineRect:textOrigin:':
+                trim_after_first_colon: true
+    UITextDropProposal: {} #since 11.0
+
+    UIDocumentBrowserAction: #since 11.0
+        methods:
+            '-initWithIdentifier:localizedTitle:availability:handler:':
+                name: init
+    UIDocumentBrowserTransitionController: {} #since 11.0
+    UIDocumentBrowserViewController: #since 11.0
+        methods:
+            '-revealDocumentAtURL:importIfNeeded:completion:':
+                name: revealDocument
+            '-importDocumentAtURL:nextToDocumentAtURL:mode:completionHandler:':
+                name: importDocument
+            '-initForOpeningFilesWithContentTypes:':
+                name: initForOpeningFilesWithContentTypes
+    UIFocusMovementHint: {} #since 12.0
+    UITextInputPasswordRules: #since 12.0
+        methods:
+            '+passwordRulesWithDescriptor:':
+                name: create
+                constructor: true
+    UIPencilInteraction: {} #since 12.1
 
 protocols:
     NSLayoutManagerDelegate: # DONE
@@ -3708,26 +3955,13 @@ protocols:
                 name: shouldRequestHealthAuthorization
             '-application:userDidAcceptCloudKitShareWithMetadata:':
                 name: didAcceptCloudKitShare
-                exclude: true # >>>>> TODO need to update CloudKit
+            '-application:handleIntent:completionHandler:':
+                name: handleIntent
     UIBarPositioning: {} # DONE
     UIBarPositioningDelegate: # DONE
         methods:
             '-positionForBar:':
                 name: getPosition
-  #  UICloudSharingControllerDelegate: # DONE
-   #     methods:                    >>>>> TODO need to update CloudKit
-  #          '-cloudSharingController:failedToSaveShareWithError:':
-   #             name: failedToSaveShare
-   #         '-itemTitleForCloudSharingController:':
-   #             name: getItemTitle
-   #         '-itemThumbnailDataForCloudSharingController:':
-    #            name: getItemThumbnailData
-   #         '-itemTypeForCloudSharingController:':
-   #             name: getItemType
-   #         '-cloudSharingControllerDidSaveShare:':
-   #             name: didSaveShare
-   #         '-cloudSharingControllerDidStopSharing:':
-   #             name: didStopSharing
     UICollectionViewDataSource: # DONE
         methods:
             '-collectionView:cellForItemAtIndexPath:':
@@ -3794,6 +4028,8 @@ protocols:
                 name: didUpdateFocus
             '-indexPathForPreferredFocusedViewInCollectionView:':
                 name: getIndexPathForPreferredFocusedView
+            '-collectionView:shouldSpringLoadItemAtIndexPath:withContext:':
+                name: shouldSpringLoadItem
     UICollectionViewDelegateFlowLayout: # DONE
         methods:
             '-collectionView:layout:insetForSectionAtIndex:':
@@ -3874,6 +4110,8 @@ protocols:
                 name: didPickDocument
             '-documentPickerWasCancelled:':
                 name: wasCancelled
+            '-documentPicker:didPickDocumentsAtURLs:':
+                name: didPickDocuments
     UIDynamicAnimatorDelegate: # DONE
         methods:
             '-dynamicAnimatorWillResume:':
@@ -3998,6 +4236,10 @@ protocols:
                 name: getAccessibilityHint
             '-pickerView:accessibilityLabelForComponent:':
                 name: getAccessibilityLabel
+            '-pickerView:accessibilityAttributedLabelForComponent:':
+                name: getAccessibilityAttributedLabel
+            '-pickerView:accessibilityAttributedHintForComponent:':
+                name: getAccessibilityAttributedHint
     UIPickerViewDataSource: # DONE
         methods:
             '-numberOfComponentsInPickerView:':
@@ -4389,6 +4631,12 @@ protocols:
                 name: didUpdateFocus
             '-indexPathForPreferredFocusedViewInTableView:':
                 name: getIndexPathForPreferredFocusedView
+            '-tableView:leadingSwipeActionsConfigurationForRowAtIndexPath:':
+                name: getLeadingSwipeActionsConfigurationForRow
+            '-tableView:trailingSwipeActionsConfigurationForRowAtIndexPath:':
+                name: getTrailingSwipeActionsConfigurationForRow
+            '-tableView:shouldSpringLoadRowAtIndexPath:withContext:':
+                name: shouldSpringLoadRow
     UITextDocumentProxy: # DONE
         methods:
             '-adjustTextPositionByCharacterOffset:':
@@ -4722,6 +4970,283 @@ protocols:
                 name: increaseSize
             '-decreaseSize:':
                 name: decreaseSize
+    # ios11 binding actions
+    UIAccelerometerDelegate: # it is replaced by coremotion but lets have it here for a while
+        methods:
+            '-accelerometer:didAccelerate:':
+                name: didAccelerate
+    UIAccessibilityContainerDataTable: #since 11.0
+        methods:
+            '-accessibilityDataTableCellElementForRow:column:':
+                name: provideElement
+    UIAccessibilityContainerDataTableCell: {} #since 11.0
+    UIAccessibilityContentSizeCategoryImageAdjusting: {} #since 11.0
+    UIAccessibilityReadingContent: {}
+    UICloudSharingControllerDelegate:
+        methods:
+            '-cloudSharingController:failedToSaveShareWithError:':
+                name: failedToSaveShare
+
+    UICollectionViewDragDelegate: #since 11.0
+        methods:
+            '-collectionView:itemsForBeginningDragSession:atIndexPath:':
+                name: itemsForBeginningDragSession
+            '-collectionView:itemsForAddingToDragSession:atIndexPath:point:':
+                name: itemsForAddingToDragSession
+            '-collectionView:dragPreviewParametersForItemAtIndexPath:':
+                name: dragPreviewParametersForItem
+            '-collectionView:dragSessionWillBegin:':
+                name: dragSessionWillBegin
+            '-collectionView:dragSessionDidEnd:':
+                name: dragSessionDidEnd
+            '-collectionView:dragSessionAllowsMoveOperation:':
+                name: dragSessionAllowsMoveOperation
+            '-collectionView:dragSessionIsRestrictedToDraggingApplication:':
+                name: dragSessionIsRestrictedToDraggingApplication
+    UICollectionViewDropCoordinator: #since 11.0
+        methods:
+            '-dropItem:toPlaceholder:':
+                name: dropItem
+            '-dropItem:toItemAtIndexPath:':
+                name: dropItem
+            '-dropItem:intoItemAtIndexPath:rect:':
+                name: dropItemIntoItem
+            '-dropItem:toTarget:':
+                name: dropItemToTarget
+    UICollectionViewDropDelegate: #since 11.0
+        methods:
+            '-collectionView:performDropWithCoordinator:':
+                name: performDrop
+            '-collectionView:canHandleDropSession:':
+                name: canHandleDropSession
+            '-collectionView:dropSessionDidEnter:':
+                name: dropSessionDidEnter
+            '-collectionView:dropSessionDidUpdate:withDestinationIndexPath:':
+                name: dropSessionDidUpdate
+            '-collectionView:dropSessionDidExit:':
+                name: dropSessionDidExit
+            '-collectionView:dropSessionDidEnd:':
+                name: dropSessionDidEnd
+            '-collectionView:dropPreviewParametersForItemAtIndexPath:':
+                name: dropPreviewParameters
+    UICollectionViewDropItem: {} #since 11.0
+    UICollectionViewDropPlaceholderContext: #since 11.0
+        methods:
+            '-commitInsertionWithDataSourceUpdates:':
+                name: commitInsertion
+    UIContentContainer:
+        methods:
+            '-sizeForChildContentContainer:withParentContainerSize:':
+                name: sizeForChildContentContainer
+            '-viewWillTransitionToSize:withTransitionCoordinator:':
+                name: viewWillTransitionToSize
+            '-willTransitionToTraitCollection:withTransitionCoordinator:':
+                name: willTransitionToTraitCollection
+    UIContentSizeCategoryAdjusting: {} #since 10.0
+    UIDataSourceTranslating: {} #since 11.0
+    UIDragAnimating: {} #since 11.0
+    UIDragDropSession: {} #since 11.0
+    UIDragInteractionDelegate: #since 11.0
+        methods:
+            '-dragInteraction:itemsForBeginningSession:':
+                name: itemsForBeginningSession
+            '-dragInteraction:previewForLiftingItem:session:':
+                name: previewForLiftingItem
+            '-dragInteraction:willAnimateLiftWithAnimator:session:':
+                name: willAnimateLift
+            '-dragInteraction:sessionWillBegin:':
+                name: sessionWillBegin
+            '-dragInteraction:sessionAllowsMoveOperation:':
+                name: sessionAllowsMoveOperation
+            '-dragInteraction:sessionIsRestrictedToDraggingApplication:':
+                name: sessionIsRestrictedToDraggingApplication
+            '-dragInteraction:prefersFullSizePreviewsForSession:':
+                name: prefersFullSizePreviews
+            '-dragInteraction:sessionDidMove:':
+                name: sessionDidMove
+            '-dragInteraction:session:willEndWithOperation:':
+                name: sessionWillEnd
+            '-dragInteraction:session:didEndWithOperation:':
+                name: sessionDidEnd
+            '-dragInteraction:sessionDidTransferItems:':
+                name: sessionDidTransferItems
+            '-dragInteraction:itemsForAddingToSession:withTouchAtPoint:':
+                name: itemsForAddingToSession
+            '-dragInteraction:sessionForAddingItems:withTouchAtPoint:':
+                name: sessionForAddingItems
+            '-dragInteraction:session:willAddItems:forInteraction:':
+                name: sessionWillAddItems
+            '-dragInteraction:previewForCancellingItem:withDefault:':
+                name: previewForCancellingItem
+            '-dragInteraction:item:willAnimateCancelWithAnimator:':
+                name: itemWillAnimateCancel
+    UIDragSession: {} #since 11.0
+    UIDropInteractionDelegate: #since 11.0
+        methods:
+            '-dropInteraction:canHandleSession:':
+                name: canHandleSession
+            '-dropInteraction:sessionDidEnter:':
+                name: sessionDidEnter
+            '-dropInteraction:sessionDidUpdate:':
+                name: sessionDidUpdate
+            '-dropInteraction:sessionDidExit:':
+                name: sessionDidExit
+            '-dropInteraction:performDrop:':
+                name: performDrop
+            '-dropInteraction:concludeDrop:':
+                name: concludeDrop
+            '-dropInteraction:sessionDidEnd:':
+                name: sessionDidEnd
+            '-dropInteraction:previewForDroppingItem:withDefault:':
+                name: previewForDroppingItem
+            '-dropInteraction:item:willAnimateDropWithAnimator:':
+                name: itemWillAnimateDrop
+    UIDropSession: #since 11.0
+        methods:
+            '-loadObjectsOfClass:completion:':
+                name: loadObjects
+    UIFocusAnimationContext: {} #since 11.0
+    UIFocusDebuggerOutput: {} #since 11.0
+    UIInteraction: {} #since 11.0
+    UIItemProviderPresentationSizeProviding: {} #since 11.0
+    UIObjectRestoration:
+        methods:
+            '+objectWithRestorationIdentifierPath:coder:':
+                name: objectWithRestorationIdentifier
+    UIPasteConfigurationSupporting: {} #since 11.0
+    UIPopoverBackgroundViewMethods: {}
+    UIScrollViewAccessibilityDelegate: {}
+    UISpringLoadedInteractionBehavior: #since 11.0
+        methods:
+            '-shouldAllowInteraction:withContext:':
+                trim_after_first_colon: true
+    UISpringLoadedInteractionContext: {} #since 11.0
+    UISpringLoadedInteractionEffect: #since 11.0
+        methods:
+            '-interaction:didChangeWithContext:':
+                name: didChange
+    UISpringLoadedInteractionSupporting: {} #since 11.0
+    UITableViewDragDelegate: #since 11.0
+        methods:
+            '-tableView:itemsForBeginningDragSession:atIndexPath:':
+                name: itemsForBeginningDragSession
+            '-tableView:itemsForAddingToDragSession:atIndexPath:point:':
+                name: itemsForAddingToDragSession
+            '-tableView:dragPreviewParametersForRowAtIndexPath:':
+                name: dragPreviewParametersForRow
+            '-tableView:dragSessionWillBegin:':
+                name: dragSessionWillBegin
+            '-tableView:dragSessionDidEnd:':
+                name: dragSessionDidEnd
+            '-tableView:dragSessionAllowsMoveOperation:':
+                name: dragSessionAllowsMoveOperation
+            '-tableView:dragSessionIsRestrictedToDraggingApplication:':
+                name: dragSessionIsRestrictedToDraggingApplication
+    UITableViewDropCoordinator: #since 11.0
+        methods:
+            '-dropItem:toPlaceholder:':
+                name: dropItem
+            '-dropItem:toRowAtIndexPath:':
+                name: dropItem
+            '-dropItem:intoRowAtIndexPath:rect:':
+                name: dropItem
+            '-dropItem:toTarget:':
+                name: dropItem
+    UITableViewDropDelegate: #since 11.0
+        methods:
+            '-tableView:performDropWithCoordinator:':
+                name: performDrop
+            '-tableView:canHandleDropSession:':
+                name: canHandleDropSession
+            '-tableView:dropSessionDidEnter:':
+                name: dropSessionDidEnter
+            '-tableView:dropSessionDidUpdate:withDestinationIndexPath:':
+                name: dropSessionDidUpdate
+            '-tableView:dropSessionDidExit:':
+                name: dropSessionDidExit
+            '-tableView:dropSessionDidEnd:':
+                name: dropSessionDidEnd
+            '-tableView:dropPreviewParametersForRowAtIndexPath:':
+                name: dropPreviewParameters
+    UITableViewDropItem: {} #since 11.0
+    UITableViewDropPlaceholderContext: #since 11.0
+        methods:
+            '-commitInsertionWithDataSourceUpdates:':
+                name: commitInsertion
+    UITextDragDelegate: #since 11.0
+        methods:
+            '-textDraggableView:itemsForDrag:':
+                name: itemsForDrag
+            '-textDraggableView:dragPreviewForLiftingItem:session:':
+                name: dragPreviewForLiftingItem
+            '-textDraggableView:willAnimateLiftWithAnimator:session:':
+                name: willAnimateLift
+            '-textDraggableView:dragSessionWillBegin:':
+                name: dragSessionWillBegin
+            '-textDraggableView:dragSessionDidEnd:withOperation:':
+                name: dragSessionDidEnd
+    UITextDragRequest: {} #since 11.0
+    UITextDraggable: {} #since 11.0
+    UITextDropDelegate: #since 11.0
+        methods:
+            '-textDroppableView:willBecomeEditableForDrop:':
+                name: willBecomeEditableForDrop
+            '-textDroppableView:proposalForDrop:':
+                name: proposalForDrop
+            '-textDroppableView:willPerformDrop:':
+                name: willPerformDrop
+            '-textDroppableView:previewForDroppingAllItemsWithDefault:':
+                name: previewForDroppingAllItemsWithDefault
+            '-textDroppableView:dropSessionDidEnter:':
+                name: dropSessionDidEnter
+            '-textDroppableView:dropSessionDidUpdate:':
+                name: dropSessionDidUpdate
+            '-textDroppableView:dropSessionDidExit:':
+                name: dropSessionDidExit
+            '-textDroppableView:dropSessionDidEnd:':
+                name: dropSessionDidEnd
+    UITextDropRequest: {} #since 11.0
+    UITextDroppable: {} #since 11.0
+    UITextPasteConfigurationSupporting: {} #since 11.0
+    UITextPasteDelegate: #since 11.0
+        methods:
+            '-textPasteConfigurationSupporting:transformPasteItem:':
+                name: transformPasteItem
+            '-textPasteConfigurationSupporting:combineItemAttributedStrings:forRange:':
+                name: combineItemAttributedStrings
+            '-textPasteConfigurationSupporting:performPasteOfAttributedString:toRange:':
+                name: performPasteOfAttributedString
+            '-textPasteConfigurationSupporting:shouldAnimatePasteOfAttributedString:toRange:':
+                name: shouldAnimatePasteOfAttributedString
+    UITextPasteItem: {} #since 11.0
+
+    UIViewControllerRestoration:
+        methods:
+            '+viewControllerWithRestorationIdentifierPath:coder:':
+                name: viewControllerWithRestorationIdentifier
+
+    UIDocumentBrowserViewControllerDelegate: #since 11.0
+        methods:
+            '-documentBrowser:didPickDocumentURLs:':
+                name: didPickDocumentURLs
+            '-documentBrowser:didPickDocumentsAtURLs:':
+                name: didPickDocumentsAtURLs
+            '-documentBrowser:didRequestDocumentCreationWithHandler:':
+                name: didRequestDocumentCreationWithHandler
+            '-documentBrowser:didImportDocumentAtURL:toDestinationURL:':
+                name: didImportDocument
+            '-documentBrowser:failedToImportDocumentAtURL:error:':
+                name: failedToImportDocument
+            '-documentBrowser:applicationActivitiesForDocumentURLs:':
+                name: applicationActivities
+            '-documentBrowser:willPresentActivityViewController:':
+                name: willPresentActivityViewController
+    UIFocusItemContainer: {} #since 12.0
+    UIFocusItemScrollableContainer: {} #since 12.0
+    UIInputViewAudioFeedback: {}
+    UIUserActivityRestoring: {} #since 8.0
+    UIPencilInteractionDelegate: {} #since 12.1
+
 
 functions:
     # NSTextAlignment
@@ -4828,6 +5353,14 @@ functions:
     (.*)FromString:
         class: UIGeometry
         name: 'stringTo#{g[0]}'
+
+    UIContentSizeCategory(IsAccessibilityCategory|CompareToCategory):
+        name: '#{g[0]}'
+        class: UIContentSizeCategory
+
+    UIGuidedAccessConfigureAccessibilityFeatures:
+        class: UIGuidedAccess
+        name: configureAccessibilityFeatures
 
     # Make sure we don't miss any functions if new ones are introduced in a later UIKit
     (CG.*):
@@ -5489,6 +6022,24 @@ values:
     UIViewControllerHierarchyInconsistencyException:
         exclude: true
 
+    UIDocumentBrowserErrorDomain:
+        class: UIDocumentBrowserErrorCode
+        name: getClassDomain
+
+    NSDirectionalEdgeInsetsZero:
+        class: NSDirectionalEdgeInsets
+        name: Zero
+    UIFocus(.*):
+        class: UIFocusEnvironmentConstants
+        name: '#{g[0]}'
+    UIAccessibility(.*):
+        class: UIAccessibilityConstants
+        name: '#{g[0]}'
+
+    UIGuidedAccessErrorDomain:
+        class: UIGuidedAccessErrorCode
+        name: getClassDomain
+
     # Make sure we don't miss any values if new ones are introduced in a later UIKit
     (NS.*):
         class: UIKit
@@ -5496,6 +6047,11 @@ values:
     (UI.*):
         class: UIKit
         name: 'Value__#{g[0]}'
+
+typed_enums:
+    NSAttributedStringDocumentReadingOptionKey:
+        dictionary: NSAttributedStringDocumentReadingOptionKeys
+        type: NSString
 
 constants:
     NS(AttachmentCharacter):
@@ -5510,6 +6066,13 @@ constants:
     UILayoutPriority(.*):
         class: UILayoutPriority
         name: '#{g[0]}'
+
+    UIKIT_DEFINE_AS_PROPERTIES:
+        exclude: true
+    UIKIT_REMOVE_ZERO_FROM_SWIFT:
+        exclude: true
+    UIKIT_STRING_ENUMS:
+        exclude: true
 
     # Make sure we don't miss any constants if new ones are introduced in a later UIKit
     (UI.*):

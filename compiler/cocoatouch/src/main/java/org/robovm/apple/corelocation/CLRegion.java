@@ -30,6 +30,7 @@ import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.addressbook.*;
 import org.robovm.apple.corebluetooth.*;
+import org.robovm.apple.contacts.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -40,7 +41,7 @@ import org.robovm.apple.corebluetooth.*;
 /*<annotations>*/@Library("CoreLocation") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/CLRegion/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class CLRegionPtr extends Ptr<CLRegion, CLRegionPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(CLRegion.class); }/*</bind>*/
@@ -51,23 +52,25 @@ import org.robovm.apple.corebluetooth.*;
     protected CLRegion(SkipInit skipInit) { super(skipInit); }
     /**
      * @since Available in iOS 4.0 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Please see CLCircularRegion
      */
     @Deprecated
     @Method(selector = "initCircularRegionWithCenter:radius:identifier:")
     public CLRegion(@ByVal CLLocationCoordinate2D center, double radius, String identifier) { super((SkipInit) null); initObject(init(center, radius, identifier)); }
+    @Method(selector = "initWithCoder:")
+    public CLRegion(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     /**
      * @since Available in iOS 4.0 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Please see CLCircularRegion
      */
     @Deprecated
     @Property(selector = "center")
     public native @ByVal CLLocationCoordinate2D getCenter();
     /**
      * @since Available in iOS 4.0 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Please see CLCircularRegion
      */
     @Deprecated
     @Property(selector = "radius")
@@ -97,22 +100,28 @@ import org.robovm.apple.corebluetooth.*;
      */
     @Property(selector = "setNotifyOnExit:")
     public native void setNotifiesOnExit(boolean v);
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
     /**
      * @since Available in iOS 4.0 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Please see CLCircularRegion
      */
     @Deprecated
     @Method(selector = "initCircularRegionWithCenter:radius:identifier:")
     protected native @Pointer long init(@ByVal CLLocationCoordinate2D center, double radius, String identifier);
     /**
      * @since Available in iOS 4.0 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Please see CLCircularRegion
      */
     @Deprecated
     @Method(selector = "containsCoordinate:")
     public native boolean containsCoordinate(@ByVal CLLocationCoordinate2D coordinate);
+    @Method(selector = "encodeWithCoder:")
+    public native void encode(NSCoder coder);
+    @Method(selector = "initWithCoder:")
+    protected native @Pointer long init(NSCoder decoder);
     /*</methods>*/
 }

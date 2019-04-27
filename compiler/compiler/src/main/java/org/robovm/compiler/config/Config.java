@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2012 RoboVM AB
+ * Copyright (C) 2018 Daniel Thommes, NeverNull GmbH, <daniel.thommes@nevernull.io>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -140,6 +141,8 @@ public class Config {
     private ArrayList<String> roots;
     @ElementList(required = false, entry = "pattern")
     private ArrayList<String> forceLinkClasses;
+    @ElementList(required = false, entry = "entry")
+    private ArrayList<ForceLinkMethodsConfig> forceLinkMethods;
     @ElementList(required = false, entry = "lib")
     private ArrayList<Lib> libs;
     @ElementList(required = false, entry = "symbol")
@@ -152,6 +155,10 @@ public class Config {
     private ArrayList<String> weakFrameworks;
     @ElementList(required = false, entry = "path")
     private ArrayList<File> frameworkPaths;
+    @ElementList(required = false, entry = "extension")
+    private ArrayList<AppExtension> appExtensions;
+    @ElementList(required = false, entry = "path")
+    private ArrayList<File> appExtensionPaths;
     @ElementList(required = false, entry = "resource")
     private ArrayList<Resource> resources;   
     @ElementList(required = false, entry = "classpathentry")
@@ -166,6 +173,8 @@ public class Config {
     private StripArchivesConfig stripArchivesConfig;
     @Element(required = false, name = "treeShaker")
     private TreeShakerMode treeShakerMode;
+    @Element(required = false, name = "smartSkipRebuild")
+    private Boolean smartSkipRebuild;
 
     @Element(required = false)
     private String iosSdkVersion;
@@ -361,7 +370,7 @@ public class Config {
     
     public StripArchivesConfig getStripArchivesConfig() {
        return stripArchivesConfig == null ? StripArchivesConfig.DEFAULT : stripArchivesConfig;
-   }
+    }
 
     public DependencyGraph getDependencyGraph() {
         return dependencyGraph;
@@ -383,6 +392,11 @@ public class Config {
     public List<String> getForceLinkClasses() {
         return forceLinkClasses == null ? Collections.<String> emptyList()
                 : Collections.unmodifiableList(forceLinkClasses);
+    }
+
+    public List<ForceLinkMethodsConfig> getForceLinkMethods() {
+        return forceLinkMethods == null ? Collections.<ForceLinkMethodsConfig> emptyList()
+                : Collections.unmodifiableList(forceLinkMethods);
     }
 
     public List<String> getExportedSymbols() {
@@ -413,6 +427,16 @@ public class Config {
     public List<File> getFrameworkPaths() {
         return frameworkPaths == null ? Collections.<File> emptyList()
                 : Collections.unmodifiableList(frameworkPaths);
+    }
+
+    public List<AppExtension> getAppExtensions() {
+        return appExtensions == null ? Collections.<AppExtension> emptyList()
+                : Collections.unmodifiableList(appExtensions);
+    }
+
+    public List<File> getAppExtensionPaths() {
+        return appExtensionPaths == null ? Collections.<File> emptyList()
+                : Collections.unmodifiableList(appExtensionPaths);
     }
 
     public List<Resource> getResources() {
@@ -507,6 +531,10 @@ public class Config {
 
     public TreeShakerMode getTreeShakerMode() {
         return treeShakerMode == null ? TreeShakerMode.none : treeShakerMode;
+    }
+
+    public boolean isSmartSkipRebuild(){
+        return smartSkipRebuild != null && smartSkipRebuild;
     }
 
     public String getIosSdkVersion() {
@@ -713,6 +741,7 @@ public class Config {
         to.exportedSymbols = mergeLists(from.exportedSymbols, to.exportedSymbols);
         to.unhideSymbols = mergeLists(from.unhideSymbols, to.unhideSymbols);
         to.forceLinkClasses = mergeLists(from.forceLinkClasses, to.forceLinkClasses);
+        to.forceLinkMethods = mergeLists(from.forceLinkMethods, to.forceLinkMethods);
         to.frameworkPaths = mergeLists(from.frameworkPaths, to.frameworkPaths);
         to.frameworks = mergeLists(from.frameworks, to.frameworks);
         to.libs = mergeLists(from.libs, to.libs);
@@ -749,6 +778,7 @@ public class Config {
         this.exportedSymbols = config.exportedSymbols;
         this.unhideSymbols = config.unhideSymbols;
         this.forceLinkClasses = config.forceLinkClasses;
+        this.forceLinkMethods = config.forceLinkMethods;
         this.frameworkPaths = config.frameworkPaths;
         this.frameworks = config.frameworks;
         this.libs = config.libs;
@@ -1105,6 +1135,18 @@ public class Config {
         }
     }
 
+    /**
+     * reads configuration from disk without any analysis
+     */
+    public static Config loadRawConfig(File contentRoot) throws IOException {
+        // dkimitsa: config retrieved this way shall not be used for any compilation needs
+        // just for IB and other UI related things
+        Builder builder = new Builder();
+        builder.readProjectProperties(contentRoot, false);
+        builder.readProjectConfig(contentRoot, false);
+        return builder.config;
+    }
+
     public static class Builder {
         protected final Config config;
 
@@ -1268,6 +1310,11 @@ public class Config {
             return this;
         }
 
+        public Builder smartSkipRebuild(boolean smartSkipRebuild){
+            config.smartSkipRebuild = smartSkipRebuild;
+            return this;
+        }
+
         public Builder clearForceLinkClasses() {
             if (config.forceLinkClasses != null) {
                 config.forceLinkClasses.clear();
@@ -1370,6 +1417,39 @@ public class Config {
                 config.frameworkPaths = new ArrayList<File>();
             }
             config.frameworkPaths.add(frameworkPath);
+            return this;
+        }
+
+        public Builder clearExtensions() {
+            if (config.appExtensions != null) {
+                config.appExtensions.clear();
+            }
+            return this;
+        }
+
+        public Builder addExtension(String name, String profile) {
+            if (config.appExtensions == null) {
+                config.appExtensions = new ArrayList<>();
+            }
+            AppExtension extension = new AppExtension();
+            extension.name = name;
+            extension.profile = profile;
+            config.appExtensions.add(extension);
+            return this;
+        }
+
+        public Builder clearExtensionPaths() {
+            if (config.appExtensionPaths != null) {
+                config.appExtensionPaths.clear();
+            }
+            return this;
+        }
+
+        public Builder addExtenaionPath(File extensionPath) {
+            if (config.appExtensionPaths == null) {
+                config.appExtensionPaths = new ArrayList<File>();
+            }
+            config.appExtensionPaths.add(extensionPath);
             return this;
         }
 
@@ -1602,7 +1682,7 @@ public class Config {
 
         public void read(Reader reader, File wd) throws IOException {
             try {
-                Serializer serializer = createSerializer(wd);
+                Serializer serializer = createSerializer(config, wd);
                 serializer.read(config, reader);
             } catch (IOException e) {
                 throw e;
@@ -1635,7 +1715,7 @@ public class Config {
 
         public void write(Writer writer, File wd) throws IOException {
             try {
-                Serializer serializer = createSerializer(wd);
+                Serializer serializer = createSerializer(config, wd);
                 serializer.write(config, writer);
             } catch (IOException e) {
                 throw e;
@@ -1646,7 +1726,7 @@ public class Config {
             }
         }
 
-        private Serializer createSerializer(final File wd) throws Exception {
+        public static Serializer createSerializer(Config config, final File wd) throws Exception {
             RelativeFileConverter fileConverter = new RelativeFileConverter(wd);
 
             Serializer resourceSerializer = new Persister(

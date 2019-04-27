@@ -19,8 +19,6 @@ package org.robovm.apple.gamecontroller;
 import java.io.*;
 import java.nio.*;
 import java.util.*;
-
-import org.robovm.apple.uikit.UIViewController;
 import org.robovm.objc.*;
 import org.robovm.objc.annotation.*;
 import org.robovm.objc.block.*;
@@ -31,6 +29,7 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.dispatch.*;
+import org.robovm.apple.uikit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -50,6 +49,10 @@ import org.robovm.apple.dispatch.*;
     public GCEventViewController() {}
     protected GCEventViewController(Handle h, long handle) { super(h, handle); }
     protected GCEventViewController(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithNibName:bundle:")
+    public GCEventViewController(String nibNameOrNil, NSBundle nibBundleOrNil) { super(nibNameOrNil, nibBundleOrNil); }
+    @Method(selector = "initWithCoder:")
+    public GCEventViewController(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "controllerUserInteractionEnabled")

@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -58,6 +57,9 @@ import org.robovm.apple.audiounit.*;
     public AVAudioUnitDelay() {}
     protected AVAudioUnitDelay(Handle h, long handle) { super(h, handle); }
     protected AVAudioUnitDelay(SkipInit skipInit) { super(skipInit); }
+    @WeaklyLinked
+    @Method(selector = "initWithAudioComponentDescription:")
+    public AVAudioUnitDelay(@ByVal AudioComponentDescription audioComponentDescription) { super(audioComponentDescription); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "delayTime")

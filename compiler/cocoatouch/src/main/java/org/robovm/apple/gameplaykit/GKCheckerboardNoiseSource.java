@@ -29,6 +29,8 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.spritekit.*;
+import org.robovm.apple.scenekit.*;
+import org.robovm.apple.uikit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -49,7 +51,7 @@ import org.robovm.apple.spritekit.*;
     protected GKCheckerboardNoiseSource(Handle h, long handle) { super(h, handle); }
     protected GKCheckerboardNoiseSource(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithSquareSize:")
-    public GKCheckerboardNoiseSource(double squareSize) { super((SkipInit) null); initObject(initWithSquareSize(squareSize)); }
+    public GKCheckerboardNoiseSource(double squareSize) { super((SkipInit) null); initObject(init(squareSize)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "squareSize")
@@ -60,6 +62,6 @@ import org.robovm.apple.spritekit.*;
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "initWithSquareSize:")
-    protected native @Pointer long initWithSquareSize(double squareSize);
+    protected native @Pointer long init(double squareSize);
     /*</methods>*/
 }

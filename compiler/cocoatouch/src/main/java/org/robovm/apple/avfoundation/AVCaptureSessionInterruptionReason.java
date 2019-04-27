@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -53,7 +52,11 @@ public enum /*<name>*/AVCaptureSessionInterruptionReason/*</name>*/ implements V
     VideoDeviceNotAvailableInBackground(1L),
     AudioDeviceInUseByAnotherClient(2L),
     VideoDeviceInUseByAnotherClient(3L),
-    VideoDeviceNotAvailableWithMultipleForegroundApps(4L);
+    VideoDeviceNotAvailableWithMultipleForegroundApps(4L),
+    /**
+     * @since Available in iOS 11.1 and later.
+     */
+    VideoDeviceNotAvailableDueToSystemPressure(5L);
     /*</values>*/
 
     /*<bind>*/

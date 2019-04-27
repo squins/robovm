@@ -38,7 +38,7 @@ import org.robovm.apple.foundation.*;
 /*<annotations>*/@Library("UserNotifications") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UNNotificationSettings/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class UNNotificationSettingsPtr extends Ptr<UNNotificationSettings, UNNotificationSettingsPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(UNNotificationSettings.class); }/*</bind>*/
@@ -47,6 +47,8 @@ import org.robovm.apple.foundation.*;
     protected UNNotificationSettings() {}
     protected UNNotificationSettings(Handle h, long handle) { super(h, handle); }
     protected UNNotificationSettings(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithCoder:")
+    public UNNotificationSettings(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "authorizationStatus")
@@ -65,9 +67,29 @@ import org.robovm.apple.foundation.*;
     public native UNNotificationSetting getCarPlaySetting();
     @Property(selector = "alertStyle")
     public native UNAlertStyle getAlertStyle();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "showPreviewsSetting")
+    public native UNShowPreviewsSetting getShowPreviewsSetting();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "criticalAlertSetting")
+    public native UNNotificationSetting getCriticalAlertSetting();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "providesAppNotificationSettings")
+    public native boolean providesAppNotificationSettings();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
-    
+    @Method(selector = "encodeWithCoder:")
+    public native void encode(NSCoder coder);
+    @Method(selector = "initWithCoder:")
+    protected native @Pointer long init(NSCoder decoder);
     /*</methods>*/
 }

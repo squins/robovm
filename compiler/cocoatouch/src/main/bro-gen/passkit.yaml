@@ -5,6 +5,8 @@ framework: PassKit
 clang_args: ['-x', 'objective-c']
 headers:
     - /System/Library/Frameworks/PassKit.framework/Headers/PassKit.h
+private_typedefs:
+    CGRect: '@ByVal org.robovm.apple.coregraphics.CGRect'
 typedefs:
     'void (^)(PKPassLibraryAddPassesStatus)': '@Block VoidBlock1<PKPassLibraryAddPassesStatus>'
     'void (^)(PKPaymentAuthorizationStatus)': '@Block VoidBlock1<PKPaymentAuthorizationStatus>'
@@ -26,6 +28,9 @@ enums:
     PKAddPassButtonStyle: {prefix: PKAddPassButtonStyle}
     PKAddPaymentPassError: {}
     PKAutomaticPassPresentationSuppressionResult: {}
+    PKPaymentErrorCode: {nserror: true, prefix: PKPayment} #since 11.0
+    PKAddPaymentPassStyle: {} #since 12.0
+    PKDisbursementRequestSchedule: {}
 
 classes:
     PKPassKitError:
@@ -140,6 +145,15 @@ classes:
                 type: NSArray<PKPaymentSummaryItem>
             'shippingMethods':
                 type: NSArray<PKShippingMethod>
+        methods:
+            '+paymentContactInvalidErrorWithContactField:localizedDescription:':
+                name: createPaymentContactInvalidError
+            '+paymentShippingAddressInvalidErrorWithKey:localizedDescription:':
+                name: createPaymentShippingAddressInvalidError
+            '+paymentShippingAddressUnserviceableErrorWithLocalizedDescription:':
+                name: createPaymentShippingAddressUnserviceableError
+            '+paymentBillingAddressInvalidErrorWithKey:localizedDescription:':
+                name: createPaymentBillingAddressInvalidError
     PKPaymentSummaryItem: # DONE
         methods:
             '+summaryItemWithLabel:amount:':
@@ -162,13 +176,42 @@ classes:
         methods:
             '+canMakePaymentsUsingNetworks:capabilities:':
                 name: canMakePayments
+            '-initWithPaymentRequest:':
+                name: init
+            '-presentWithCompletion:':
+                name: present
+            '-dismissWithCompletion:':
+                name: dismiss
     PKSuicaPassProperties: {}
+    PKPaymentAuthorizationResult: #since 11.0
+        methods:
+            '-init.*':
+                name: init
+    PKPaymentRequestPaymentMethodUpdate: {} #since 11.0
+    PKPaymentRequestShippingContactUpdate: #since 11.0
+        methods:
+            '-init.*':
+                name: init
+    PKPaymentRequestShippingMethodUpdate: {} #since 11.0
+    PKPaymentRequestUpdate: #since 11.0
+        methods:
+            '-initWithPaymentSummaryItems:':
+                name: init
+    PKTransitPassProperties: {} #since 11.3
+    PKDisbursementAuthorizationController:
+        methods:
+            '-initWithDisbursementRequest:delegate:':
+                name: init
+            '-authorizeDisbursementWithCompletion:':
+                name: authorizeDisbursement
+    PKDisbursementRequest: {}
+    PKDisbursementVoucher: {}
 
 protocols:
     PKPaymentAuthorizationControllerDelegate:
         methods:
             '-paymentAuthorizationController:didAuthorizePayment:completion:':
-                name: didAuthorizePayment
+                name: didAuthorizePaymentEx # as outdated
             '-paymentAuthorizationControllerDidFinish:':
                 name: didFinish
             '-paymentAuthorizationControllerWillAuthorizePayment:':
@@ -178,6 +221,14 @@ protocols:
             '-paymentAuthorizationController:didSelectShippingContact:completion:':
                 name: didSelectShippingContact
             '-paymentAuthorizationController:didSelectPaymentMethod:completion:':
+                name: didSelectPaymentMethodEx # as outdated
+            '-paymentAuthorizationController:didAuthorizePayment:handler:':
+                name: didAuthorizePayment
+            '-paymentAuthorizationController:didSelectShippingMethod:handler:':
+                name: didSelectShippingMethod
+            '-paymentAuthorizationController:didSelectShippingContact:handler:':
+                name: didSelectShippingContact
+            '-paymentAuthorizationController:didSelectPaymentMethod:handler:':
                 name: didSelectPaymentMethod
 
     PKAddPassesViewControllerDelegate: # DONE
@@ -198,7 +249,7 @@ protocols:
     PKPaymentAuthorizationViewControllerDelegate: # DONE
         methods:
             '-paymentAuthorizationViewController:didAuthorizePayment:completion:':
-                name: didAuthorizePayment
+                name: didAuthorizePaymentEx # as outdated
             '-paymentAuthorizationViewControllerDidFinish:':
                 name: didFinish
             '-paymentAuthorizationViewControllerWillAuthorizePayment:':
@@ -219,11 +270,24 @@ protocols:
                     completion:
                         type: '@Block VoidBlock3<PKPaymentAuthorizationStatus, NSArray<PKShippingMethod>, NSArray<PKPaymentSummaryItem>>'
             '-paymentAuthorizationViewController:didSelectPaymentMethod:completion:':
-                name: didSelectPaymentMethod
+                name: didSelectPaymentMethodEx # as outdated
                 parameters:
                     completion:
                         type: '@Block VoidBlock1<NSArray<PKPaymentSummaryItem>>'
-
+            '-paymentAuthorizationViewController:didAuthorizePayment:handler:':
+                name: didAuthorizePayment
+            '-paymentAuthorizationViewController:didSelectShippingMethod:handler:':
+                name: didSelectShippingMethod
+            '-paymentAuthorizationViewController:didSelectShippingContact:handler:':
+                name: didSelectShippingContact
+            '-paymentAuthorizationViewController:didSelectPaymentMethod:handler:':
+                name: didSelectPaymentMethod
+    PKDisbursementAuthorizationControllerDelegate:
+        methods:
+            '-disbursementAuthorizationController:didAuthorizeWithDisbursementVoucher:':
+                name: didAuthorize
+            '-disbursementAuthorizationControllerDidFinish:':
+                name: didFinish
 functions:
     # Make sure we don't miss any functions if new ones are introduced in a later version
     (PK.*):
@@ -233,6 +297,15 @@ functions:
 values:
     PKPassKitErrorDomain:
         class: PKPassKitError
+        name: getClassDomain
+
+    PKPaymentErrorDomain:
+        class: PKPaymentErrorCode
+        name: getClassDomain
+
+    PKPaymentError(.*)UserInfoKey:
+        class: PKPaymentErrorCode
+        name: '#{g[0]}UserInfoKey'
 
     # PKPassLibrary
     PKPassLibrary(.*Notification):
@@ -264,6 +337,12 @@ values:
     # PKPayment
     PKPaymentNetwork(.*):
         enum: PKPaymentNetwork
+        name: '#{g[0]}'
+        type: NSString
+
+    # PKContactField
+    PKContactField(.*):
+        enum: PKContactField
         name: '#{g[0]}'
         type: NSString
 

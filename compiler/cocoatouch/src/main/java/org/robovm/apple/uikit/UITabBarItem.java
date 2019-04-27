@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -44,7 +47,7 @@ import org.robovm.apple.corelocation.*;
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UITabBarItem/*</name>*/ 
     extends /*<extends>*/UIBarItem/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements UISpringLoadedInteractionSupporting/*</implements>*/ {
 
     /*<ptr>*/public static class UITabBarItemPtr extends Ptr<UITabBarItem, UITabBarItemPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(UITabBarItem.class); }/*</bind>*/
@@ -54,7 +57,7 @@ import org.robovm.apple.corelocation.*;
     protected UITabBarItem(Handle h, long handle) { super(h, handle); }
     protected UITabBarItem(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithCoder:")
-    public UITabBarItem(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UITabBarItem(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     @Method(selector = "initWithTitle:image:tag:")
     public UITabBarItem(String title, UIImage image, @MachineSizedSInt long tag) { super((SkipInit) null); initObject(init(title, image, tag)); }
     /**
@@ -100,11 +103,21 @@ import org.robovm.apple.corelocation.*;
      */
     @Property(selector = "setBadgeColor:")
     public native void setBadgeColor(UIColor v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "isSpringLoaded")
+    public native boolean isSpringLoaded();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setSpringLoaded:")
+    public native void setSpringLoaded(boolean v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     @Method(selector = "initWithTitle:image:tag:")
     protected native @Pointer long init(String title, UIImage image, @MachineSizedSInt long tag);
     /**
@@ -116,7 +129,7 @@ import org.robovm.apple.corelocation.*;
     protected native @Pointer long init(UITabBarSystemItem systemItem, @MachineSizedSInt long tag);
     /**
      * @since Available in iOS 5.0 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Use initWithTitle:image:selectedImage: or the image and selectedImage properties along with UIImageRenderingModeAlwaysOriginal
      */
     @Deprecated
     @Method(selector = "setFinishedSelectedImage:withFinishedUnselectedImage:")

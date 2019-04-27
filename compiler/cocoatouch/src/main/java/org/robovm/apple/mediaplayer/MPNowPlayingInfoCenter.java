@@ -46,7 +46,7 @@ import org.robovm.apple.coregraphics.*;
     /*<bind>*/static { ObjCRuntime.bind(MPNowPlayingInfoCenter.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public MPNowPlayingInfoCenter() {}
+    protected MPNowPlayingInfoCenter() {}
     protected MPNowPlayingInfoCenter(Handle h, long handle) { super(h, handle); }
     protected MPNowPlayingInfoCenter(SkipInit skipInit) { super(skipInit); }
     /*</constructors>*/
@@ -55,6 +55,10 @@ import org.robovm.apple.coregraphics.*;
     public native MPNowPlayingInfo getNowPlayingInfo();
     @Property(selector = "setNowPlayingInfo:")
     public native void setNowPlayingInfo(MPNowPlayingInfo v);
+    @Property(selector = "playbackState")
+    public native MPNowPlayingPlaybackState getPlaybackState();
+    @Property(selector = "setPlaybackState:")
+    public native void setPlaybackState(MPNowPlayingPlaybackState v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

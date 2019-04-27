@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -53,13 +56,11 @@ import org.robovm.apple.corelocation.*;
     public UICollectionViewCell() {}
     protected UICollectionViewCell(Handle h, long handle) { super(h, handle); }
     protected UICollectionViewCell(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithFrame:")
+    public UICollectionViewCell(@ByVal CGRect frame) { super(frame); }
+    @Method(selector = "initWithCoder:")
+    public UICollectionViewCell(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
-    public UICollectionViewCell(CGRect frame) {
-        super(frame);
-    }
-    public UICollectionViewCell(NSCoder decoder) {
-        super(decoder);
-    }
     /*<properties>*/
     @Property(selector = "contentView")
     public native UIView getContentView();
@@ -82,6 +83,10 @@ import org.robovm.apple.corelocation.*;
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
-    
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "dragStateDidChange:")
+    public native void dragStateDidChange(UICollectionViewCellDragState dragState);
     /*</methods>*/
 }

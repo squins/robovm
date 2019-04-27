@@ -11,6 +11,7 @@ enums:
     MSMessagesAppPresentationStyle: {}
     MSMessageErrorCode: {}
     MSStickerSize: {}
+    MSMessagesAppPresentationContext: { prefix: MSMessagesAppPresentationContext}
 
 classes:
     MSConversation:
@@ -23,12 +24,29 @@ classes:
                 name: insertText
             '-insertAttachment:withAlternateFilename:completionHandler:':
                 name: insertAttachment
-    MSMessage: {}
+            '-sendMessage:completionHandler:':
+                trim_after_first_colon: true
+            '-sendSticker:completionHandler:':
+                trim_after_first_colon: true
+            '-sendText:completionHandler:':
+                trim_after_first_colon: true
+            '-sendAttachment:withAlternateFilename:completionHandler:':
+                trim_after_first_colon: true
+    MSMessage: #since 10.0
+        methods:
+            '-initWithSession:':
+                name: init
     MSMessageLayout: {}
     MSMessagesAppViewController:
         methods:
-            '-init.*':
-                name: init
+            '-willBecomeActiveWithConversation:':
+                name: willBecomeActive
+            '-didBecomeActiveWithConversation:':
+                name: didBecomeActive
+            '-willResignActiveWithConversation:':
+                name: willResignActive
+            '-didResignActiveWithConversation:':
+                name: didResignActive
             '-will.*':
                 trim_after_first_colon: true
             '-did.*':
@@ -50,14 +68,15 @@ classes:
         methods:
             '-init.*':
                 name: init
-            '-stickerBrowserView:stickerAtIndex:':
-                name: getStickerBrowserViewStickerAtIndex
 
     MSStickerView:
         methods:
             '-init.*':
                 name: init
-
+    MSMessageLiveLayout: #since 11.0
+        methods:
+            '-initWithAlternateLayout:':
+                name: init
 protocols:
     MSStickerBrowserViewDataSource:
         methods:
@@ -65,6 +84,7 @@ protocols:
                 name: numberOfStickersInStickerBrowserView
             '-stickerBrowserView:stickerAtIndex:':
                 name: stickerAtIndex
+    MSMessagesAppTranscriptPresentation: {} #since 11.0
 functions:
     # Make sure we don't miss any functions if new ones are introduced in a later version
     (k?MS.*):

@@ -32,6 +32,7 @@ import org.robovm.apple.corefoundation.*;
 import org.robovm.apple.coregraphics.*;
 import org.robovm.apple.opengles.*;
 import org.robovm.apple.metal.*;
+import org.robovm.apple.iosurface.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -651,6 +652,11 @@ import org.robovm.apple.metal.*;
          */
         @GlobalValue(symbol="kCVPixelFormatContainsRGB", optional=true)
         public static native CFString ContainsRGB();
+        /**
+         * @since Available in iOS 12.0 and later.
+         */
+        @GlobalValue(symbol="kCVPixelFormatContainsGrayscale", optional=true)
+        public static native CFString ContainsGrayscale();
         /**
          * @since Available in iOS 9.0 and later.
          */

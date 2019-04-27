@@ -46,15 +46,19 @@ import org.robovm.apple.dispatch.*;
 /*<annotations>*/@Library("Foundation") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/NSUnitLength/*</name>*/ 
     extends /*<extends>*/NSDimension/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class NSUnitLengthPtr extends Ptr<NSUnitLength, NSUnitLengthPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(NSUnitLength.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public NSUnitLength() {}
+    protected NSUnitLength() {}
     protected NSUnitLength(Handle h, long handle) { super(h, handle); }
     protected NSUnitLength(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithSymbol:converter:")
+    public NSUnitLength(String symbol, NSUnitConverter converter) { super(symbol, converter); }
+    @Method(selector = "initWithSymbol:")
+    public NSUnitLength(String symbol) { super(symbol); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "megameters")

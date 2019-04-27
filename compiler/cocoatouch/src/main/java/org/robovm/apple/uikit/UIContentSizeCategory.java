@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -163,7 +166,18 @@ import org.robovm.apple.corelocation.*;
             + /*<name>*/UIContentSizeCategory/*</name>*/.class.getName());
     }
     
-    /*<methods>*//*</methods>*/
+    /*<methods>*/
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Bridge(symbol="UIContentSizeCategoryIsAccessibilityCategory", optional=true)
+    public static native boolean isAccessibilityCategory(String category);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Bridge(symbol="UIContentSizeCategoryCompareToCategory", optional=true)
+    public static native NSComparisonResult compareToCategory(String lhs, String rhs);
+    /*</methods>*/
     
     /*<annotations>*/@Library("UIKit") @StronglyLinked/*</annotations>*/
     public static class Values {

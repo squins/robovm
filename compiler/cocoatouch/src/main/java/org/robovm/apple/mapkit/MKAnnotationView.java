@@ -55,10 +55,9 @@ import org.robovm.apple.dispatch.*;
     public MKAnnotationView(MKAnnotation annotation, String reuseIdentifier) { super((SkipInit) null); initObject(init(annotation, reuseIdentifier)); }
     @Method(selector = "initWithCoder:")
     public MKAnnotationView(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    @Method(selector = "initWithFrame:")
+    public MKAnnotationView(@ByVal CGRect frame) { super(frame); }
     /*</constructors>*/
-    public MKAnnotationView(CGRect frame) {
-    	super(frame);
-    }
     /*<properties>*/
     @Property(selector = "reuseIdentifier")
     public native String getReuseIdentifier();
@@ -132,6 +131,41 @@ import org.robovm.apple.dispatch.*;
      */
     @Property(selector = "setDragState:")
     public native void setDragState(MKAnnotationViewDragState v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "clusteringIdentifier")
+    public native String getClusteringIdentifier();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setClusteringIdentifier:")
+    public native void setClusteringIdentifier(String v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "clusterAnnotationView")
+    public native MKAnnotationView getClusterAnnotationView();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "displayPriority")
+    public native float getDisplayPriority();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setDisplayPriority:")
+    public native void setDisplayPriority(float v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "collisionMode")
+    public native MKAnnotationViewCollisionMode getCollisionMode();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setCollisionMode:")
+    public native void setCollisionMode(MKAnnotationViewCollisionMode v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -141,6 +175,11 @@ import org.robovm.apple.dispatch.*;
     protected native @Pointer long init(NSCoder aDecoder);
     @Method(selector = "prepareForReuse")
     public native void prepareForReuse();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "prepareForDisplay")
+    public native void prepareForDisplay();
     @Method(selector = "setSelected:animated:")
     public native void setSelected(boolean selected, boolean animated);
     /**

@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -107,6 +106,12 @@ import org.robovm.apple.audiounit.*;
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @GlobalValue(symbol="AVAudioFileTypeKey", optional=true)
+    public static native String TypeKey();
+    
     @Method(selector = "initForReading:error:")
     private native @Pointer long init(NSURL fileURL, NSError.NSErrorPtr outError);
     @Method(selector = "initForReading:commonFormat:interleaved:error:")

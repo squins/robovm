@@ -35,6 +35,7 @@ import org.robovm.apple.corevideo.*;
 import org.robovm.apple.imageio.*;
 import org.robovm.apple.uikit.*;
 import org.robovm.apple.metal.*;
+import org.robovm.apple.iosurface.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -54,7 +55,7 @@ import org.robovm.apple.metal.*;
     /*</properties>*/
     /*<methods>*/
     @Method(selector = "filterWithName:")
-    CIFilter filterWithName(String name);
+    CIFilter createFilter(String name);
     /*</methods>*/
     /*<adapter>*/
     /*</adapter>*/

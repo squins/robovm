@@ -35,6 +35,7 @@ import org.robovm.apple.corevideo.*;
 import org.robovm.apple.imageio.*;
 import org.robovm.apple.uikit.*;
 import org.robovm.apple.metal.*;
+import org.robovm.apple.iosurface.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -76,13 +77,45 @@ import org.robovm.apple.metal.*;
     public native CIImage apply(@ByVal CGRect extent, @Block("@ByVal (,@ByVal)") Block2<Integer, CGRect, CGRect> callback, NSArray<?> args);
     /**
      * @since Available in iOS 8.0 and later.
+     * @deprecated Deprecated in iOS 12.0. Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings)
      */
+    @Deprecated
     @Method(selector = "kernelsWithString:")
     public static native NSArray<CIKernel> createKernels(String string);
     /**
      * @since Available in iOS 8.0 and later.
+     * @deprecated Deprecated in iOS 12.0. Core Image Kernel Language API deprecated. (Define CI_SILENCE_GL_DEPRECATION to silence these warnings)
      */
+    @Deprecated
     @Method(selector = "kernelWithString:")
     public static native CIKernel create(String string);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    public static CIKernel create(String name, NSData data) throws NSErrorException {
+       NSError.NSErrorPtr ptr = new NSError.NSErrorPtr();
+       CIKernel result = create(name, data, ptr);
+       if (ptr.get() != null) { throw new NSErrorException(ptr.get()); }
+       return result;
+    }
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "kernelWithFunctionName:fromMetalLibraryData:error:")
+    private static native CIKernel create(String name, NSData data, NSError.NSErrorPtr error);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    public static CIKernel create(String name, NSData data, int format) throws NSErrorException {
+       NSError.NSErrorPtr ptr = new NSError.NSErrorPtr();
+       CIKernel result = create(name, data, format, ptr);
+       if (ptr.get() != null) { throw new NSErrorException(ptr.get()); }
+       return result;
+    }
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "kernelWithFunctionName:fromMetalLibraryData:outputPixelFormat:error:")
+    private static native CIKernel create(String name, NSData data, int format, NSError.NSErrorPtr error);
     /*</methods>*/
 }

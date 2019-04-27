@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -60,6 +59,10 @@ import org.robovm.apple.audiounit.*;
     protected AVQueuePlayer(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithItems:")
     public AVQueuePlayer(NSArray<AVPlayerItem> items) { super((SkipInit) null); initObject(init(items)); }
+    @Method(selector = "initWithURL:")
+    public AVQueuePlayer(NSURL URL) { super(URL); }
+    @Method(selector = "initWithPlayerItem:")
+    public AVQueuePlayer(AVPlayerItem item) { super(item); }
     /*</constructors>*/
     /*<properties>*/
     

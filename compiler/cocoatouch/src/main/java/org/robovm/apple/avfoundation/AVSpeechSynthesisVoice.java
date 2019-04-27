@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -49,7 +48,7 @@ import org.robovm.apple.audiounit.*;
 /*<annotations>*/@Library("AVFoundation") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/AVSpeechSynthesisVoice/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class AVSpeechSynthesisVoicePtr extends Ptr<AVSpeechSynthesisVoice, AVSpeechSynthesisVoicePtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(AVSpeechSynthesisVoice.class); }/*</bind>*/
@@ -63,6 +62,8 @@ import org.robovm.apple.audiounit.*;
      * @since Available in iOS 9.0 and later.
      */
     public AVSpeechSynthesisVoice(AVSpeechSynthesisVoiceIdentifier identifier) { super((Handle) null, create(identifier)); retain(getHandle()); }
+    @Method(selector = "initWithCoder:")
+    public AVSpeechSynthesisVoice(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "language")
@@ -82,6 +83,8 @@ import org.robovm.apple.audiounit.*;
      */
     @Property(selector = "quality")
     public native AVSpeechSynthesisVoiceQuality getQuality();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -96,5 +99,9 @@ import org.robovm.apple.audiounit.*;
      */
     @Method(selector = "voiceWithIdentifier:")
     protected static native @Pointer long create(AVSpeechSynthesisVoiceIdentifier identifier);
+    @Method(selector = "encodeWithCoder:")
+    public native void encode(NSCoder coder);
+    @Method(selector = "initWithCoder:")
+    protected native @Pointer long init(NSCoder decoder);
     /*</methods>*/
 }

@@ -35,6 +35,7 @@ import org.robovm.apple.corevideo.*;
 import org.robovm.apple.imageio.*;
 import org.robovm.apple.uikit.*;
 import org.robovm.apple.metal.*;
+import org.robovm.apple.iosurface.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -45,7 +46,7 @@ import org.robovm.apple.metal.*;
 /*<annotations>*/@Library("CoreImage") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/CIFilter/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class CIFilterPtr extends Ptr<CIFilter, CIFilterPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(CIFilter.class); }/*</bind>*/
@@ -61,15 +62,17 @@ import org.robovm.apple.metal.*;
     /**
      * @since Available in iOS 10.0 and later.
      */
-    public CIFilter(NSURL url, NSDictionary<?, ?> options) { super((Handle) null, create(url, options)); retain(getHandle()); }
+    public CIFilter(NSURL url, CIRAWFilterOptions options) { super((Handle) null, create(url, options)); retain(getHandle()); }
     /**
      * @since Available in iOS 10.0 and later.
      */
-    public CIFilter(NSData data, NSDictionary<?, ?> options) { super((Handle) null, create(data, options)); retain(getHandle()); }
+    public CIFilter(NSData data, CIRAWFilterOptions options) { super((Handle) null, create(data, options)); retain(getHandle()); }
     /**
      * @since Available in iOS 10.0 and later.
      */
-    public CIFilter(CVPixelBuffer pixelBuffer, NSDictionary<?, ?> properties, NSDictionary<?, ?> options) { super((Handle) null, create(pixelBuffer, properties, options)); retain(getHandle()); }
+    public CIFilter(CVPixelBuffer pixelBuffer, NSDictionary<?, ?> properties, CIRAWFilterOptions options) { super((Handle) null, create(pixelBuffer, properties, options)); retain(getHandle()); }
+    @Method(selector = "initWithCoder:")
+    public CIFilter(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     public CIFilter(String name, Object...inputParameters) {super((Handle) null, create(name, inputParameters)); retain(getHandle()); }
     /*<properties>*/
@@ -83,11 +86,13 @@ import org.robovm.apple.metal.*;
     @Property(selector = "setName:")
     public native void setName(String v);
     @Property(selector = "inputKeys")
-    public native NSArray<?> getInputKeys();
+    public native NSArray<NSString> getInputKeys();
     @Property(selector = "outputKeys")
-    public native NSArray<?> getOutputKeys();
+    public native NSArray<NSString> getOutputKeys();
     @Property(selector = "attributes")
-    public native NSDictionary<?, ?> getAttributes();
+    public native NSDictionary<NSString, ?> getAttributes();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     
@@ -181,7 +186,7 @@ import org.robovm.apple.metal.*;
      * @since Available in iOS 9.0 and later.
      */
     @Method(selector = "registerFilterName:constructor:classAttributes:")
-    public static native void register(String name, CIFilterConstructor anObject, NSDictionary<?, ?> attributes);
+    public static native void register(String name, CIFilterConstructor anObject, NSDictionary<NSString, ?> attributes);
     /**
      * @since Available in iOS 9.0 and later.
      */
@@ -225,16 +230,20 @@ import org.robovm.apple.metal.*;
      * @since Available in iOS 10.0 and later.
      */
     @Method(selector = "filterWithImageURL:options:")
-    protected static native @Pointer long create(NSURL url, NSDictionary<?, ?> options);
+    protected static native @Pointer long create(NSURL url, CIRAWFilterOptions options);
     /**
      * @since Available in iOS 10.0 and later.
      */
     @Method(selector = "filterWithImageData:options:")
-    protected static native @Pointer long create(NSData data, NSDictionary<?, ?> options);
+    protected static native @Pointer long create(NSData data, CIRAWFilterOptions options);
     /**
      * @since Available in iOS 10.0 and later.
      */
     @Method(selector = "filterWithCVPixelBuffer:properties:options:")
-    protected static native @Pointer long create(CVPixelBuffer pixelBuffer, NSDictionary<?, ?> properties, NSDictionary<?, ?> options);
+    protected static native @Pointer long create(CVPixelBuffer pixelBuffer, NSDictionary<?, ?> properties, CIRAWFilterOptions options);
+    @Method(selector = "encodeWithCoder:")
+    public native void encode(NSCoder coder);
+    @Method(selector = "initWithCoder:")
+    protected native @Pointer long init(NSCoder decoder);
     /*</methods>*/
 }

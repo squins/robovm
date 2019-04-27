@@ -58,6 +58,11 @@ import org.robovm.apple.corelocation.*;
     @Property(selector = "isPrimary")
     public native boolean isPrimary();
     /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "homeHubState")
+    public native HMHomeHubState getHomeHubState();
+    /**
      * @since Available in iOS 9.0 and later.
      */
     @Property(selector = "uniqueIdentifier")
@@ -71,7 +76,7 @@ import org.robovm.apple.corelocation.*;
     public native HMUser getCurrentUser();
     /**
      * @since Available in iOS 8.0 and later.
-     * @deprecated Deprecated in iOS 9.0.
+     * @deprecated Deprecated in iOS 9.0. No longer supported.
      */
     @Deprecated
     @Property(selector = "users")
@@ -105,7 +110,12 @@ import org.robovm.apple.corelocation.*;
      * @since Available in iOS 10.0 and later.
      */
     @Method(selector = "addAndSetupAccessoriesWithCompletionHandler:")
-    public native void addAndSetupAccessoriesWithCompletionHandler(@Block VoidBlock1<NSError> completion);
+    public native void addAndSetupAccessories(@Block VoidBlock1<NSError> completion);
+    /**
+     * @since Available in iOS 11.3 and later.
+     */
+    @Method(selector = "addAndSetupAccessoriesWithPayload:completionHandler:")
+    public native void addAndSetupAccessories(HMAccessorySetupPayload payload, @Block VoidBlock2<NSArray<HMAccessory>, NSError> completion);
     /**
      * @since Available in iOS 9.0 and later.
      */

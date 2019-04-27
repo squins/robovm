@@ -30,6 +30,7 @@ import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.corelocation.*;
 import org.robovm.apple.contacts.*;
+import org.robovm.apple.fileprovider.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -40,13 +41,13 @@ import org.robovm.apple.contacts.*;
 /*<annotations>*/@Library("CloudKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/CKRecordZoneSubscription/*</name>*/ 
     extends /*<extends>*/CKSubscription/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class CKRecordZoneSubscriptionPtr extends Ptr<CKRecordZoneSubscription, CKRecordZoneSubscriptionPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(CKRecordZoneSubscription.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public CKRecordZoneSubscription() {}
+    protected CKRecordZoneSubscription() {}
     protected CKRecordZoneSubscription(Handle h, long handle) { super(h, handle); }
     protected CKRecordZoneSubscription(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithZoneID:")

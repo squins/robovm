@@ -29,6 +29,8 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.spritekit.*;
+import org.robovm.apple.scenekit.*;
+import org.robovm.apple.uikit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -52,6 +54,8 @@ import org.robovm.apple.spritekit.*;
     public GKGridGraph(@ByVal VectorInt2 position, int width, int height, boolean diagonalsAllowed) { super((SkipInit) null); initObject(init(position, width, height, diagonalsAllowed)); }
     @Method(selector = "initFromGridStartingAt:width:height:diagonalsAllowed:nodeClass:")
     public GKGridGraph(@ByVal VectorInt2 position, int width, int height, boolean diagonalsAllowed, Class<?> nodeClass) { super((SkipInit) null); initObject(init(position, width, height, diagonalsAllowed, nodeClass)); }
+    @Method(selector = "initWithNodes:")
+    public GKGridGraph(NSArray<GKGraphNode> nodes) { super(nodes); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "gridOrigin")

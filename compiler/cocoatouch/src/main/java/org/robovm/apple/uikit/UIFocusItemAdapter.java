@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -52,9 +55,15 @@ import org.robovm.apple.corelocation.*;
     /*<properties>*/
     @NotImplemented("canBecomeFocused")
     public boolean canBecomeFocused() { return false; }
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @NotImplemented("frame")
+    public @ByVal CGRect getFrame() { return null; }
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
-    
+    @NotImplemented("didHintFocusMovement:")
+    public void didHintFocusMovement(UIFocusMovementHint hint) {}
     /*</methods>*/
 }

@@ -30,6 +30,7 @@ import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.corelocation.*;
 import org.robovm.apple.contacts.*;
+import org.robovm.apple.fileprovider.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -55,7 +56,7 @@ public enum /*<name>*/CKErrorCode/*</name>*/ implements NSErrorCode {
     InvalidArguments(12L),
     /**
      * @since Available in iOS 8.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Will not be returned
      */
     @Deprecated
     ResultsTruncated(13L),
@@ -93,7 +94,15 @@ public enum /*<name>*/CKErrorCode/*</name>*/ implements NSErrorCode {
     /**
      * @since Available in iOS 10.0 and later.
      */
-    ParticipantMayNeedVerification(33L);
+    ParticipantMayNeedVerification(33L),
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    ServerResponseLost(34L),
+    /**
+     * @since Available in iOS 11.3 and later.
+     */
+    AssetNotAvailable(35L);
     /*</values>*/
 
     /*<bind>*/

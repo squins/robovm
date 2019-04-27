@@ -36,6 +36,7 @@ import org.robovm.apple.avfoundation.*;
 import org.robovm.apple.glkit.*;
 import org.robovm.apple.scenekit.*;
 import org.robovm.apple.gameplaykit.*;
+import org.robovm.apple.metal.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -53,10 +54,11 @@ import org.robovm.apple.gameplaykit.*;
     public SKView() {}
     protected SKView(Handle h, long handle) { super(h, handle); }
     protected SKView(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithFrame:")
+    public SKView(@ByVal CGRect frame) { super(frame); }
+    @Method(selector = "initWithCoder:")
+    public SKView(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
-    public SKView(CGRect frame) {
-    	super(frame);
-    }
     /*<properties>*/
     @Property(selector = "isPaused")
     public native boolean isPaused();

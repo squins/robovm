@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -60,6 +59,9 @@ import org.robovm.apple.audiounit.*;
     protected AVAudioUnitEQ(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithNumberOfBands:")
     public AVAudioUnitEQ(@MachineSizedUInt long numberOfBands) { super((SkipInit) null); initObject(init(numberOfBands)); }
+    @WeaklyLinked
+    @Method(selector = "initWithAudioComponentDescription:")
+    public AVAudioUnitEQ(@ByVal AudioComponentDescription audioComponentDescription) { super(audioComponentDescription); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "bands")

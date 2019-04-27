@@ -109,7 +109,32 @@ import org.robovm.apple.dispatch.*;
     public native MTLRenderCommandEncoder newRenderCommandEncoder(MTLRenderPassDescriptor renderPassDescriptor);
     @Method(selector = "computeCommandEncoder")
     public native MTLComputeCommandEncoder newComputeCommandEncoder();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Method(selector = "computeCommandEncoderWithDispatchType:")
+    public native MTLComputeCommandEncoder newComputeCommandEncoder(MTLDispatchType dispatchType);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Method(selector = "encodeWaitForEvent:value:")
+    public native void encodeWaitForEvent(MTLEvent event, long value);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Method(selector = "encodeSignalEvent:value:")
+    public native void encodeSignalEvent(MTLEvent event, long value);
     @Method(selector = "parallelRenderCommandEncoderWithDescriptor:")
     public native MTLParallelRenderCommandEncoder newParallelRenderCommandEncoder(MTLRenderPassDescriptor renderPassDescriptor);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "pushDebugGroup:")
+    public native void pushDebugGroup(String string);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "popDebugGroup")
+    public native void popDebugGroup();
     /*</methods>*/
 }

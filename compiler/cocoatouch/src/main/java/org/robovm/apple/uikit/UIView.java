@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -44,7 +47,7 @@ import org.robovm.apple.corelocation.*;
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UIView/*</name>*/ 
     extends /*<extends>*/UIResponder/*</extends>*/ 
-    /*<implements>*/implements NSCoding, UIAppearanceContainer, UIDynamicItem, UITraitEnvironment, UICoordinateSpace, UIFocusItem, CALayerDelegate, UIAccessibilityIdentification/*</implements>*/ {
+    /*<implements>*/implements NSCoding, UIAppearanceContainer, UIDynamicItem, UITraitEnvironment, UICoordinateSpace, UIFocusItem, UIFocusItemContainer, CALayerDelegate, UIAccessibilityIdentification/*</implements>*/ {
 
     /*<ptr>*/public static class UIViewPtr extends Ptr<UIView, UIViewPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(UIView.class); }/*</bind>*/
@@ -57,7 +60,7 @@ import org.robovm.apple.corelocation.*;
     @Method(selector = "initWithFrame:")
     public UIView(@ByVal CGRect frame) { super((SkipInit) null); initObject(init(frame)); }
     @Method(selector = "initWithCoder:")
-    public UIView(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UIView(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     @WeaklyLinked
@@ -158,6 +161,16 @@ import org.robovm.apple.corelocation.*;
     @Property(selector = "setLayoutMargins:")
     public native void setLayoutMargins(@ByVal UIEdgeInsets v);
     /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "directionalLayoutMargins")
+    public native @ByVal NSDirectionalEdgeInsets getDirectionalLayoutMargins();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setDirectionalLayoutMargins:")
+    public native void setDirectionalLayoutMargins(@ByVal NSDirectionalEdgeInsets v);
+    /**
      * @since Available in iOS 8.0 and later.
      */
     @Property(selector = "preservesSuperviewLayoutMargins")
@@ -168,6 +181,21 @@ import org.robovm.apple.corelocation.*;
     @Property(selector = "setPreservesSuperviewLayoutMargins:")
     public native void setPreservesSuperviewLayoutMargins(boolean v);
     /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "insetsLayoutMarginsFromSafeArea")
+    public native boolean isInsetsLayoutMarginsFromSafeArea();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setInsetsLayoutMarginsFromSafeArea:")
+    public native void setInsetsLayoutMarginsFromSafeArea(boolean v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "safeAreaInsets")
+    public native @ByVal UIEdgeInsets getSafeAreaInsets();
+    /**
      * @since Available in iOS 9.0 and later.
      */
     @Property(selector = "layoutMarginsGuide")
@@ -177,6 +205,11 @@ import org.robovm.apple.corelocation.*;
      */
     @Property(selector = "readableContentGuide")
     public native UILayoutGuide getReadableContentGuide();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "safeAreaLayoutGuide")
+    public native UILayoutGuide getSafeAreaLayoutGuide();
     @Property(selector = "clipsToBounds")
     public native boolean clipsToBounds();
     @Property(selector = "setClipsToBounds:")
@@ -383,6 +416,26 @@ import org.robovm.apple.corelocation.*;
     @Property(selector = "setRestorationIdentifier:")
     public native void setRestorationIdentifier(String v);
     /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "accessibilityIgnoresInvertColors")
+    public native boolean isAccessibilityIgnoresInvertColors();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setAccessibilityIgnoresInvertColors:")
+    public native void setAccessibilityIgnoresInvertColors(boolean v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "interactions")
+    public native NSArray<?> getInteractions();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setInteractions:")
+    public native void setInteractions(NSArray<?> v);
+    /**
      * @since Available in iOS 9.0 and later.
      */
     @Property(selector = "collisionBoundsType")
@@ -400,12 +453,24 @@ import org.robovm.apple.corelocation.*;
     @Property(selector = "preferredFocusEnvironments")
     public native @org.robovm.rt.bro.annotation.Marshaler(NSArray.AsListMarshaler.class) List<UIFocusEnvironment> getPreferredFocusEnvironments();
     /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "parentFocusEnvironment")
+    public native UIFocusEnvironment getParentFocusEnvironment();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "focusItemContainer")
+    public native UIFocusItemContainer getFocusItemContainer();
+    /**
      * @since Available in iOS 9.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Use -preferredFocusEnvironments instead.
      */
     @Deprecated
     @Property(selector = "preferredFocusedView")
     public native UIView getPreferredFocusedView();
+    @Property(selector = "coordinateSpace")
+    public native UICoordinateSpace getCoordinateSpace();
     /**
      * @since Available in iOS 5.0 and later.
      */
@@ -428,7 +493,7 @@ import org.robovm.apple.corelocation.*;
     @Method(selector = "initWithFrame:")
     protected native @Pointer long init(@ByVal CGRect frame);
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     /**
      * @since Available in iOS 9.0 and later.
      */
@@ -498,6 +563,11 @@ import org.robovm.apple.corelocation.*;
      */
     @Method(selector = "layoutMarginsDidChange")
     public native void layoutMarginsDidChange();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "safeAreaInsetsDidChange")
+    public native void safeAreaInsetsDidChange();
     @Method(selector = "drawRect:")
     public native void draw(@ByVal CGRect rect);
     @Method(selector = "setNeedsDisplay")
@@ -749,6 +819,16 @@ import org.robovm.apple.corelocation.*;
      */
     @Method(selector = "drawViewHierarchyInRect:afterScreenUpdates:")
     public native boolean drawViewHierarchy(@ByVal CGRect rect, boolean afterUpdates);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "addInteraction:")
+    public native void addInteraction(UIInteraction interaction);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "removeInteraction:")
+    public native void removeInteraction(UIInteraction interaction);
     @Method(selector = "endEditing:")
     public native boolean endEditing(boolean force);
     @Method(selector = "viewPrintFormatter")
@@ -782,6 +862,8 @@ import org.robovm.apple.corelocation.*;
      */
     @Method(selector = "convertRect:fromCoordinateSpace:")
     public native @ByVal CGRect convertRectFromCoordinateSpace(@ByVal CGRect rect, UICoordinateSpace coordinateSpace);
+    @Method(selector = "didHintFocusMovement:")
+    public native void didHintFocusMovement(UIFocusMovementHint hint);
     @Method(selector = "setNeedsFocusUpdate")
     public native void setNeedsFocusUpdate();
     @Method(selector = "updateFocusIfNeeded")
@@ -790,6 +872,8 @@ import org.robovm.apple.corelocation.*;
     public native boolean shouldUpdateFocus(UIFocusUpdateContext context);
     @Method(selector = "didUpdateFocusInContext:withAnimationCoordinator:")
     public native void didUpdateFocus(UIFocusUpdateContext context, UIFocusAnimationCoordinator coordinator);
+    @Method(selector = "focusItemsInRect:")
+    public native NSArray<?> focusItemsInRect(@ByVal CGRect rect);
     @Method(selector = "displayLayer:")
     public native void displayLayer(CALayer layer);
     @Method(selector = "drawLayer:inContext:")

@@ -52,6 +52,10 @@ import org.robovm.apple.coregraphics.*;
     public MDLTexture(NSData pixelData, boolean topLeftOrigin, String name, @ByVal VectorInt2 dimensions, @MachineSizedSInt long rowStride, @MachineSizedUInt long channelCount, MDLTextureChannelEncoding channelEncoding, boolean isCube) { super((SkipInit) null); initObject(init(pixelData, topLeftOrigin, name, dimensions, rowStride, channelCount, channelEncoding, isCube)); }
     public MDLTexture(String name) { super((Handle) null, create(name)); retain(getHandle()); }
     public MDLTexture(String name, NSBundle bundleOrNil) { super((Handle) null, create(name, bundleOrNil)); retain(getHandle()); }
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    public MDLTexture(String name, MDLAssetResolver resolver) { super((Handle) null, create(name, resolver)); retain(getHandle()); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "dimensions")
@@ -83,10 +87,25 @@ import org.robovm.apple.coregraphics.*;
     protected native @Pointer long init(NSData pixelData, boolean topLeftOrigin, String name, @ByVal VectorInt2 dimensions, @MachineSizedSInt long rowStride, @MachineSizedUInt long channelCount, MDLTextureChannelEncoding channelEncoding, boolean isCube);
     @Method(selector = "writeToURL:")
     public native boolean write(NSURL URL);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "writeToURL:level:")
+    public native boolean write(NSURL URL, @MachineSizedUInt long level);
     @Method(selector = "writeToURL:type:")
     public native boolean write(NSURL nsurl, String type);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "writeToURL:type:level:")
+    public native boolean write(NSURL nsurl, String type, @MachineSizedUInt long level);
     @Method(selector = "imageFromTexture")
     public native CGImage getImage();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "imageFromTextureAtLevel:")
+    public native CGImage imageFromTextureAtLevel(@MachineSizedUInt long level);
     @Method(selector = "texelDataWithTopLeftOrigin")
     public native NSData getTexelDataWithTopLeftOrigin();
     @Method(selector = "texelDataWithBottomLeftOrigin")
@@ -99,6 +118,11 @@ import org.robovm.apple.coregraphics.*;
     protected static native @Pointer long create(String name);
     @Method(selector = "textureNamed:bundle:")
     protected static native @Pointer long create(String name, NSBundle bundleOrNil);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Method(selector = "textureNamed:assetResolver:")
+    protected static native @Pointer long create(String name, MDLAssetResolver resolver);
     @Method(selector = "textureCubeWithImagesNamed:")
     public static native MDLTexture newTextureCube(@org.robovm.rt.bro.annotation.Marshaler(NSArray.AsStringListMarshaler.class) List<String> names);
     @Method(selector = "textureCubeWithImagesNamed:bundle:")

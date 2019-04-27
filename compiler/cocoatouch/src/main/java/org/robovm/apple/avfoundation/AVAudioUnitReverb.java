@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -58,6 +57,9 @@ import org.robovm.apple.audiounit.*;
     public AVAudioUnitReverb() {}
     protected AVAudioUnitReverb(Handle h, long handle) { super(h, handle); }
     protected AVAudioUnitReverb(SkipInit skipInit) { super(skipInit); }
+    @WeaklyLinked
+    @Method(selector = "initWithAudioComponentDescription:")
+    public AVAudioUnitReverb(@ByVal AudioComponentDescription audioComponentDescription) { super(audioComponentDescription); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "wetDryMix")

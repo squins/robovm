@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -44,7 +47,7 @@ import org.robovm.apple.corelocation.*;
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UIAlertController/*</name>*/ 
     extends /*<extends>*/UIViewController/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements UISpringLoadedInteractionSupporting/*</implements>*/ {
 
     /*<ptr>*/public static class UIAlertControllerPtr extends Ptr<UIAlertController, UIAlertControllerPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(UIAlertController.class); }/*</bind>*/
@@ -54,6 +57,10 @@ import org.robovm.apple.corelocation.*;
     protected UIAlertController(Handle h, long handle) { super(h, handle); }
     protected UIAlertController(SkipInit skipInit) { super(skipInit); }
     public UIAlertController(String title, String message, UIAlertControllerStyle preferredStyle) { super((Handle) null, create(title, message, preferredStyle)); retain(getHandle()); }
+    @Method(selector = "initWithNibName:bundle:")
+    public UIAlertController(String nibNameOrNil, NSBundle nibBundleOrNil) { super(nibNameOrNil, nibBundleOrNil); }
+    @Method(selector = "initWithCoder:")
+    public UIAlertController(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "actions")
@@ -80,6 +87,16 @@ import org.robovm.apple.corelocation.*;
     public native void setMessage(String v);
     @Property(selector = "preferredStyle")
     public native UIAlertControllerStyle getPreferredStyle();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "isSpringLoaded")
+    public native boolean isSpringLoaded();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setSpringLoaded:")
+    public native void setSpringLoaded(boolean v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

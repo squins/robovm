@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -60,6 +59,8 @@ import org.robovm.apple.audiounit.*;
     protected AVCaptureVideoPreviewLayer(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithSession:")
     public AVCaptureVideoPreviewLayer(AVCaptureSession session) { super((SkipInit) null); initObject(init(session)); }
+    @Method(selector = "initWithLayer:")
+    public AVCaptureVideoPreviewLayer(CALayer layer) { super(layer); }
     /*</constructors>*/
     /**
      * @since Available in iOS 8.0 and later.

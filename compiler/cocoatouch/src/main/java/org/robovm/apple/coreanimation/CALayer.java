@@ -43,7 +43,7 @@ import org.robovm.apple.metal.*;
 /*<annotations>*/@Library("QuartzCore") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/CALayer/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements NSCoding, CAMediaTiming/*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding, CAMediaTiming/*</implements>*/ {
 
     /*<ptr>*/public static class CALayerPtr extends Ptr<CALayer, CALayerPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(CALayer.class); }/*</bind>*/
@@ -187,8 +187,14 @@ import org.robovm.apple.metal.*;
     public native CAEdgeAntialiasingMask getEdgeAntialiasingMask();
     @Property(selector = "setEdgeAntialiasingMask:")
     public native void setEdgeAntialiasingMask(CAEdgeAntialiasingMask v);
+    /**
+     * @since Available in iOS 2.0 and later.
+     */
     @Property(selector = "allowsEdgeAntialiasing")
     public native boolean allowsEdgeAntialiasing();
+    /**
+     * @since Available in iOS 2.0 and later.
+     */
     @Property(selector = "setAllowsEdgeAntialiasing:")
     public native void setAllowsEdgeAntialiasing(boolean v);
     @Property(selector = "backgroundColor")
@@ -199,6 +205,16 @@ import org.robovm.apple.metal.*;
     public native @MachineSizedFloat double getCornerRadius();
     @Property(selector = "setCornerRadius:")
     public native void setCornerRadius(@MachineSizedFloat double v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "maskedCorners")
+    public native CACornerMask getMaskedCorners();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setMaskedCorners:")
+    public native void setMaskedCorners(CACornerMask v);
     @Property(selector = "borderWidth")
     public native @MachineSizedFloat double getBorderWidth();
     @Property(selector = "setBorderWidth:")
@@ -211,8 +227,14 @@ import org.robovm.apple.metal.*;
     public native float getOpacity();
     @Property(selector = "setOpacity:")
     public native void setOpacity(float v);
+    /**
+     * @since Available in iOS 2.0 and later.
+     */
     @Property(selector = "allowsGroupOpacity")
     public native boolean allowsGroupOpacity();
+    /**
+     * @since Available in iOS 2.0 and later.
+     */
     @Property(selector = "setAllowsGroupOpacity:")
     public native void setAllowsGroupOpacity(boolean v);
     @WeaklyLinked
@@ -279,6 +301,8 @@ import org.robovm.apple.metal.*;
     public native void setStyle(NSDictionary<?, ?> v);
     @Property(selector = "visibleRect")
     public native @ByVal CGRect getVisibleRect();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     @Property(selector = "beginTime")
     public native double getBeginTime();
     @Property(selector = "setBeginTime:")
@@ -339,7 +363,7 @@ import org.robovm.apple.metal.*;
     @Method(selector = "insertSublayer:above:")
     public native void insertSublayerAbove(CALayer layer, CALayer sibling);
     @Method(selector = "replaceSublayer:with:")
-    public native void replaceSublayer(CALayer layer, CALayer layer2);
+    public native void replaceSublayer(CALayer oldLayer, CALayer newLayer);
     @Method(selector = "convertPoint:fromLayer:")
     public native @ByVal CGPoint convertPointFromLayer(@ByVal CGPoint p, CALayer l);
     @Method(selector = "convertPoint:toLayer:")

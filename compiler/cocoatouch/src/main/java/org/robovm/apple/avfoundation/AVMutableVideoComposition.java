@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -82,12 +81,28 @@ import org.robovm.apple.audiounit.*;
     public native @ByVal CMTime getFrameDuration();
     @Property(selector = "setFrameDuration:")
     public native void setFrameDuration(@ByVal CMTime v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "sourceTrackIDForFrameTiming")
+    public native int getSourceTrackIDForFrameTiming();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setSourceTrackIDForFrameTiming:")
+    public native void setSourceTrackIDForFrameTiming(int v);
     @Property(selector = "renderSize")
     public native @ByVal CGSize getRenderSize();
     @Property(selector = "setRenderSize:")
     public native void setRenderSize(@ByVal CGSize v);
+    /**
+     * @since Available in iOS 4.0 and later.
+     */
     @Property(selector = "renderScale")
     public native float getRenderScale();
+    /**
+     * @since Available in iOS 4.0 and later.
+     */
     @Property(selector = "setRenderScale:")
     public native void setRenderScale(float v);
     @Property(selector = "instructions")

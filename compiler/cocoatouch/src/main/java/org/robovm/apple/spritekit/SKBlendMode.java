@@ -36,6 +36,7 @@ import org.robovm.apple.avfoundation.*;
 import org.robovm.apple.glkit.*;
 import org.robovm.apple.scenekit.*;
 import org.robovm.apple.gameplaykit.*;
+import org.robovm.apple.metal.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -52,7 +53,8 @@ public enum /*<name>*/SKBlendMode/*</name>*/ implements ValuedEnum {
     Multiply(3L),
     MultiplyX2(4L),
     Screen(5L),
-    Replace(6L);
+    Replace(6L),
+    MultiplyAlpha(7L);
     /*</values>*/
 
     /*<bind>*/

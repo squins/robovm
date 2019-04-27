@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -53,6 +56,10 @@ import org.robovm.apple.corelocation.*;
     public UISplitViewController() {}
     protected UISplitViewController(Handle h, long handle) { super(h, handle); }
     protected UISplitViewController(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithNibName:bundle:")
+    public UISplitViewController(String nibNameOrNil, NSBundle nibBundleOrNil) { super(nibNameOrNil, nibBundleOrNil); }
+    @Method(selector = "initWithCoder:")
+    public UISplitViewController(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "viewControllers")
@@ -133,6 +140,16 @@ import org.robovm.apple.corelocation.*;
      */
     @Property(selector = "primaryColumnWidth")
     public native @MachineSizedFloat double getPrimaryColumnWidth();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "primaryEdge")
+    public native UISplitViewControllerPrimaryEdge getPrimaryEdge();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setPrimaryEdge:")
+    public native void setPrimaryEdge(UISplitViewControllerPrimaryEdge v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

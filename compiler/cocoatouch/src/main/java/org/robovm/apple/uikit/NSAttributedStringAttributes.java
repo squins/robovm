@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -267,7 +270,7 @@ import org.robovm.apple.corelocation.*;
     public NSUnderlineStyle getStrikethroughStyle() {
         if (has(NSAttributedStringAttribute.StrikethroughStyle)) {
             NSNumber val = (NSNumber) get(NSAttributedStringAttribute.StrikethroughStyle);
-            return NSUnderlineStyle.valueOf(val.longValue());
+            return new NSUnderlineStyle(val.longValue());
         }
         return null;
     }
@@ -284,7 +287,7 @@ import org.robovm.apple.corelocation.*;
     public NSUnderlineStyle getUnderlineStyle() {
         if (has(NSAttributedStringAttribute.UnderlineStyle)) {
             NSNumber val = (NSNumber) get(NSAttributedStringAttribute.UnderlineStyle);
-            return NSUnderlineStyle.valueOf(val.longValue());
+            return new NSUnderlineStyle(val.longValue());
         }
         return null;
     }

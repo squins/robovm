@@ -34,12 +34,15 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
 /**
  * @since Available in iOS 8.0 and later.
- * @deprecated Deprecated in iOS 10.0.
+ * @deprecated Deprecated in iOS 10.0. Use UserNotifications Framework's UNNotificationAction
  */
 @Deprecated
 /*</javadoc>*/
@@ -55,6 +58,8 @@ import org.robovm.apple.corelocation.*;
     public UIMutableUserNotificationAction() {}
     protected UIMutableUserNotificationAction(Handle h, long handle) { super(h, handle); }
     protected UIMutableUserNotificationAction(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithCoder:")
+    public UIMutableUserNotificationAction(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "identifier")

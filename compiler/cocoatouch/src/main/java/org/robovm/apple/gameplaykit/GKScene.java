@@ -29,6 +29,8 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.spritekit.*;
+import org.robovm.apple.scenekit.*;
+import org.robovm.apple.uikit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -39,7 +41,7 @@ import org.robovm.apple.spritekit.*;
 /*<annotations>*/@Library("GameplayKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/GKScene/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class GKScenePtr extends Ptr<GKScene, GKScenePtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(GKScene.class); }/*</bind>*/
@@ -48,6 +50,8 @@ import org.robovm.apple.spritekit.*;
     public GKScene() {}
     protected GKScene(Handle h, long handle) { super(h, handle); }
     protected GKScene(SkipInit skipInit) { super(skipInit); }
+    public GKScene(String filename) { super((Handle) null, create(filename)); retain(getHandle()); }
+    public GKScene(String filename, GKSceneRootNodeType rootNode) { super((Handle) null, create(filename, rootNode)); retain(getHandle()); }
     @Method(selector = "initWithCoder:")
     public GKScene(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
@@ -59,7 +63,9 @@ import org.robovm.apple.spritekit.*;
     @Property(selector = "setRootNode:")
     public native void setRootNode(GKSceneRootNodeType v);
     @Property(selector = "graphs")
-    public native NSDictionary<?, ?> getGraphs();
+    public native NSDictionary<NSString, GKGraph> getGraphs();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -72,7 +78,9 @@ import org.robovm.apple.spritekit.*;
     @Method(selector = "removeGraph:")
     public native void removeGraph(String name);
     @Method(selector = "sceneWithFileNamed:")
-    public static native GKScene sceneWithFileNamed(String filename);
+    protected static native @Pointer long create(String filename);
+    @Method(selector = "sceneWithFileNamed:rootNode:")
+    protected static native @Pointer long create(String filename, GKSceneRootNodeType rootNode);
     @Method(selector = "encodeWithCoder:")
     public native void encode(NSCoder coder);
     @Method(selector = "initWithCoder:")

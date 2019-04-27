@@ -45,15 +45,13 @@ import org.robovm.apple.coregraphics.*;
     /*<bind>*/static { ObjCRuntime.bind(MDLVoxelArray.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    protected MDLVoxelArray() {}
+    public MDLVoxelArray() {}
     protected MDLVoxelArray(Handle h, long handle) { super(h, handle); }
     protected MDLVoxelArray(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithAsset:divisions:patchRadius:")
     public MDLVoxelArray(MDLAsset asset, int divisions, float patchRadius) { super((SkipInit) null); initObject(init(asset, divisions, patchRadius)); }
     @Method(selector = "initWithData:boundingBox:voxelExtent:")
     public MDLVoxelArray(NSData voxelData, @ByVal MDLAxisAlignedBoundingBox boundingBox, float voxelExtent) { super((SkipInit) null); initObject(init(voxelData, boundingBox, voxelExtent)); }
-    @Method(selector = "initWithAsset:divisions:interiorShells:exteriorShells:patchRadius:")
-    public MDLVoxelArray(MDLAsset asset, int divisions, int interiorShells, int exteriorShells, float patchRadius) { super((SkipInit) null); initObject(init(asset, divisions, interiorShells, exteriorShells, patchRadius)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "count")
@@ -79,8 +77,6 @@ import org.robovm.apple.coregraphics.*;
     protected native @Pointer long init(MDLAsset asset, int divisions, float patchRadius);
     @Method(selector = "initWithData:boundingBox:voxelExtent:")
     protected native @Pointer long init(NSData voxelData, @ByVal MDLAxisAlignedBoundingBox boundingBox, float voxelExtent);
-    @Method(selector = "initWithAsset:divisions:interiorShells:exteriorShells:patchRadius:")
-    protected native @Pointer long init(MDLAsset asset, int divisions, int interiorShells, int exteriorShells, float patchRadius);
     @Method(selector = "voxelExistsAtIndex:allowAnyX:allowAnyY:allowAnyZ:allowAnyShell:")
     public native boolean voxelExists(@ByVal VectorInt4 index, boolean allowAnyX, boolean allowAnyY, boolean allowAnyZ, boolean allowAnyShell);
     @Method(selector = "voxelsWithinExtent:")

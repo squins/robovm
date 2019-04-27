@@ -44,7 +44,7 @@ import org.robovm.rt.annotation.WeaklyLinked;
 /*<annotations>*/@Library("QuartzCore") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/CAAnimation/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements NSCoding, CAMediaTiming, CAAction/*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding, CAMediaTiming, CAAction/*</implements>*/ {
 
     /*<ptr>*/public static class CAAnimationPtr extends Ptr<CAAnimation, CAAnimationPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(CAAnimation.class); }/*</bind>*/
@@ -104,6 +104,8 @@ import org.robovm.rt.annotation.WeaklyLinked;
     public native boolean isRemovedOnCompletion();
     @Property(selector = "setRemovedOnCompletion:")
     public native void setRemovedOnCompletion(boolean v);
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     @Property(selector = "beginTime")
     public native double getBeginTime();
     @Property(selector = "setBeginTime:")

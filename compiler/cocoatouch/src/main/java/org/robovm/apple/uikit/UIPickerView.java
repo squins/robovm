@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -53,13 +56,11 @@ import org.robovm.apple.corelocation.*;
     public UIPickerView() {}
     protected UIPickerView(Handle h, long handle) { super(h, handle); }
     protected UIPickerView(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithFrame:")
+    public UIPickerView(@ByVal CGRect frame) { super(frame); }
+    @Method(selector = "initWithCoder:")
+    public UIPickerView(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
-    public UIPickerView(CGRect frame) {
-        super(frame);
-    }
-    public UIPickerView(NSCoder decoder) {
-        super(decoder);
-    }
     /*<properties>*/
     @Property(selector = "dataSource")
     public native UIPickerViewDataSource getDataSource();

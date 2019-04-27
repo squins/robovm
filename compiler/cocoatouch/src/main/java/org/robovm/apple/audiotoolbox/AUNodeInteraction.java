@@ -29,9 +29,10 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.corefoundation.*;
-import org.robovm.apple.audiounit.*;
 import org.robovm.apple.coreaudio.*;
 import org.robovm.apple.coremidi.*;
+import org.robovm.apple.avfoundation.*;
+import org.robovm.apple.uikit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -48,20 +49,17 @@ import org.robovm.apple.coremidi.*;
     /*<constants>*//*</constants>*/
     /*<constructors>*/
     public AUNodeInteraction() {}
-    public AUNodeInteraction(AUNodeInteractionType nodeInteractionType) {
-        this.setNodeInteractionType(nodeInteractionType);
-    }
-    /*</constructors>*/
     public AUNodeInteraction(AUNodeInteractionType nodeInteractionType, AUNodeInteractionInfo nodeInteraction) {
         this.setNodeInteractionType(nodeInteractionType);
         this.setNodeInteraction(nodeInteraction);
     }
+    /*</constructors>*/
     /*<properties>*//*</properties>*/
     /*<members>*/
     @StructMember(0) public native AUNodeInteractionType getNodeInteractionType();
     @StructMember(0) public native AUNodeInteraction setNodeInteractionType(AUNodeInteractionType nodeInteractionType);
-    /*</members>*/
     @StructMember(1) public native @ByVal AUNodeInteractionInfo getNodeInteraction();
     @StructMember(1) public native AUNodeInteraction setNodeInteraction(@ByVal AUNodeInteractionInfo nodeInteraction);
+    /*</members>*/
     /*<methods>*//*</methods>*/
 }

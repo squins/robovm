@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -79,14 +82,14 @@ import org.robovm.apple.corelocation.*;
     void willResignActive(UIApplication application);
     /**
      * @since Available in iOS 2.0 and later.
-     * @deprecated Deprecated in iOS 9.0.
+     * @deprecated Deprecated in iOS 9.0. Please use application:openURL:options:
      */
     @Deprecated
     @Method(selector = "application:handleOpenURL:")
     boolean handleOpenURL(UIApplication application, NSURL url);
     /**
      * @since Available in iOS 4.2 and later.
-     * @deprecated Deprecated in iOS 9.0.
+     * @deprecated Deprecated in iOS 9.0. Please use application:openURL:options:
      */
     @Deprecated
     @Method(selector = "application:openURL:sourceApplication:annotation:")
@@ -112,7 +115,9 @@ import org.robovm.apple.corelocation.*;
     void didChangStatusBarFrame(UIApplication application, @ByVal CGRect oldStatusBarFrame);
     /**
      * @since Available in iOS 8.0 and later.
+     * @deprecated Deprecated in iOS 10.0. Use UserNotifications Framework's -[UNUserNotificationCenter requestAuthorizationWithOptions:completionHandler:]
      */
+    @Deprecated
     @Method(selector = "application:didRegisterUserNotificationSettings:")
     void didRegisterUserNotificationSettings(UIApplication application, UIUserNotificationSettings notificationSettings);
     /**
@@ -127,42 +132,42 @@ import org.robovm.apple.corelocation.*;
     void didFailToRegisterForRemoteNotifications(UIApplication application, NSError error);
     /**
      * @since Available in iOS 3.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Use UserNotifications Framework's -[UNUserNotificationCenterDelegate willPresentNotification:withCompletionHandler:] or -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:] for user visible notifications and -[UIApplicationDelegate application:didReceiveRemoteNotification:fetchCompletionHandler:] for silent remote notifications
      */
     @Deprecated
     @Method(selector = "application:didReceiveRemoteNotification:")
     void didReceiveRemoteNotification(UIApplication application, UIRemoteNotification userInfo);
     /**
      * @since Available in iOS 4.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Use UserNotifications Framework's -[UNUserNotificationCenterDelegate willPresentNotification:withCompletionHandler:] or -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]
      */
     @Deprecated
     @Method(selector = "application:didReceiveLocalNotification:")
     void didReceiveLocalNotification(UIApplication application, UILocalNotification notification);
     /**
      * @since Available in iOS 8.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]
      */
     @Deprecated
     @Method(selector = "application:handleActionWithIdentifier:forLocalNotification:completionHandler:")
     void handleLocalNotificationAction(UIApplication application, String identifier, UILocalNotification notification, @Block Runnable completionHandler);
     /**
      * @since Available in iOS 9.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]
      */
     @Deprecated
     @Method(selector = "application:handleActionWithIdentifier:forRemoteNotification:withResponseInfo:completionHandler:")
     void handleRemoteNotificationAction(UIApplication application, String identifier, UIRemoteNotification userInfo, NSDictionary<?, ?> responseInfo, @Block Runnable completionHandler);
     /**
      * @since Available in iOS 8.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]
      */
     @Deprecated
     @Method(selector = "application:handleActionWithIdentifier:forRemoteNotification:completionHandler:")
     void handleRemoteNotificationAction(UIApplication application, String identifier, UIRemoteNotification userInfo, @Block Runnable completionHandler);
     /**
      * @since Available in iOS 9.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]
      */
     @Deprecated
     @Method(selector = "application:handleActionWithIdentifier:forLocalNotification:withResponseInfo:completionHandler:")
@@ -197,6 +202,11 @@ import org.robovm.apple.corelocation.*;
      */
     @Method(selector = "applicationShouldRequestHealthAuthorization:")
     void shouldRequestHealthAuthorization(UIApplication application);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "application:handleIntent:completionHandler:")
+    void handleIntent(UIApplication application, INIntent intent, @Block VoidBlock1<INIntentResponse> completionHandler);
     /**
      * @since Available in iOS 4.0 and later.
      */
@@ -272,6 +282,11 @@ import org.robovm.apple.corelocation.*;
      */
     @Method(selector = "application:didUpdateUserActivity:")
     void didUpdateUserActivity(UIApplication application, NSUserActivity userActivity);
+    /**
+     * @since Available in iOS 10.0 and later.
+     */
+    @Method(selector = "application:userDidAcceptCloudKitShareWithMetadata:")
+    void didAcceptCloudKitShare(UIApplication application, CKShareMetadata cloudKitShareMetadata);
     /*</methods>*/
     /*<adapter>*/
     /*</adapter>*/

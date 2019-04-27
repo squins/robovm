@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -59,6 +62,8 @@ import org.robovm.apple.corelocation.*;
     public UIGraphicsImageRenderer(@ByVal CGSize size, UIGraphicsImageRendererFormat format) { super((SkipInit) null); initObject(init(size, format)); }
     @Method(selector = "initWithBounds:format:")
     public UIGraphicsImageRenderer(@ByVal CGRect bounds, UIGraphicsImageRendererFormat format) { super((SkipInit) null); initObject(init(bounds, format)); }
+    @Method(selector = "initWithBounds:")
+    public UIGraphicsImageRenderer(@ByVal CGRect bounds) { super(bounds); }
     /*</constructors>*/
     /*<properties>*/
     

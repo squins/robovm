@@ -29,6 +29,8 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.spritekit.*;
+import org.robovm.apple.scenekit.*;
+import org.robovm.apple.uikit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -49,7 +51,7 @@ import org.robovm.apple.spritekit.*;
     protected GKSKNodeComponent(Handle h, long handle) { super(h, handle); }
     protected GKSKNodeComponent(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithNode:")
-    public GKSKNodeComponent(SKNode node) { super((SkipInit) null); initObject(initWithNode(node)); }
+    public GKSKNodeComponent(SKNode node) { super((SkipInit) null); initObject(init(node)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "node")
@@ -60,7 +62,7 @@ import org.robovm.apple.spritekit.*;
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "initWithNode:")
-    protected native @Pointer long initWithNode(SKNode node);
+    protected native @Pointer long init(SKNode node);
     @Method(selector = "agentWillUpdate:")
     public native void willUpdate(GKAgent agent);
     @Method(selector = "agentDidUpdate:")

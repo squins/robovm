@@ -45,14 +45,7 @@ public class JdwpRefTypeSourceFileHandler implements IJdwpRequestHandler{
             if (!classInfo.isClass())
                 return JdwpConsts.Error.INVALID_CLASS;
 
-            // TODO: pick information from debug information
-            // as there is no way to find out the proper file location for inner classes
-            // TODO: currently making it from class name
-            String sourceFile = ((ClassInfoImpl)classInfo).className();
-            int sepIdx = sourceFile.indexOf('$');
-            if (sepIdx > 0)
-                sourceFile = sourceFile.substring(0, sepIdx);
-            sourceFile += ".java";
+            String sourceFile = ((ClassInfoImpl)classInfo).sourceFile();
             output.writeStringWithLen(sourceFile);
         }
 

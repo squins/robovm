@@ -34,7 +34,9 @@ import org.robovm.apple.uikit.*;
 /*<javadoc>*/
 /**
  * @since Available in iOS 10.0 and later.
+ * @deprecated Deprecated in iOS 12.0.
  */
+@Deprecated
 /*</javadoc>*/
 /*<annotations>*/@Library("GameKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/GKGameSession/*</name>*/ 
@@ -78,11 +80,11 @@ import org.robovm.apple.uikit.*;
     @Method(selector = "setConnectionState:completionHandler:")
     public native void setConnectionState(GKConnectionState state, @Block VoidBlock1<NSError> completionHandler);
     @Method(selector = "playersWithConnectionState:")
-    public native NSArray<GKCloudPlayer> playersWithConnectionState(GKConnectionState state);
+    public native NSArray<GKCloudPlayer> getPlayers(GKConnectionState state);
     @Method(selector = "sendData:withTransportType:completionHandler:")
     public native void sendData(NSData data, GKTransportType transport, @Block VoidBlock1<NSError> completionHandler);
     @Method(selector = "sendMessageWithLocalizedFormatKey:arguments:data:toPlayers:badgePlayers:completionHandler:")
-    public native void sendMessage(String key, NSArray<?> arguments, NSData data, NSArray<GKCloudPlayer> players, boolean badgePlayers, @Block VoidBlock1<NSError> completionHandler);
+    public native void sendMessage(String key, NSArray<NSString> arguments, NSData data, NSArray<GKCloudPlayer> players, boolean badgePlayers, @Block VoidBlock1<NSError> completionHandler);
     @Method(selector = "clearBadgeForPlayers:completionHandler:")
     public native void clearBadge(NSArray<GKCloudPlayer> players, @Block VoidBlock1<NSError> completionHandler);
     @Method(selector = "createSessionInContainer:withTitle:maxConnectedPlayers:completionHandler:")
@@ -95,12 +97,16 @@ import org.robovm.apple.uikit.*;
     public static native void removeSession(String identifier, @Block VoidBlock1<NSError> completionHandler);
     /**
      * @since Available in iOS 10.0 and later.
+     * @deprecated Deprecated in iOS 12.0. Use GKLocalPlayer's registerListener: to register for GKLocalPlayerListener event notifications.
      */
+    @Deprecated
     @Method(selector = "addEventListener:")
     public static native void addEventListener(GKGameSessionEventListener listener);
     /**
      * @since Available in iOS 10.0 and later.
+     * @deprecated Deprecated in iOS 12.0. Use GKLocalPlayer's unregisterListener: or unregisterAllListeners to unregister from GKLocalPlayerListener event notifications.
      */
+    @Deprecated
     @Method(selector = "removeEventListener:")
     public static native void removeEventListener(GKGameSessionEventListener listener);
     /*</methods>*/

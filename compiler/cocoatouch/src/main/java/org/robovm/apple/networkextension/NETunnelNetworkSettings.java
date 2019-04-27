@@ -39,7 +39,7 @@ import org.robovm.apple.security.*;
 /*<annotations>*/@Library("NetworkExtension") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/NETunnelNetworkSettings/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class NETunnelNetworkSettingsPtr extends Ptr<NETunnelNetworkSettings, NETunnelNetworkSettingsPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(NETunnelNetworkSettings.class); }/*</bind>*/
@@ -52,7 +52,9 @@ import org.robovm.apple.security.*;
      * @since Available in iOS 9.0 and later.
      */
     @Method(selector = "initWithTunnelRemoteAddress:")
-    public NETunnelNetworkSettings(String address) { super((SkipInit) null); initObject(initWithTunnelRemoteAddress(address)); }
+    public NETunnelNetworkSettings(String address) { super((SkipInit) null); initObject(init(address)); }
+    @Method(selector = "initWithCoder:")
+    public NETunnelNetworkSettings(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     /**
@@ -80,6 +82,8 @@ import org.robovm.apple.security.*;
      */
     @Property(selector = "setProxySettings:")
     public native void setProxySettings(NEProxySettings v);
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -87,6 +91,10 @@ import org.robovm.apple.security.*;
      * @since Available in iOS 9.0 and later.
      */
     @Method(selector = "initWithTunnelRemoteAddress:")
-    protected native @Pointer long initWithTunnelRemoteAddress(String address);
+    protected native @Pointer long init(String address);
+    @Method(selector = "encodeWithCoder:")
+    public native void encode(NSCoder coder);
+    @Method(selector = "initWithCoder:")
+    protected native @Pointer long init(NSCoder decoder);
     /*</methods>*/
 }

@@ -34,12 +34,15 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
 /**
  * @since Available in iOS 3.2 and later.
- * @deprecated Deprecated in iOS 9.0.
+ * @deprecated Deprecated in iOS 9.0. UIPopoverController is deprecated. Popovers are now implemented as UIViewController presentations. Use a modal presentation style of UIModalPresentationPopover and UIPopoverPresentationController.
  */
 @Deprecated
 /*</javadoc>*/

@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -55,7 +54,7 @@ import org.robovm.apple.audiounit.*;
     /*<bind>*/static { ObjCRuntime.bind(AVMetadataMachineReadableCodeObject.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public AVMetadataMachineReadableCodeObject() {}
+    protected AVMetadataMachineReadableCodeObject() {}
     protected AVMetadataMachineReadableCodeObject(Handle h, long handle) { super(h, handle); }
     protected AVMetadataMachineReadableCodeObject(SkipInit skipInit) { super(skipInit); }
     /*</constructors>*/
@@ -64,6 +63,11 @@ import org.robovm.apple.audiounit.*;
     public native NSArray<NSDictionary<?, ?>> getCorners();
     @Property(selector = "stringValue")
     public native String getStringValue();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "descriptor")
+    public native CIBarcodeDescriptor getDescriptor();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -68,6 +67,11 @@ import org.robovm.apple.audiounit.*;
     public native NSObject getIdentifier();
     @Property(selector = "initializationData")
     public native NSData getInitializationData();
+    /**
+     * @since Available in iOS 12.2 and later.
+     */
+    @Property(selector = "options")
+    public native NSDictionary<NSString, ?> getOptions();
     @Property(selector = "canProvidePersistableContentKey")
     public native boolean canProvidePersistableContentKey();
     @Property(selector = "renewsExpiringResponseData")
@@ -76,12 +80,22 @@ import org.robovm.apple.audiounit.*;
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:")
-    public native void makeStreamingContentKeyRequestDataForApp(NSData appIdentifier, NSData contentIdentifier, NSDictionary<?, ?> options, @Block VoidBlock2<NSData, NSError> handler);
+    public native void makeStreamingContentKeyRequestDataForApp(NSData appIdentifier, NSData contentIdentifier, NSDictionary<NSString, ?> options, @Block VoidBlock2<NSData, NSError> handler);
     @Method(selector = "processContentKeyResponse:")
     public native void processContentKeyResponse(AVContentKeyResponse keyResponse);
     @Method(selector = "processContentKeyResponseError:")
     public native void processContentKeyResponseError(NSError error);
+    /**
+     * @since Available in iOS 10.3 and later.
+     * @deprecated Deprecated in iOS 11.2. Use respondByRequestingPersistableContentKeyRequestAndReturnError: instead.
+     */
+    @Deprecated
     @Method(selector = "respondByRequestingPersistableContentKeyRequest")
     public native void respondByRequestingPersistableContentKeyRequest();
+    /**
+     * @since Available in iOS 11.2 and later.
+     */
+    @Method(selector = "respondByRequestingPersistableContentKeyRequestAndReturnError:")
+    public native boolean respondByRequestingPersistableContentKeyRequestAndReturnError(NSError.NSErrorPtr outError);
     /*</methods>*/
 }

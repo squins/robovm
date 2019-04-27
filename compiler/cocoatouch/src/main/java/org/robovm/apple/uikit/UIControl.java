@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -54,13 +57,11 @@ import org.robovm.apple.corelocation.*;
     @Deprecated protected UIControl(long handle) { super(handle); }
     protected UIControl(Handle h, long handle) { super(h, handle); }
     protected UIControl(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithFrame:")
+    public UIControl(@ByVal CGRect frame) { super(frame); }
+    @Method(selector = "initWithCoder:")
+    public UIControl(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
-    public UIControl(CGRect frame) {
-        super(frame);
-    }    
-    public UIControl(NSCoder decoder) {
-        super(decoder);
-    }
     /*<properties>*/
     @Property(selector = "isEnabled")
     public native boolean isEnabled();
@@ -82,6 +83,8 @@ import org.robovm.apple.corelocation.*;
     public native UIControlContentHorizontalAlignment getContentHorizontalAlignment();
     @Property(selector = "setContentHorizontalAlignment:")
     public native void setContentHorizontalAlignment(UIControlContentHorizontalAlignment v);
+    @Property(selector = "effectiveContentHorizontalAlignment")
+    public native UIControlContentHorizontalAlignment getEffectiveContentHorizontalAlignment();
     @Property(selector = "state")
     public native UIControlState getState();
     @Property(selector = "isTracking")

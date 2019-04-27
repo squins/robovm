@@ -44,7 +44,7 @@ import org.robovm.apple.dispatch.*;
 /*<annotations>*/@Library("Foundation") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/NSMutableCharacterSet/*</name>*/ 
     extends /*<extends>*/NSCharacterSet/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class NSMutableCharacterSetPtr extends Ptr<NSMutableCharacterSet, NSMutableCharacterSetPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(NSMutableCharacterSet.class); }/*</bind>*/
@@ -56,6 +56,8 @@ import org.robovm.apple.dispatch.*;
     public NSMutableCharacterSet(@ByVal NSRange aRange) { super((Handle) null, create(aRange)); retain(getHandle()); }
     public NSMutableCharacterSet(String aString) { super((Handle) null, create(aString)); retain(getHandle()); }
     public NSMutableCharacterSet(NSData data) { super((Handle) null, create(data)); retain(getHandle()); }
+    @Method(selector = "initWithCoder:")
+    public NSMutableCharacterSet(NSCoder aDecoder) { super(aDecoder); }
     /*</constructors>*/
     public NSMutableCharacterSet(File file) {
         super(createWithFile(file));

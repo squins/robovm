@@ -33,7 +33,9 @@ import org.robovm.apple.messages.*;
 /*</imports>*/
 
 /*<javadoc>*/
-
+/**
+ * @since Available in iOS 3.0 and later.
+ */
 /*</javadoc>*/
 /*<annotations>*/@Library("MessageUI") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/MFMailComposeViewController/*</name>*/ 
@@ -47,6 +49,17 @@ import org.robovm.apple.messages.*;
     public MFMailComposeViewController() {}
     protected MFMailComposeViewController(Handle h, long handle) { super(h, handle); }
     protected MFMailComposeViewController(SkipInit skipInit) { super(skipInit); }
+    /**
+     * @since Available in iOS 5.0 and later.
+     */
+    @Method(selector = "initWithNavigationBarClass:toolbarClass:")
+    public MFMailComposeViewController(Class<? extends UINavigationBar> navigationBarClass, Class<? extends UIToolbar> toolbarClass) { super(navigationBarClass, toolbarClass); }
+    @Method(selector = "initWithRootViewController:")
+    public MFMailComposeViewController(UIViewController rootViewController) { super(rootViewController); }
+    @Method(selector = "initWithNibName:bundle:")
+    public MFMailComposeViewController(String nibNameOrNil, NSBundle nibBundleOrNil) { super(nibNameOrNil, nibBundleOrNil); }
+    @Method(selector = "initWithCoder:")
+    public MFMailComposeViewController(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "mailComposeDelegate")
@@ -56,39 +69,23 @@ import org.robovm.apple.messages.*;
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
-    /**
-     * @since Available in iOS 3.0 and later.
-     */
     @Method(selector = "setSubject:")
     public native void setSubject(String subject);
-    /**
-     * @since Available in iOS 3.0 and later.
-     */
     @Method(selector = "setToRecipients:")
     public native void setToRecipients(@org.robovm.rt.bro.annotation.Marshaler(NSArray.AsStringListMarshaler.class) List<String> toRecipients);
-    /**
-     * @since Available in iOS 3.0 and later.
-     */
     @Method(selector = "setCcRecipients:")
     public native void setCcRecipients(@org.robovm.rt.bro.annotation.Marshaler(NSArray.AsStringListMarshaler.class) List<String> ccRecipients);
-    /**
-     * @since Available in iOS 3.0 and later.
-     */
     @Method(selector = "setBccRecipients:")
     public native void setBccRecipients(@org.robovm.rt.bro.annotation.Marshaler(NSArray.AsStringListMarshaler.class) List<String> bccRecipients);
-    /**
-     * @since Available in iOS 3.0 and later.
-     */
     @Method(selector = "setMessageBody:isHTML:")
     public native void setMessageBody(String body, boolean isHTML);
-    /**
-     * @since Available in iOS 3.0 and later.
-     */
     @Method(selector = "addAttachmentData:mimeType:fileName:")
     public native void addAttachmentData(NSData attachment, String mimeType, String filename);
     /**
-     * @since Available in iOS 3.0 and later.
+     * @since Available in iOS 11.0 and later.
      */
+    @Method(selector = "setPreferredSendingEmailAddress:")
+    public native void setPreferredSendingEmailAddress(String emailAddress);
     @Method(selector = "canSendMail")
     public static native boolean canSendMail();
     /*</methods>*/

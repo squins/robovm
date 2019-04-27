@@ -48,6 +48,10 @@ import org.robovm.apple.uikit.*;
     public SKCloudServiceSetupViewController() {}
     protected SKCloudServiceSetupViewController(Handle h, long handle) { super(h, handle); }
     protected SKCloudServiceSetupViewController(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithNibName:bundle:")
+    public SKCloudServiceSetupViewController(String nibNameOrNil, NSBundle nibBundleOrNil) { super(nibNameOrNil, nibBundleOrNil); }
+    @Method(selector = "initWithCoder:")
+    public SKCloudServiceSetupViewController(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "delegate")
@@ -58,6 +62,6 @@ import org.robovm.apple.uikit.*;
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "loadWithOptions:completionHandler:")
-    public native void load(NSDictionary<?, ?> options, @Block VoidBlock2<Boolean, NSError> completionHandler);
+    public native void load(SKCloudServiceSetupOptions options, @Block VoidBlock2<Boolean, NSError> completionHandler);
     /*</methods>*/
 }

@@ -29,6 +29,8 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.spritekit.*;
+import org.robovm.apple.scenekit.*;
+import org.robovm.apple.uikit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -48,6 +50,8 @@ import org.robovm.apple.spritekit.*;
     public GKShuffledDistribution() {}
     protected GKShuffledDistribution(Handle h, long handle) { super(h, handle); }
     protected GKShuffledDistribution(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithRandomSource:lowestValue:highestValue:")
+    public GKShuffledDistribution(GKRandom source, @MachineSizedSInt long lowestInclusive, @MachineSizedSInt long highestInclusive) { super(source, lowestInclusive, highestInclusive); }
     /*</constructors>*/
     /*<properties>*/
     

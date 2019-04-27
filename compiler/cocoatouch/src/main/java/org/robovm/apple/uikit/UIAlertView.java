@@ -34,12 +34,15 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
 /**
  * @since Available in iOS 2.0 and later.
- * @deprecated Deprecated in iOS 9.0.
+ * @deprecated Deprecated in iOS 9.0. UIAlertView is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleAlert instead
  */
 @Deprecated
 /*</javadoc>*/
@@ -58,7 +61,7 @@ import org.robovm.apple.corelocation.*;
     @Method(selector = "initWithFrame:")
     public UIAlertView(@ByVal CGRect frame) { super((SkipInit) null); initObject(init(frame)); }
     @Method(selector = "initWithCoder:")
-    public UIAlertView(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UIAlertView(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     
     public UIAlertView(String title, String message, UIAlertViewDelegate delegate, String cancelButtonTitle, 
@@ -113,7 +116,7 @@ import org.robovm.apple.corelocation.*;
     @Method(selector = "initWithFrame:")
     protected native @Pointer long init(@ByVal CGRect frame);
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     @Method(selector = "addButtonWithTitle:")
     public native @MachineSizedSInt long addButton(String title);
     @Method(selector = "buttonTitleAtIndex:")

@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -63,13 +66,37 @@ import org.robovm.apple.corelocation.*;
     public native boolean isOpaque();
     @Property(selector = "setOpaque:")
     public native void setOpaque(boolean v);
+    /**
+     * @since Available in iOS 10.0 and later.
+     * @deprecated Deprecated in iOS 12.0. Use the preferredRange property instead
+     */
+    @Deprecated
     @Property(selector = "prefersExtendedRange")
     public native boolean prefersExtendedRange();
+    /**
+     * @since Available in iOS 10.0 and later.
+     * @deprecated Deprecated in iOS 12.0. Use the preferredRange property instead
+     */
+    @Deprecated
     @Property(selector = "setPrefersExtendedRange:")
     public native void setPrefersExtendedRange(boolean v);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "preferredRange")
+    public native UIGraphicsImageRendererFormatRange getPreferredRange();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "setPreferredRange:")
+    public native void setPreferredRange(UIGraphicsImageRendererFormatRange v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
-    
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "formatForTraitCollection:")
+    public static native UIGraphicsImageRendererFormat formatForTraitCollection(UITraitCollection traitCollection);
     /*</methods>*/
 }

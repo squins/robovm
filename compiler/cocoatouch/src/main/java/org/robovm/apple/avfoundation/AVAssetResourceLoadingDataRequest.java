@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -75,6 +74,6 @@ import org.robovm.apple.audiounit.*;
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "respondWithData:")
-    public native void respondWithData(NSData data);
+    public native void respond(NSData data);
     /*</methods>*/
 }

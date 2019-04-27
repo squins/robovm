@@ -55,20 +55,35 @@ import org.robovm.apple.avfoundation.*;
     protected SCNView(Handle h, long handle) { super(h, handle); }
     protected SCNView(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithFrame:options:")
-    public SCNView(@ByVal CGRect frame, NSDictionary<?, ?> options) { super((SkipInit) null); initObject(init(frame, options)); }
+    public SCNView(@ByVal CGRect frame, NSDictionary<NSString, ?> options) { super((SkipInit) null); initObject(init(frame, options)); }
+    @Method(selector = "initWithFrame:")
+    public SCNView(@ByVal CGRect frame) { super(frame); }
+    @Method(selector = "initWithCoder:")
+    public SCNView(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
-    public SCNView(CGRect frame) {
-    	super(frame);
-    }
     /*<properties>*/
     @Property(selector = "scene")
     public native SCNScene getScene();
     @Property(selector = "setScene:")
     public native void setScene(SCNScene v);
+    @Property(selector = "rendersContinuously")
+    public native boolean isRendersContinuously();
+    @Property(selector = "setRendersContinuously:")
+    public native void setRendersContinuously(boolean v);
     @Property(selector = "allowsCameraControl")
     public native boolean allowsCameraControl();
     @Property(selector = "setAllowsCameraControl:")
     public native void setAllowsCameraControl(boolean v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "cameraControlConfiguration")
+    public native SCNCameraControlConfiguration getCameraControlConfiguration();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "defaultCameraController")
+    public native SCNCameraController getDefaultCameraController();
     @Property(selector = "preferredFramesPerSecond")
     public native @MachineSizedSInt long getPreferredFramesPerSecond();
     @Property(selector = "setPreferredFramesPerSecond:")
@@ -211,7 +226,7 @@ import org.robovm.apple.avfoundation.*;
     public static native String SCNPreferLowPowerDeviceKey();
     
     @Method(selector = "initWithFrame:options:")
-    protected native @Pointer long init(@ByVal CGRect frame, NSDictionary<?, ?> options);
+    protected native @Pointer long init(@ByVal CGRect frame, NSDictionary<NSString, ?> options);
     @Method(selector = "snapshot")
     public native UIImage snapshot();
     @Method(selector = "play:")
@@ -233,13 +248,13 @@ import org.robovm.apple.avfoundation.*;
      * @since Available in iOS 9.0 and later.
      */
     @Method(selector = "nodesInsideFrustumWithPointOfView:")
-    public native NSArray<SCNNode> nodesInsideFrustumWithPointOfView(SCNNode pointOfView);
+    public native NSArray<SCNNode> getNodesInsideFrustum(SCNNode pointOfView);
     @Method(selector = "projectPoint:")
     public native @ByVal SCNVector3 projectPoint(@ByVal SCNVector3 point);
     @Method(selector = "unprojectPoint:")
     public native @ByVal SCNVector3 unprojectPoint(@ByVal SCNVector3 point);
     @Method(selector = "prepareObject:shouldAbortBlock:")
-    public native boolean prepareObject(NSObject object, @Block Block0<Boolean> block);
+    public native boolean prepareObject(NSObject object, @Block BooleanBlock block);
     @Method(selector = "prepareObjects:withCompletionHandler:")
     public native void prepareObjects(NSArray<?> objects, @Block VoidBooleanBlock completionHandler);
     /*</methods>*/

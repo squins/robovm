@@ -34,12 +34,15 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
 /**
  * @since Available in iOS 4.0 and later.
- * @deprecated Deprecated in iOS 10.0.
+ * @deprecated Deprecated in iOS 10.0. Use UserNotifications Framework's UNNotificationRequest
  */
 @Deprecated
 /*</javadoc>*/
@@ -56,7 +59,7 @@ import org.robovm.apple.corelocation.*;
     protected UILocalNotification(Handle h, long handle) { super(h, handle); }
     protected UILocalNotification(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithCoder:")
-    public UILocalNotification(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UILocalNotification(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "fireDate")
@@ -150,14 +153,14 @@ import org.robovm.apple.corelocation.*;
     /*<methods>*/
     /**
      * @since Available in iOS 4.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Use UserNotifications Framework's +[UNNotificationSound defaultSound]
      */
     @Deprecated
     @GlobalValue(symbol="UILocalNotificationDefaultSoundName", optional=true)
     public static native String getDefaultSoundName();
     
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     @Method(selector = "encodeWithCoder:")
     public native void encode(NSCoder coder);
     /*</methods>*/

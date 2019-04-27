@@ -36,6 +36,7 @@ import org.robovm.apple.avfoundation.*;
 import org.robovm.apple.glkit.*;
 import org.robovm.apple.scenekit.*;
 import org.robovm.apple.gameplaykit.*;
+import org.robovm.apple.metal.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -44,7 +45,7 @@ import org.robovm.apple.gameplaykit.*;
 /*<annotations>*/@Library("SpriteKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/SKTextureAtlas/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class SKTextureAtlasPtr extends Ptr<SKTextureAtlas, SKTextureAtlasPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(SKTextureAtlas.class); }/*</bind>*/
@@ -88,6 +89,8 @@ import org.robovm.apple.gameplaykit.*;
     /*<properties>*/
     @Property(selector = "textureNames")
     public native @org.robovm.rt.bro.annotation.Marshaler(NSArray.AsStringListMarshaler.class) List<String> getTextureNames();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -101,7 +104,7 @@ import org.robovm.apple.gameplaykit.*;
      * @since Available in iOS 8.0 and later.
      */
     @Method(selector = "atlasWithDictionary:")
-    protected static native @Pointer long create(NSDictionary<?, ?> properties);
+    protected static native @Pointer long create(NSDictionary<NSString, ?> properties);
     @Method(selector = "preloadTextureAtlases:withCompletionHandler:")
     public static native void preloadTextureAtlases(NSArray<SKTextureAtlas> textureAtlases, @Block Runnable completionHandler);
     /**

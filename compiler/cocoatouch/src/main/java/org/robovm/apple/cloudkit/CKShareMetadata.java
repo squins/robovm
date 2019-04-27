@@ -30,6 +30,7 @@ import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.corelocation.*;
 import org.robovm.apple.contacts.*;
+import org.robovm.apple.fileprovider.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -40,7 +41,7 @@ import org.robovm.apple.contacts.*;
 /*<annotations>*/@Library("CloudKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/CKShareMetadata/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class CKShareMetadataPtr extends Ptr<CKShareMetadata, CKShareMetadataPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(CKShareMetadata.class); }/*</bind>*/
@@ -49,6 +50,8 @@ import org.robovm.apple.contacts.*;
     public CKShareMetadata() {}
     protected CKShareMetadata(Handle h, long handle) { super(h, handle); }
     protected CKShareMetadata(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithCoder:")
+    public CKShareMetadata(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "containerIdentifier")
@@ -57,6 +60,16 @@ import org.robovm.apple.contacts.*;
     public native CKShare getShare();
     @Property(selector = "rootRecordID")
     public native CKRecordID getRootRecordID();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "participantRole")
+    public native CKShareParticipantRole getParticipantRole();
+    /**
+     * @since Available in iOS 10.0 and later.
+     * @deprecated Deprecated in iOS 12.0.
+     */
+    @Deprecated
     @Property(selector = "participantType")
     public native CKShareParticipantType getParticipantType();
     @Property(selector = "participantStatus")
@@ -67,9 +80,14 @@ import org.robovm.apple.contacts.*;
     public native CKUserIdentity getOwnerIdentity();
     @Property(selector = "rootRecord")
     public native CKRecord getRootRecord();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
-    
+    @Method(selector = "encodeWithCoder:")
+    public native void encode(NSCoder coder);
+    @Method(selector = "initWithCoder:")
+    protected native @Pointer long init(NSCoder decoder);
     /*</methods>*/
 }

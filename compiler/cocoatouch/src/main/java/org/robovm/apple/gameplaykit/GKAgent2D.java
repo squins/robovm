@@ -29,6 +29,8 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.spritekit.*;
+import org.robovm.apple.scenekit.*;
+import org.robovm.apple.uikit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -39,7 +41,7 @@ import org.robovm.apple.spritekit.*;
 /*<annotations>*/@Library("GameplayKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/GKAgent2D/*</name>*/ 
     extends /*<extends>*/GKAgent/*</extends>*/ 
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class GKAgent2DPtr extends Ptr<GKAgent2D, GKAgent2DPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(GKAgent2D.class); }/*</bind>*/

@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 import org.robovm.apple.corefoundation.CFDictionary;
 import org.robovm.apple.coremedia.CMTextMarkupAttributes;
@@ -46,7 +49,7 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UITextView/*</name>*/ 
     extends /*<extends>*/UIScrollView/*</extends>*/ 
-    /*<implements>*/implements UITextInput/*</implements>*/ {
+    /*<implements>*/implements UITextInput, UIContentSizeCategoryAdjusting, UITextDraggable, UITextDroppable, UITextPasteConfigurationSupporting/*</implements>*/ {
 
     public static class Notifications {
         public static NSObject observeDidBeginEditing(UITextView object, final VoidBlock1<UITextView> block) {
@@ -87,13 +90,11 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
     @Method(selector = "initWithFrame:textContainer:")
     public UITextView(@ByVal CGRect frame, NSTextContainer textContainer) { super((SkipInit) null); initObject(init(frame, textContainer)); }
     @Method(selector = "initWithCoder:")
-    public UITextView(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UITextView(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
+    @Method(selector = "initWithFrame:")
+    public UITextView(@ByVal CGRect frame) { super(frame); }
     /*</constructors>*/
-    
-    public UITextView(CGRect frame) {
-        super(frame);
-    }
-    
+
     /**
      * @since Available in iOS 7.0 and later.
      */
@@ -392,6 +393,36 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
      */
     @Property(selector = "setSpellCheckingType:")
     public native void setSpellCheckingType(UITextSpellCheckingType v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "smartQuotesType")
+    public native UITextSmartQuotesType getSmartQuotesType();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setSmartQuotesType:")
+    public native void setSmartQuotesType(UITextSmartQuotesType v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "smartDashesType")
+    public native UITextSmartDashesType getSmartDashesType();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setSmartDashesType:")
+    public native void setSmartDashesType(UITextSmartDashesType v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "smartInsertDeleteType")
+    public native UITextSmartInsertDeleteType getSmartInsertDeleteType();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setSmartInsertDeleteType:")
+    public native void setSmartInsertDeleteType(UITextSmartInsertDeleteType v);
     @Property(selector = "keyboardType")
     public native UIKeyboardType getKeyboardType();
     @Property(selector = "setKeyboardType:")
@@ -422,6 +453,48 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
      */
     @Property(selector = "setTextContentType:")
     public native void setTextContentType(UITextContentType v);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "passwordRules")
+    public native UITextInputPasswordRules getPasswordRules();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "setPasswordRules:")
+    public native void setPasswordRules(UITextInputPasswordRules v);
+    @Property(selector = "adjustsFontForContentSizeCategory")
+    public native boolean adjustsFontForContentSizeCategory();
+    @Property(selector = "setAdjustsFontForContentSizeCategory:")
+    public native void setAdjustsFontForContentSizeCategory(boolean v);
+    @Property(selector = "textDragDelegate")
+    public native UITextDragDelegate getTextDragDelegate();
+    @Property(selector = "setTextDragDelegate:", strongRef = true)
+    public native void setTextDragDelegate(UITextDragDelegate v);
+    @Property(selector = "textDragInteraction")
+    public native UIDragInteraction getTextDragInteraction();
+    @Property(selector = "isTextDragActive")
+    public native boolean isTextDragActive();
+    @Property(selector = "textDragOptions")
+    public native UITextDragOptions getTextDragOptions();
+    @Property(selector = "setTextDragOptions:")
+    public native void setTextDragOptions(UITextDragOptions v);
+    @Property(selector = "textDropDelegate")
+    public native UITextDropDelegate getTextDropDelegate();
+    @Property(selector = "setTextDropDelegate:", strongRef = true)
+    public native void setTextDropDelegate(UITextDropDelegate v);
+    @Property(selector = "textDropInteraction")
+    public native UIDropInteraction getTextDropInteraction();
+    @Property(selector = "isTextDropActive")
+    public native boolean isTextDropActive();
+    @Property(selector = "pasteDelegate")
+    public native UITextPasteDelegate getPasteDelegate();
+    @Property(selector = "setPasteDelegate:", strongRef = true)
+    public native void setPasteDelegate(UITextPasteDelegate v);
+    @Property(selector = "pasteConfiguration")
+    public native UIPasteConfiguration getPasteConfiguration();
+    @Property(selector = "setPasteConfiguration:")
+    public native void setPasteConfiguration(UIPasteConfiguration v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -440,7 +513,7 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
     @Method(selector = "initWithFrame:textContainer:")
     protected native @Pointer long init(@ByVal CGRect frame, NSTextContainer textContainer);
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     @Method(selector = "textInRange:")
     public native String getText(UITextRange range);
     @Method(selector = "replaceRange:withText:")
@@ -522,5 +595,9 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
     public native void insertText(String text);
     @Method(selector = "deleteBackward")
     public native void deleteBackward();
+    @Method(selector = "pasteItemProviders:")
+    public native void pasteItemProviders(NSArray<NSItemProvider> itemProviders);
+    @Method(selector = "canPasteItemProviders:")
+    public native boolean canPasteItemProviders(NSArray<NSItemProvider> itemProviders);
     /*</methods>*/
 }

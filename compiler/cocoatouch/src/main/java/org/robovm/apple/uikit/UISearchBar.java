@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 import org.robovm.apple.corefoundation.CFDictionary;
 import org.robovm.apple.coremedia.CMTextMarkupAttributes;
@@ -58,7 +61,7 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
     @Method(selector = "initWithFrame:")
     public UISearchBar(@ByVal CGRect frame) { super((SkipInit) null); initObject(init(frame)); }
     @Method(selector = "initWithCoder:")
-    public UISearchBar(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UISearchBar(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "barStyle")
@@ -242,6 +245,36 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
      */
     @Property(selector = "setSpellCheckingType:")
     public native void setSpellCheckingType(UITextSpellCheckingType v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "smartQuotesType")
+    public native UITextSmartQuotesType getSmartQuotesType();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setSmartQuotesType:")
+    public native void setSmartQuotesType(UITextSmartQuotesType v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "smartDashesType")
+    public native UITextSmartDashesType getSmartDashesType();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setSmartDashesType:")
+    public native void setSmartDashesType(UITextSmartDashesType v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "smartInsertDeleteType")
+    public native UITextSmartInsertDeleteType getSmartInsertDeleteType();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setSmartInsertDeleteType:")
+    public native void setSmartInsertDeleteType(UITextSmartInsertDeleteType v);
     @Property(selector = "keyboardType")
     public native UIKeyboardType getKeyboardType();
     @Property(selector = "setKeyboardType:")
@@ -272,6 +305,16 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
      */
     @Property(selector = "setTextContentType:")
     public native void setTextContentType(UITextContentType v);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "passwordRules")
+    public native UITextInputPasswordRules getPasswordRules();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "setPasswordRules:")
+    public native void setPasswordRules(UITextInputPasswordRules v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /**
@@ -336,7 +379,7 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
     @Method(selector = "initWithFrame:")
     protected native @Pointer long init(@ByVal CGRect frame);
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     /**
      * @since Available in iOS 3.0 and later.
      */

@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -53,9 +56,15 @@ import org.robovm.apple.corelocation.*;
     /*<properties>*/
     @Property(selector = "canBecomeFocused")
     boolean canBecomeFocused();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "frame")
+    @ByVal CGRect getFrame();
     /*</properties>*/
     /*<methods>*/
-    
+    @Method(selector = "didHintFocusMovement:")
+    void didHintFocusMovement(UIFocusMovementHint hint);
     /*</methods>*/
     /*<adapter>*/
     /*</adapter>*/

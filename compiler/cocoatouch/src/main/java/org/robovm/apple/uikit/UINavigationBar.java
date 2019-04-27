@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 import org.robovm.apple.corefoundation.CFDictionary;
 import org.robovm.apple.coremedia.CMTextMarkupAttributes;
@@ -55,13 +58,11 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
     public UINavigationBar() {}
     protected UINavigationBar(Handle h, long handle) { super(h, handle); }
     protected UINavigationBar(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithFrame:")
+    public UINavigationBar(@ByVal CGRect frame) { super(frame); }
+    @Method(selector = "initWithCoder:")
+    public UINavigationBar(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
-    public UINavigationBar(CGRect frame) {
-        super(frame);
-    }
-    public UINavigationBar(NSCoder decoder) {
-        super(decoder);
-    }
     /**
      * @since Available in iOS 5.0 and later.
      */
@@ -147,6 +148,16 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
     public native NSArray<UINavigationItem> getItems();
     @Property(selector = "setItems:")
     public native void setItems(NSArray<UINavigationItem> v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "prefersLargeTitles")
+    public native boolean prefersLargeTitles();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setPrefersLargeTitles:")
+    public native void setPrefersLargeTitles(boolean v);
     @Property(selector = "tintColor")
     public native UIColor getTintColor();
     @Property(selector = "setTintColor:")
@@ -181,6 +192,16 @@ import org.robovm.apple.coremedia.CMTextMarkupAttributes;
      */
     @Property(selector = "setTitleTextAttributes:")
     public native void setTitleTextAttributesDictionary(NSDictionary<NSString, ?> v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "largeTitleTextAttributes")
+    public native NSDictionary<NSString, ?> getLargeTitleTextAttributes();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setLargeTitleTextAttributes:")
+    public native void setLargeTitleTextAttributes(NSDictionary<NSString, ?> v);
     /**
      * @since Available in iOS 7.0 and later.
      */

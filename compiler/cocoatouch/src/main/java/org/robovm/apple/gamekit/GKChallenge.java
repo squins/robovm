@@ -39,7 +39,7 @@ import org.robovm.apple.uikit.*;
 /*<annotations>*/@Library("GameKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/GKChallenge/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSCoding, NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class GKChallengePtr extends Ptr<GKChallenge, GKChallengePtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(GKChallenge.class); }/*</bind>*/
@@ -54,14 +54,14 @@ import org.robovm.apple.uikit.*;
     /*<properties>*/
     /**
      * @since Available in iOS 6.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. Use issuingPlayer instead
      */
     @Deprecated
     @Property(selector = "issuingPlayerID")
     public native String getIssuingPlayerID();
     /**
      * @since Available in iOS 6.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. Use receivingPlayer instead
      */
     @Deprecated
     @Property(selector = "receivingPlayerID")
@@ -84,6 +84,8 @@ import org.robovm.apple.uikit.*;
     public native NSDate getCompletionDate();
     @Property(selector = "message")
     public native String getMessage();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

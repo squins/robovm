@@ -39,7 +39,7 @@ import org.robovm.apple.uikit.*;
 /*<annotations>*/@Library("GameKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/GKAchievementDescription/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSCoding, NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class GKAchievementDescriptionPtr extends Ptr<GKAchievementDescription, GKAchievementDescriptionPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(GKAchievementDescription.class); }/*</bind>*/
@@ -76,11 +76,13 @@ import org.robovm.apple.uikit.*;
     public native boolean isReplayable();
     /**
      * @since Available in iOS 4.1 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Use loadImageWithCompletionHandler: instead
      */
     @Deprecated
     @Property(selector = "image")
     public native UIImage getImage();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

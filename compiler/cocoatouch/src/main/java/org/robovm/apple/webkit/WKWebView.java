@@ -54,10 +54,9 @@ import org.robovm.apple.security.*;
     public WKWebView(@ByVal CGRect frame, WKWebViewConfiguration configuration) { super((SkipInit) null); initObject(init(frame, configuration)); }
     @Method(selector = "initWithCoder:")
     public WKWebView(NSCoder coder) { super((SkipInit) null); initObject(init(coder)); }
+    @Method(selector = "initWithFrame:")
+    public WKWebView(@ByVal CGRect frame) { super(frame); }
     /*</constructors>*/
-    public WKWebView(CGRect frame) {
-        super(frame);
-    }
     /*<properties>*/
     @Property(selector = "configuration")
     public native WKWebViewConfiguration getConfiguration();
@@ -158,5 +157,15 @@ import org.robovm.apple.security.*;
     public native void stopLoading();
     @Method(selector = "evaluateJavaScript:completionHandler:")
     public native void evaluateJavaScript(String javaScriptString, @Block VoidBlock2<NSObject, NSError> completionHandler);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "takeSnapshotWithConfiguration:completionHandler:")
+    public native void takeSnapshot(WKSnapshotConfiguration snapshotConfiguration, @Block VoidBlock2<UIImage, NSError> completionHandler);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "handlesURLScheme:")
+    public static native boolean handlesURLScheme(String urlScheme);
     /*</methods>*/
 }

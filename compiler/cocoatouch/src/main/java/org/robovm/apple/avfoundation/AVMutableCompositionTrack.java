@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -55,7 +54,7 @@ import org.robovm.apple.audiounit.*;
     /*<bind>*/static { ObjCRuntime.bind(AVMutableCompositionTrack.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public AVMutableCompositionTrack() {}
+    protected AVMutableCompositionTrack() {}
     protected AVMutableCompositionTrack(Handle h, long handle) { super(h, handle); }
     protected AVMutableCompositionTrack(SkipInit skipInit) { super(skipInit); }
     /*</constructors>*/
@@ -123,5 +122,15 @@ import org.robovm.apple.audiounit.*;
     }
     @Method(selector = "validateTrackSegments:error:")
     private native boolean validateTrackSegments(NSArray<AVCompositionTrackSegment> trackSegments, NSError.NSErrorPtr outError);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Method(selector = "addTrackAssociationToTrack:type:")
+    public native void addTrackAssociation(AVCompositionTrack compositionTrack, String trackAssociationType);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Method(selector = "removeTrackAssociationToTrack:type:")
+    public native void removeTrackAssociation(AVCompositionTrack compositionTrack, String trackAssociationType);
     /*</methods>*/
 }

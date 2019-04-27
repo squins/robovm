@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -44,7 +47,7 @@ import org.robovm.apple.corelocation.*;
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UITabBar/*</name>*/ 
     extends /*<extends>*/UIView/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements UISpringLoadedInteractionSupporting/*</implements>*/ {
 
     /*<ptr>*/public static class UITabBarPtr extends Ptr<UITabBar, UITabBarPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(UITabBar.class); }/*</bind>*/
@@ -53,13 +56,11 @@ import org.robovm.apple.corelocation.*;
     public UITabBar() {}
     protected UITabBar(Handle h, long handle) { super(h, handle); }
     protected UITabBar(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithFrame:")
+    public UITabBar(@ByVal CGRect frame) { super(frame); }
+    @Method(selector = "initWithCoder:")
+    public UITabBar(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
-    public UITabBar(CGRect frame) {
-        super(frame);
-    }
-    public UITabBar(NSCoder decoder) {
-        super(decoder);
-    }
     /*<properties>*/
     @Property(selector = "delegate")
     public native UITabBarDelegate getDelegate();
@@ -107,14 +108,14 @@ import org.robovm.apple.corelocation.*;
     public native void setUnselectedItemTintColor(UIColor v);
     /**
      * @since Available in iOS 5.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. Use tintColor
      */
     @Deprecated
     @Property(selector = "selectedImageTintColor")
     public native UIColor getSelectedImageTintColor();
     /**
      * @since Available in iOS 5.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. Use tintColor
      */
     @Deprecated
     @Property(selector = "setSelectedImageTintColor:")
@@ -199,6 +200,16 @@ import org.robovm.apple.corelocation.*;
      */
     @Property(selector = "setTranslucent:")
     public native void setTranslucent(boolean v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "isSpringLoaded")
+    public native boolean isSpringLoaded();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setSpringLoaded:")
+    public native void setSpringLoaded(boolean v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

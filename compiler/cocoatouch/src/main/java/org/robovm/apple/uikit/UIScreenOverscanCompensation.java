@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -50,7 +53,7 @@ public enum /*<name>*/UIScreenOverscanCompensation/*</name>*/ implements ValuedE
     None(2L),
     /**
      * @since Available in iOS 5.0 and later.
-     * @deprecated Deprecated in iOS 9.0.
+     * @deprecated Deprecated in iOS 9.0. Use UIScreenOverscanCompensationNone
      */
     @Deprecated
     InsetApplicationFrame(2L);

@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -44,7 +47,7 @@ import org.robovm.apple.corelocation.*;
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UIScrollView/*</name>*/ 
     extends /*<extends>*/UIView/*</extends>*/ 
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSCoding, UIFocusItemScrollableContainer/*</implements>*/ {
 
     /*<ptr>*/public static class UIScrollViewPtr extends Ptr<UIScrollView, UIScrollViewPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(UIScrollView.class); }/*</bind>*/
@@ -53,13 +56,11 @@ import org.robovm.apple.corelocation.*;
     public UIScrollView() {}
     protected UIScrollView(Handle h, long handle) { super(h, handle); }
     protected UIScrollView(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithFrame:")
+    public UIScrollView(@ByVal CGRect frame) { super(frame); }
+    @Method(selector = "initWithCoder:")
+    public UIScrollView(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
-    public UIScrollView(CGRect frame) {
-        super(frame);
-    }
-    public UIScrollView(NSCoder decoder) {
-        super(decoder);
-    }
     /*<properties>*/
     @Property(selector = "contentOffset")
     public native @ByVal CGPoint getContentOffset();
@@ -73,6 +74,31 @@ import org.robovm.apple.corelocation.*;
     public native @ByVal UIEdgeInsets getContentInset();
     @Property(selector = "setContentInset:")
     public native void setContentInset(@ByVal UIEdgeInsets v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "adjustedContentInset")
+    public native @ByVal UIEdgeInsets getAdjustedContentInset();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "contentInsetAdjustmentBehavior")
+    public native UIScrollViewContentInsetAdjustmentBehavior getContentInsetAdjustmentBehavior();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setContentInsetAdjustmentBehavior:")
+    public native void setContentInsetAdjustmentBehavior(UIScrollViewContentInsetAdjustmentBehavior v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "contentLayoutGuide")
+    public native UILayoutGuide getContentLayoutGuide();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "frameLayoutGuide")
+    public native UILayoutGuide getFrameLayoutGuide();
     @Property(selector = "delegate")
     public native UIScrollViewDelegate getDelegate();
     @Property(selector = "setDelegate:", strongRef = true)
@@ -127,6 +153,10 @@ import org.robovm.apple.corelocation.*;
      */
     @Property(selector = "setDecelerationRate:")
     public native void setDecelerationRate(@MachineSizedFloat double v);
+    @Property(selector = "indexDisplayMode")
+    public native UIScrollViewIndexDisplayMode getIndexDisplayMode();
+    @Property(selector = "setIndexDisplayMode:")
+    public native void setIndexDisplayMode(UIScrollViewIndexDisplayMode v);
     @Property(selector = "isTracking")
     public native boolean isTracking();
     @Property(selector = "isDragging")
@@ -181,6 +211,8 @@ import org.robovm.apple.corelocation.*;
      */
     @Property(selector = "pinchGestureRecognizer")
     public native UIPinchGestureRecognizer getPinchGestureRecognizer();
+    @Property(selector = "directionalPressGestureRecognizer")
+    public native UIGestureRecognizer getDirectionalPressGestureRecognizer();
     /**
      * @since Available in iOS 7.0 and later.
      */
@@ -201,6 +233,8 @@ import org.robovm.apple.corelocation.*;
      */
     @Property(selector = "setRefreshControl:")
     public native void setRefreshControl(UIRefreshControl v);
+    @Property(selector = "visibleSize")
+    public native @ByVal CGSize getVisibleSize();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -215,6 +249,11 @@ import org.robovm.apple.corelocation.*;
     @GlobalValue(symbol="UIScrollViewDecelerationRateFast", optional=true)
     public static native @MachineSizedFloat double getFastDecelerationRate();
     
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "adjustedContentInsetDidChange")
+    public native void adjustedContentInsetDidChange();
     @Method(selector = "setContentOffset:animated:")
     public native void setContentOffset(@ByVal CGPoint contentOffset, boolean animated);
     @Method(selector = "scrollRectToVisible:animated:")

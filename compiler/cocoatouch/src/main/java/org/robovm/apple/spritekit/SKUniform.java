@@ -36,6 +36,7 @@ import org.robovm.apple.avfoundation.*;
 import org.robovm.apple.glkit.*;
 import org.robovm.apple.scenekit.*;
 import org.robovm.apple.gameplaykit.*;
+import org.robovm.apple.metal.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -46,7 +47,7 @@ import org.robovm.apple.gameplaykit.*;
 /*<annotations>*/@Library("SpriteKit") @NativeClass @WeaklyLinked/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/SKUniform/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class SKUniformPtr extends Ptr<SKUniform, SKUniformPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(SKUniform.class); }/*</bind>*/
@@ -70,7 +71,7 @@ import org.robovm.apple.gameplaykit.*;
      * @since Available in iOS 10.0 and later.
      */
     @Method(selector = "initWithName:vectorFloat3:")
-    public SKUniform(String name, @ByVal SKVector3 value) { super((SkipInit) null); initObject(init(name, value)); }
+    public SKUniform(String name, @ByVal VectorFloat3 value) { super((SkipInit) null); initObject(init(name, value)); }
     /**
      * @since Available in iOS 10.0 and later.
      */
@@ -163,12 +164,12 @@ import org.robovm.apple.gameplaykit.*;
      * @since Available in iOS 10.0 and later.
      */
     @Property(selector = "vectorFloat3Value")
-    public native @ByVal SKVector3 getVectorFloat3Value();
+    public native @ByVal VectorFloat3 getVectorFloat3Value();
     /**
      * @since Available in iOS 10.0 and later.
      */
     @Property(selector = "setVectorFloat3Value:")
-    public native void setVectorFloat3Value(@ByVal SKVector3 v);
+    public native void setVectorFloat3Value(@ByVal VectorFloat3 v);
     /**
      * @since Available in iOS 10.0 and later.
      */
@@ -293,6 +294,8 @@ import org.robovm.apple.gameplaykit.*;
     @Deprecated
     @Property(selector = "setFloatMatrix4Value:")
     public native void setFloatMatrix4Value(@ByVal GLKMatrix4 v);
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -311,7 +314,7 @@ import org.robovm.apple.gameplaykit.*;
      * @since Available in iOS 10.0 and later.
      */
     @Method(selector = "initWithName:vectorFloat3:")
-    protected native @Pointer long init(String name, @ByVal SKVector3 value);
+    protected native @Pointer long init(String name, @ByVal VectorFloat3 value);
     /**
      * @since Available in iOS 10.0 and later.
      */

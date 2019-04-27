@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -148,7 +151,7 @@ import org.robovm.apple.corelocation.*;
     }
     /**
      * @since Available in iOS 4.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]
      */
     @Deprecated
     public UILocalNotification getLocalNotification() {
@@ -160,7 +163,7 @@ import org.robovm.apple.corelocation.*;
     }
     /**
      * @since Available in iOS 4.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]
      */
     @Deprecated
     public UIApplicationLaunchOptions setLocalNotification(UILocalNotification localNotification) {
@@ -319,7 +322,7 @@ import org.robovm.apple.corelocation.*;
         public static native NSString RemoteNotification();
         /**
          * @since Available in iOS 4.0 and later.
-         * @deprecated Deprecated in iOS 10.0.
+         * @deprecated Deprecated in iOS 10.0. Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]
          */
         @Deprecated
         @GlobalValue(symbol="UIApplicationLaunchOptionsLocalNotificationKey", optional=true)

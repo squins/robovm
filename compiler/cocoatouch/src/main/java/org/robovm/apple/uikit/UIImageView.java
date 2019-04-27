@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -44,7 +47,7 @@ import org.robovm.apple.corelocation.*;
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UIImageView/*</name>*/ 
     extends /*<extends>*/UIView/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements UIAccessibilityContentSizeCategoryImageAdjusting/*</implements>*/ {
 
     /*<ptr>*/public static class UIImageViewPtr extends Ptr<UIImageView, UIImageViewPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(UIImageView.class); }/*</bind>*/
@@ -60,13 +63,11 @@ import org.robovm.apple.corelocation.*;
      */
     @Method(selector = "initWithImage:highlightedImage:")
     public UIImageView(UIImage image, UIImage highlightedImage) { super((SkipInit) null); initObject(init(image, highlightedImage)); }
+    @Method(selector = "initWithFrame:")
+    public UIImageView(@ByVal CGRect frame) { super(frame); }
+    @Method(selector = "initWithCoder:")
+    public UIImageView(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
-    public UIImageView(CGRect frame) {
-        super(frame);
-    }
-    public UIImageView(NSCoder decoder) {
-        super(decoder);
-    }
     /*<properties>*/
     @Property(selector = "image")
     public native UIImage getImage();
@@ -130,6 +131,10 @@ import org.robovm.apple.corelocation.*;
     public native void setTintColor(UIColor v);
     @Property(selector = "isAnimating")
     public native boolean isAnimating();
+    @Property(selector = "adjustsImageSizeForAccessibilityContentSizeCategory")
+    public native boolean adjustsImageSizeForAccessibilityContentSizeCategory();
+    @Property(selector = "setAdjustsImageSizeForAccessibilityContentSizeCategory:")
+    public native void setAdjustsImageSizeForAccessibilityContentSizeCategory(boolean v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

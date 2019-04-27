@@ -36,6 +36,7 @@ import org.robovm.apple.avfoundation.*;
 import org.robovm.apple.glkit.*;
 import org.robovm.apple.scenekit.*;
 import org.robovm.apple.gameplaykit.*;
+import org.robovm.apple.metal.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -46,7 +47,7 @@ import org.robovm.apple.gameplaykit.*;
 /*<annotations>*/@Library("SpriteKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/SKTileSet/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements NSCoding/*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class SKTileSetPtr extends Ptr<SKTileSet, SKTileSetPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(SKTileSet.class); }/*</bind>*/
@@ -83,6 +84,8 @@ import org.robovm.apple.gameplaykit.*;
     public native @ByVal CGSize getDefaultTileSize();
     @Property(selector = "setDefaultTileSize:")
     public native void setDefaultTileSize(@ByVal CGSize v);
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -90,8 +93,6 @@ import org.robovm.apple.gameplaykit.*;
     protected native @Pointer long init(NSArray<SKTileGroup> tileGroups);
     @Method(selector = "initWithTileGroups:tileSetType:")
     protected native @Pointer long init(NSArray<SKTileGroup> tileGroups, SKTileSetType tileSetType);
-    @Method(selector = "tileSetWithTileGroups:")
-    public static native SKTileSet tileSetWithTileGroups(NSArray<SKTileGroup> tileGroups);
     @Method(selector = "tileSetNamed:")
     public static native SKTileSet tileSetNamed(String name);
     @Method(selector = "tileSetFromURL:")

@@ -30,6 +30,7 @@ import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.corelocation.*;
 import org.robovm.apple.contacts.*;
+import org.robovm.apple.fileprovider.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -50,7 +51,7 @@ import org.robovm.apple.contacts.*;
     protected CKDiscoverUserIdentitiesOperation(Handle h, long handle) { super(h, handle); }
     protected CKDiscoverUserIdentitiesOperation(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithUserIdentityLookupInfos:")
-    public CKDiscoverUserIdentitiesOperation(NSArray<CKUserIdentityLookupInfo> userIdentityLookupInfos) { super((SkipInit) null); initObject(initWithUserIdentityLookupInfos(userIdentityLookupInfos)); }
+    public CKDiscoverUserIdentitiesOperation(NSArray<CKUserIdentityLookupInfo> userIdentityLookupInfos) { super((SkipInit) null); initObject(init(userIdentityLookupInfos)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "userIdentityLookupInfos")
@@ -69,6 +70,6 @@ import org.robovm.apple.contacts.*;
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "initWithUserIdentityLookupInfos:")
-    protected native @Pointer long initWithUserIdentityLookupInfos(NSArray<CKUserIdentityLookupInfo> userIdentityLookupInfos);
+    protected native @Pointer long init(NSArray<CKUserIdentityLookupInfo> userIdentityLookupInfos);
     /*</methods>*/
 }

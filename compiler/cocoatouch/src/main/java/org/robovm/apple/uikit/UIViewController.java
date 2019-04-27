@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 import org.robovm.apple.iad.ADInterstitialPresentationPolicy;
 import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
@@ -46,7 +49,7 @@ import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UIViewController/*</name>*/ 
     extends /*<extends>*/UIResponder/*</extends>*/ 
-    /*<implements>*/implements NSCoding, UIAppearanceContainer, UITraitEnvironment, UIFocusEnvironment, UIStateRestoring, NSExtensionRequestHandling/*</implements>*/ {
+    /*<implements>*/implements NSCoding, UIAppearanceContainer, UITraitEnvironment, UIContentContainer, UIFocusEnvironment, UIStateRestoring, NSExtensionRequestHandling/*</implements>*/ {
 
     public static class Notifications {
         /**
@@ -73,7 +76,7 @@ import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
     @Method(selector = "initWithNibName:bundle:")
     public UIViewController(String nibNameOrNil, NSBundle nibBundleOrNil) { super((SkipInit) null); initObject(init(nibNameOrNil, nibBundleOrNil)); }
     @Method(selector = "initWithCoder:")
-    public UIViewController(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UIViewController(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "view")
@@ -201,11 +204,6 @@ import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
     @Property(selector = "disablesAutomaticKeyboardDismissal")
     public native boolean disablesAutomaticKeyboardDismissal();
     /**
-     * @since Available in iOS 4.3 and later.
-     */
-    @Property(selector = "setDisablesAutomaticKeyboardDismissal:")
-    public native void setDisablesAutomaticKeyboardDismissal(boolean v);
-    /**
      * @since Available in iOS 3.0 and later.
      * @deprecated Deprecated in iOS 7.0.
      */
@@ -241,12 +239,16 @@ import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
     public native void setExtendedLayoutIncludesOpaqueBars(boolean v);
     /**
      * @since Available in iOS 7.0 and later.
+     * @deprecated Deprecated in iOS 11.0. Use UIScrollView's contentInsetAdjustmentBehavior instead
      */
+    @Deprecated
     @Property(selector = "automaticallyAdjustsScrollViewInsets")
     public native boolean automaticallyAdjustsScrollViewInsets();
     /**
      * @since Available in iOS 7.0 and later.
+     * @deprecated Deprecated in iOS 11.0. Use UIScrollView's contentInsetAdjustmentBehavior instead
      */
+    @Deprecated
     @Property(selector = "setAutomaticallyAdjustsScrollViewInsets:")
     public native void setAutomaticallyAdjustsScrollViewInsets(boolean v);
     /**
@@ -361,14 +363,43 @@ import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
     public native void setTransitioningDelegate(UIViewControllerTransitioningDelegate v);
     /**
      * @since Available in iOS 7.0 and later.
+     * @deprecated Deprecated in iOS 11.0. Use view.safeAreaLayoutGuide.topAnchor instead of topLayoutGuide.bottomAnchor
      */
+    @Deprecated
     @Property(selector = "topLayoutGuide")
     public native UILayoutSupport getTopLayoutGuide();
     /**
      * @since Available in iOS 7.0 and later.
+     * @deprecated Deprecated in iOS 11.0. Use view.safeAreaLayoutGuide.bottomAnchor instead of bottomLayoutGuide.topAnchor
      */
+    @Deprecated
     @Property(selector = "bottomLayoutGuide")
     public native UILayoutSupport getBottomLayoutGuide();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "additionalSafeAreaInsets")
+    public native @ByVal UIEdgeInsets getAdditionalSafeAreaInsets();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setAdditionalSafeAreaInsets:")
+    public native void setAdditionalSafeAreaInsets(@ByVal UIEdgeInsets v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "systemMinimumLayoutMargins")
+    public native @ByVal NSDirectionalEdgeInsets getSystemMinimumLayoutMargins();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "viewRespectsSystemMinimumLayoutMargins")
+    public native boolean isViewRespectsSystemMinimumLayoutMargins();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setViewRespectsSystemMinimumLayoutMargins:")
+    public native void setViewRespectsSystemMinimumLayoutMargins(boolean v);
     /**
      * @since Available in iOS 8.0 and later.
      */
@@ -384,6 +415,26 @@ import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
      */
     @Property(selector = "popoverPresentationController")
     public native UIPopoverPresentationController getPopoverPresentationController();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "childViewControllerForScreenEdgesDeferringSystemGestures")
+    public native UIViewController getChildViewControllerForScreenEdgesDeferringSystemGestures();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "preferredScreenEdgesDeferringSystemGestures")
+    public native UIRectEdge getPreferredScreenEdgesDeferringSystemGestures();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "childViewControllerForHomeIndicatorAutoHidden")
+    public native UIViewController getChildViewControllerForHomeIndicatorAutoHidden();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "prefersHomeIndicatorAutoHidden")
+    public native boolean prefersHomeIndicatorAutoHidden();
     /**
      * @since Available in iOS 9.0 and later.
      */
@@ -419,14 +470,14 @@ import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
     public native void setModalInPopover(boolean v);
     /**
      * @since Available in iOS 3.2 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Use UIViewController.preferredContentSize instead.
      */
     @Deprecated
     @Property(selector = "contentSizeForViewInPopover")
     public native @ByVal CGSize getContentSizeForViewInPopover();
     /**
      * @since Available in iOS 3.2 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Use UIViewController.preferredContentSize instead.
      */
     @Deprecated
     @Property(selector = "setContentSizeForViewInPopover:")
@@ -452,8 +503,18 @@ import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
     @Property(selector = "preferredFocusEnvironments")
     public native @org.robovm.rt.bro.annotation.Marshaler(NSArray.AsListMarshaler.class) List<UIFocusEnvironment> getPreferredFocusEnvironments();
     /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "parentFocusEnvironment")
+    public native UIFocusEnvironment getParentFocusEnvironment();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "focusItemContainer")
+    public native UIFocusItemContainer getFocusItemContainer();
+    /**
      * @since Available in iOS 9.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Use -preferredFocusEnvironments instead.
      */
     @Deprecated
     @Property(selector = "preferredFocusedView")
@@ -557,7 +618,7 @@ import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
     @Method(selector = "initWithNibName:bundle:")
     protected native @Pointer long init(String nibNameOrNil, NSBundle nibBundleOrNil);
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     @Method(selector = "loadView")
     public native void loadView();
     /**
@@ -668,21 +729,21 @@ import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
     public native void showDetailViewController(UIViewController vc, NSObject sender);
     /**
      * @since Available in iOS 2.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. Header views are animated along with the rest of the view hierarchy
      */
     @Deprecated
     @Method(selector = "rotatingHeaderView")
     public native UIView getRotatingHeaderView();
     /**
      * @since Available in iOS 2.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. Footer views are animated along with the rest of the view hierarchy
      */
     @Deprecated
     @Method(selector = "rotatingFooterView")
     public native UIView getRotatingFooterView();
     /**
      * @since Available in iOS 2.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. Implement viewWillTransitionToSize:withTransitionCoordinator: instead
      */
     @Deprecated
     @Method(selector = "willRotateToInterfaceOrientation:duration:")
@@ -696,7 +757,7 @@ import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
     public native void didRotate(UIInterfaceOrientation fromInterfaceOrientation);
     /**
      * @since Available in iOS 3.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. Implement viewWillTransitionToSize:withTransitionCoordinator: instead
      */
     @Deprecated
     @Method(selector = "willAnimateRotationToInterfaceOrientation:duration:")
@@ -745,7 +806,7 @@ import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
     public native UITraitCollection getOverrideTraitCollection(UIViewController childViewController);
     /**
      * @since Available in iOS 6.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. Manually forward viewWillTransitionToSize:withTransitionCoordinator: if necessary
      */
     @Deprecated
     @Method(selector = "shouldAutomaticallyForwardRotationMethods")
@@ -781,6 +842,16 @@ import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
     @Method(selector = "updateViewConstraints")
     public native void updateViewConstraints();
     /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "viewLayoutMarginsDidChange")
+    public native void viewLayoutMarginsDidChange();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "viewSafeAreaInsetsDidChange")
+    public native void viewSafeAreaInsetsDidChange();
+    /**
      * @since Available in iOS 9.0 and later.
      */
     @Method(selector = "addKeyCommand:")
@@ -800,6 +871,16 @@ import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
      */
     @Method(selector = "unregisterForPreviewingWithContext:")
     public native void unregisterForPreviewing(UIViewControllerPreviewing previewing);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setNeedsUpdateOfScreenEdgesDeferringSystemGestures")
+    public native void setNeedsUpdateOfScreenEdgesDeferringSystemGestures();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setNeedsUpdateOfHomeIndicatorAutoHidden")
+    public native void setNeedsUpdateOfHomeIndicatorAutoHidden();
     /**
      * @since Available in iOS 3.0 and later.
      */
@@ -822,6 +903,31 @@ import org.robovm.apple.mediaplayer.MPMoviePlayerViewController;
      */
     @Method(selector = "traitCollectionDidChange:")
     public native void traitCollectionDidChange(UITraitCollection previousTraitCollection);
+    /**
+     * @since Available in iOS 8.0 and later.
+     */
+    @Method(selector = "preferredContentSizeDidChangeForChildContentContainer:")
+    public native void preferredContentSizeDidChangeForChildContentContainer(UIContentContainer container);
+    /**
+     * @since Available in iOS 8.0 and later.
+     */
+    @Method(selector = "systemLayoutFittingSizeDidChangeForChildContentContainer:")
+    public native void systemLayoutFittingSizeDidChangeForChildContentContainer(UIContentContainer container);
+    /**
+     * @since Available in iOS 8.0 and later.
+     */
+    @Method(selector = "sizeForChildContentContainer:withParentContainerSize:")
+    public native @ByVal CGSize sizeForChildContentContainer(UIContentContainer container, @ByVal CGSize parentSize);
+    /**
+     * @since Available in iOS 8.0 and later.
+     */
+    @Method(selector = "viewWillTransitionToSize:withTransitionCoordinator:")
+    public native void viewWillTransitionToSize(@ByVal CGSize size, UIViewControllerTransitionCoordinator coordinator);
+    /**
+     * @since Available in iOS 8.0 and later.
+     */
+    @Method(selector = "willTransitionToTraitCollection:withTransitionCoordinator:")
+    public native void willTransitionToTraitCollection(UITraitCollection newCollection, UIViewControllerTransitionCoordinator coordinator);
     @Method(selector = "setNeedsFocusUpdate")
     public native void setNeedsFocusUpdate();
     @Method(selector = "updateFocusIfNeeded")

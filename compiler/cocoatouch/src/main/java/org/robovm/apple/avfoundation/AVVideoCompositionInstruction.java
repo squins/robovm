@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -49,7 +48,7 @@ import org.robovm.apple.audiounit.*;
 /*<annotations>*/@Library("AVFoundation") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/AVVideoCompositionInstruction/*</name>*/ 
     extends /*<extends>*/NSObject/*</extends>*/ 
-    /*<implements>*/implements AVVideoCompositionInstructionProtocol/*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding, AVVideoCompositionInstructionProtocol/*</implements>*/ {
 
     /*<ptr>*/public static class AVVideoCompositionInstructionPtr extends Ptr<AVVideoCompositionInstruction, AVVideoCompositionInstructionPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(AVVideoCompositionInstruction.class); }/*</bind>*/
@@ -58,6 +57,8 @@ import org.robovm.apple.audiounit.*;
     public AVVideoCompositionInstruction() {}
     protected AVVideoCompositionInstruction(Handle h, long handle) { super(h, handle); }
     protected AVVideoCompositionInstruction(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithCoder:")
+    public AVVideoCompositionInstruction(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "timeRange")
@@ -78,11 +79,16 @@ import org.robovm.apple.audiounit.*;
      */
     @Property(selector = "passthroughTrackID")
     public native int getPassthroughTrackID();
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     @Property(selector = "containsTweening")
     public native boolean containsTweening();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
-    
+    @Method(selector = "encodeWithCoder:")
+    public native void encode(NSCoder coder);
+    @Method(selector = "initWithCoder:")
+    protected native @Pointer long init(NSCoder decoder);
     /*</methods>*/
 }

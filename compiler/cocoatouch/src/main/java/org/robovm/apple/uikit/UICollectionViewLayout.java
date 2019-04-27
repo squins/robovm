@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -54,7 +57,7 @@ import org.robovm.apple.corelocation.*;
     protected UICollectionViewLayout(Handle h, long handle) { super(h, handle); }
     protected UICollectionViewLayout(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithCoder:")
-    public UICollectionViewLayout(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UICollectionViewLayout(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "collectionView")
@@ -68,11 +71,15 @@ import org.robovm.apple.corelocation.*;
     public static native Class<? extends UICollectionViewLayoutInvalidationContext> getInvalidationContextClass();
     @Property(selector = "collectionViewContentSize")
     public native @ByVal CGSize getCollectionViewContentSize();
+    @Property(selector = "developmentLayoutDirection")
+    public native UIUserInterfaceLayoutDirection getDevelopmentLayoutDirection();
+    @Property(selector = "flipsHorizontallyInOppositeLayoutDirection")
+    public native boolean flipsHorizontallyInOppositeLayoutDirection();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     @Method(selector = "invalidateLayout")
     public native void invalidateLayout();
     /**

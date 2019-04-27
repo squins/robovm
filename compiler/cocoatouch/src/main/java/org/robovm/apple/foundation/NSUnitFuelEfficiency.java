@@ -46,15 +46,19 @@ import org.robovm.apple.dispatch.*;
 /*<annotations>*/@Library("Foundation") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/NSUnitFuelEfficiency/*</name>*/ 
     extends /*<extends>*/NSDimension/*</extends>*/ 
-    /*<implements>*//*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding/*</implements>*/ {
 
     /*<ptr>*/public static class NSUnitFuelEfficiencyPtr extends Ptr<NSUnitFuelEfficiency, NSUnitFuelEfficiencyPtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(NSUnitFuelEfficiency.class); }/*</bind>*/
     /*<constants>*//*</constants>*/
     /*<constructors>*/
-    public NSUnitFuelEfficiency() {}
+    protected NSUnitFuelEfficiency() {}
     protected NSUnitFuelEfficiency(Handle h, long handle) { super(h, handle); }
     protected NSUnitFuelEfficiency(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithSymbol:converter:")
+    public NSUnitFuelEfficiency(String symbol, NSUnitConverter converter) { super(symbol, converter); }
+    @Method(selector = "initWithSymbol:")
+    public NSUnitFuelEfficiency(String symbol) { super(symbol); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "litersPer100Kilometers")

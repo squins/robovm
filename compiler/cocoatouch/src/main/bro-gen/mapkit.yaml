@@ -20,7 +20,10 @@ enums:
     MKMapType: { marshaler: ValuedEnum.AsMachineSizedUIntMarshaler }
     MKErrorCode: { marshaler: ValuedEnum.AsMachineSizedUIntMarshaler }
     MKSearchCompletionFilterType: {}
-        
+    MKAnnotationViewCollisionMode: {} #since 11.0
+    MKFeatureVisibility: {} #since 11.0
+    MKScaleViewAlignment: {} #since 11.0
+
 categories:
     NSValueMapKitGeometryExtensions: # DONE
         methods:
@@ -118,7 +121,10 @@ classes:
                 parameters:
                     completionHandler:
                         type: '@Block VoidBlock2<MKLocalSearchResponse, NSError>'
-    MKLocalSearchRequest: {} # DONE
+    MKLocalSearchRequest: #since 6.1
+        methods:
+            '-initWithCompletion:':
+                name: init
     MKLocalSearchResponse: # DONE
         properties:
             'mapItems':
@@ -236,6 +242,10 @@ classes:
                 name: getView
             '-dequeueReusableAnnotationViewWithIdentifier:':
                 name: dequeueReusableAnnotationView
+            '-dequeueReusableAnnotationViewWithIdentifier:forAnnotation:':
+                name: dequeueReusableAnnotationView
+            '-registerClass:forAnnotationViewWithReuseIdentifier:':
+                name: registerClass
             '-selectAnnotation:animated:':
                 trim_after_first_colon: true
             '-deselectAnnotation:animated:':
@@ -471,7 +481,26 @@ classes:
     MKLocalSearchCompletion: {}
     MKLocalSearchCompleter: {}
     MKDistanceFormatter: {}
-
+    MKClusterAnnotation: #since 11.0
+        methods:
+            '-initWithMemberAnnotations:':
+                name: init
+    MKCompassButton: #since 11.0
+        methods:
+            '+compassButtonWithMapView:':
+                name: create
+                constructor: true
+    MKMarkerAnnotationView: {} #since 11.0
+    MKScaleView: #since 11.0
+        methods:
+            '+scaleViewWithMapView:':
+                name: create
+                constructor: true
+    MKUserTrackingButton: #since 11.0
+        methods:
+            '+userTrackingButtonWithMapView:':
+                name: create
+                constructor: true
 protocols:
     MKAnnotation: {} # DONE
     MKMapViewDelegate: # DONE
@@ -529,6 +558,8 @@ protocols:
                 parameters:
                     overlayViews:
                         type: NSArray<MKOverlayView>
+            '-mapView:clusterAnnotationForMemberAnnotations:':
+                name: getClusterAnnotationForMemberAnnotations
     MKOverlay: # DONE
         methods:
             '-intersectsMapRect:':
@@ -715,12 +746,28 @@ values:
     MKAnnotationCalloutInfoDidChangeNotification: # Deprecated in favor of KVO notifications
         exclude: true
 
+    MKMapItemTypeIdentifier:
+        class: MKMapItem
+        name: getTypeIdentifier
+
+    MKMapViewDefaultAnnotationViewReuseIdentifier:
+        class: MKMapView
+        name: getDefaultAnnotationViewReuseIdentifier
+
+    MKMapViewDefaultClusterAnnotationViewReuseIdentifier:
+        class: MKMapView
+        name: getDefaultClusterAnnotationViewReuseIdentifier
+
     # Make sure we don't miss any values if new ones are introduced in a later version
     (k?MK.*):
         class: MapKit
         name: 'Value__#{g[0]}'
 
 constants:
+    MKFeatureDisplayPriority(.*):
+        class: MKFeatureDisplayPriority
+        name: '#{g[0]}'
+
     # Make sure we don't miss any constants if new ones are introduced in a later version
     (k?MK.*):
         class: MapKit

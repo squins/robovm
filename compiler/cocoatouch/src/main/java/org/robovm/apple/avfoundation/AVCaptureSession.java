@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -214,6 +213,11 @@ import org.robovm.apple.audiounit.*;
      */
     @GlobalValue(symbol="AVCaptureSessionInterruptionReasonKey", optional=true)
     protected static native NSString NotificationInterruptionReasonKey();
+    /**
+     * @since Available in iOS 11.1 and later.
+     */
+    @GlobalValue(symbol="AVCaptureSessionInterruptionSystemPressureStateKey", optional=true)
+    public static native String InterruptionSystemPressureStateKey();
     /**
      * @since Available in iOS 4.0 and later.
      */

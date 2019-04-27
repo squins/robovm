@@ -48,6 +48,16 @@ import org.robovm.apple.dispatch.*;
     
     /*</constructors>*/
     /*<properties>*/
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "tileWidth")
+    public native @MachineSizedUInt long getTileWidth();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "tileHeight")
+    public native @MachineSizedUInt long getTileHeight();
     @Property(selector = "device")
     public native MTLDevice getDevice();
     @Property(selector = "label")
@@ -152,14 +162,29 @@ import org.robovm.apple.dispatch.*;
     protected native void setVertexSamplerStates(MTLSamplerState.MTLSamplerStatePtr samplers, FloatPtr lodMinClamps, FloatPtr lodMaxClamps, @ByVal NSRange range);
     @Method(selector = "setViewport:")
     public native void setViewport(@ByVal MTLViewport viewport);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Method(selector = "setViewports:count:")
+    public native void setViewports(MTLViewport viewports, @MachineSizedUInt long count);
     @Method(selector = "setFrontFacingWinding:")
     public native void setFrontFacingWinding(MTLWinding frontFacingWinding);
     @Method(selector = "setCullMode:")
     public native void setCullMode(MTLCullMode cullMode);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setDepthClipMode:")
+    public native void setDepthClipMode(MTLDepthClipMode depthClipMode);
     @Method(selector = "setDepthBias:slopeScale:clamp:")
     public native void setDepthBias(float depthBias, float slopeScale, float clamp);
     @Method(selector = "setScissorRect:")
     public native void setScissorRect(@ByVal MTLScissorRect rect);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Method(selector = "setScissorRects:count:")
+    public native void setScissorRects(MTLScissorRect scissorRects, @MachineSizedUInt long count);
     @Method(selector = "setTriangleFillMode:")
     public native void setTriangleFillMode(MTLTriangleFillMode fillMode);
     /**
@@ -175,7 +200,7 @@ import org.robovm.apple.dispatch.*;
     @Method(selector = "setFragmentBufferOffset:atIndex:")
     public native void setFragmentBufferOffset(@MachineSizedUInt long offset, @MachineSizedUInt long index);
     @Method(selector = "setFragmentBuffers:offsets:withRange:")
-    protected native void setFragmentBuffers(MTLBuffer.MTLBufferPtr buffers, MachineSizedUIntPtr offset, @ByVal NSRange range);
+    protected native void setFragmentBuffers(MTLBuffer.MTLBufferPtr buffers, MachineSizedUIntPtr offsets, @ByVal NSRange range);
     @Method(selector = "setFragmentTexture:atIndex:")
     public native void setFragmentTexture(MTLTexture texture, @MachineSizedUInt long index);
     @Method(selector = "setFragmentTextures:withRange:")
@@ -216,6 +241,21 @@ import org.robovm.apple.dispatch.*;
      */
     @Method(selector = "setStencilStoreAction:")
     public native void setStencilStoreAction(MTLStoreAction storeAction);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setColorStoreActionOptions:atIndex:")
+    public native void setColorStoreActionOptions(MTLStoreActionOptions storeActionOptions, @MachineSizedUInt long colorAttachmentIndex);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setDepthStoreActionOptions:")
+    public native void setDepthStoreActionOptions(MTLStoreActionOptions storeActionOptions);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setStencilStoreActionOptions:")
+    public native void setStencilStoreActionOptions(MTLStoreActionOptions storeActionOptions);
     @Method(selector = "drawPrimitives:vertexStart:vertexCount:instanceCount:")
     public native void drawPrimitives(MTLPrimitiveType primitiveType, @MachineSizedUInt long vertexStart, @MachineSizedUInt long vertexCount, @MachineSizedUInt long instanceCount);
     @Method(selector = "drawPrimitives:vertexStart:vertexCount:")
@@ -270,10 +310,96 @@ import org.robovm.apple.dispatch.*;
     @Method(selector = "drawPatches:patchStart:patchCount:patchIndexBuffer:patchIndexBufferOffset:instanceCount:baseInstance:")
     public native void drawPatches(@MachineSizedUInt long numberOfPatchControlPoints, @MachineSizedUInt long patchStart, @MachineSizedUInt long patchCount, MTLBuffer patchIndexBuffer, @MachineSizedUInt long patchIndexBufferOffset, @MachineSizedUInt long instanceCount, @MachineSizedUInt long baseInstance);
     /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Method(selector = "drawPatches:patchIndexBuffer:patchIndexBufferOffset:indirectBuffer:indirectBufferOffset:")
+    public native void drawPatches(@MachineSizedUInt long numberOfPatchControlPoints, MTLBuffer patchIndexBuffer, @MachineSizedUInt long patchIndexBufferOffset, MTLBuffer indirectBuffer, @MachineSizedUInt long indirectBufferOffset);
+    /**
      * @since Available in iOS 10.0 and later.
      */
     @Method(selector = "drawIndexedPatches:patchStart:patchCount:patchIndexBuffer:patchIndexBufferOffset:controlPointIndexBuffer:controlPointIndexBufferOffset:instanceCount:baseInstance:")
     public native void drawIndexedPatches(@MachineSizedUInt long numberOfPatchControlPoints, @MachineSizedUInt long patchStart, @MachineSizedUInt long patchCount, MTLBuffer patchIndexBuffer, @MachineSizedUInt long patchIndexBufferOffset, MTLBuffer controlPointIndexBuffer, @MachineSizedUInt long controlPointIndexBufferOffset, @MachineSizedUInt long instanceCount, @MachineSizedUInt long baseInstance);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Method(selector = "drawIndexedPatches:patchIndexBuffer:patchIndexBufferOffset:controlPointIndexBuffer:controlPointIndexBufferOffset:indirectBuffer:indirectBufferOffset:")
+    public native void drawIndexedPatches(@MachineSizedUInt long numberOfPatchControlPoints, MTLBuffer patchIndexBuffer, @MachineSizedUInt long patchIndexBufferOffset, MTLBuffer controlPointIndexBuffer, @MachineSizedUInt long controlPointIndexBufferOffset, MTLBuffer indirectBuffer, @MachineSizedUInt long indirectBufferOffset);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setTileBytes:length:atIndex:")
+    public native void setTileBytes(VoidPtr bytes, @MachineSizedUInt long length, @MachineSizedUInt long index);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setTileBuffer:offset:atIndex:")
+    public native void setTileBuffer(MTLBuffer buffer, @MachineSizedUInt long offset, @MachineSizedUInt long index);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setTileBufferOffset:atIndex:")
+    public native void setTileBufferOffset(@MachineSizedUInt long offset, @MachineSizedUInt long index);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setTileBuffers:offsets:withRange:")
+    public native void setTileBuffers(MTLBuffer buffers, MachineSizedUIntPtr offsets, @ByVal NSRange range);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setTileTexture:atIndex:")
+    public native void setTileTexture(MTLTexture texture, @MachineSizedUInt long index);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setTileTextures:withRange:")
+    public native void setTileTextures(MTLTexture textures, @ByVal NSRange range);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setTileSamplerState:atIndex:")
+    public native void setTileSamplerState(MTLSamplerState sampler, @MachineSizedUInt long index);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setTileSamplerStates:withRange:")
+    public native void setTileSamplerStates(MTLSamplerState samplers, @ByVal NSRange range);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "setTileSamplerState:lodMinClamp:lodMaxClamp:atIndex:")
+    public native void setTileSamplerState(MTLSamplerState sampler, float lodMinClamp, float lodMaxClamp, @MachineSizedUInt long index);
+    @Method(selector = "setTileSamplerStates:lodMinClamps:lodMaxClamps:withRange:")
+    public native void setTileSamplerStates(MTLSamplerState samplers, FloatPtr lodMinClamps, FloatPtr lodMaxClamps, @ByVal NSRange range);
+    @Method(selector = "dispatchThreadsPerTile:")
+    public native void dispatchThreadsPerTile(@ByVal MTLSize threadsPerTile);
+    @Method(selector = "setThreadgroupMemoryLength:offset:atIndex:")
+    public native void setThreadgroupMemoryLength(@MachineSizedUInt long length, @MachineSizedUInt long offset, @MachineSizedUInt long index);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "useResource:usage:")
+    public native void useResource(MTLResource resource, MTLResourceUsage usage);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "useResources:count:usage:")
+    public native void useResources(MTLResource resources, @MachineSizedUInt long count, MTLResourceUsage usage);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "useHeap:")
+    public native void useHeap(MTLHeap heap);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "useHeaps:count:")
+    public native void useHeaps(MTLHeap heaps, @MachineSizedUInt long count);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Method(selector = "executeCommandsInBuffer:withRange:")
+    public native void executeCommandsInBuffer(MTLIndirectCommandBuffer indirectCommandBuffer, @ByVal NSRange executionRange);
     @Method(selector = "endEncoding")
     public native void endEncoding();
     @Method(selector = "insertDebugSignpost:")

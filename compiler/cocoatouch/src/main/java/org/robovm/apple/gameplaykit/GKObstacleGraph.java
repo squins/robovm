@@ -29,6 +29,8 @@ import org.robovm.rt.bro.annotation.*;
 import org.robovm.rt.bro.ptr.*;
 import org.robovm.apple.foundation.*;
 import org.robovm.apple.spritekit.*;
+import org.robovm.apple.scenekit.*;
+import org.robovm.apple.uikit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -52,6 +54,8 @@ import org.robovm.apple.spritekit.*;
     public GKObstacleGraph(NSArray<GKPolygonObstacle> obstacles, float bufferRadius) { super((SkipInit) null); initObject(init(obstacles, bufferRadius)); }
     @Method(selector = "initWithObstacles:bufferRadius:nodeClass:")
     public GKObstacleGraph(NSArray<GKPolygonObstacle> obstacles, float bufferRadius, Class<?> nodeClass) { super((SkipInit) null); initObject(init(obstacles, bufferRadius, nodeClass)); }
+    @Method(selector = "initWithNodes:")
+    public GKObstacleGraph(NSArray<GKGraphNode> nodes) { super(nodes); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "obstacles")

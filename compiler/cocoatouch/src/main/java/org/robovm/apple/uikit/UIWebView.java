@@ -34,12 +34,17 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
 /**
  * @since Available in iOS 2.0 and later.
+ * @deprecated Deprecated in iOS 12.0. No longer supported; please adopt WKWebView.
  */
+@Deprecated
 /*</javadoc>*/
 /*<annotations>*/@Library("UIKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/UIWebView/*</name>*/ 
@@ -53,13 +58,11 @@ import org.robovm.apple.corelocation.*;
     public UIWebView() {}
     protected UIWebView(Handle h, long handle) { super(h, handle); }
     protected UIWebView(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithFrame:")
+    public UIWebView(@ByVal CGRect frame) { super(frame); }
+    @Method(selector = "initWithCoder:")
+    public UIWebView(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
-    public UIWebView(CGRect frame) {
-        super(frame);
-    }
-    public UIWebView(NSCoder decoder) {
-        super(decoder);
-    }
     /*<properties>*/
     @Property(selector = "delegate")
     public native UIWebViewDelegate getDelegate();
@@ -261,5 +264,10 @@ import org.robovm.apple.corelocation.*;
     public native boolean shouldScrollToTop(UIScrollView scrollView);
     @Method(selector = "scrollViewDidScrollToTop:")
     public native void didScrollToTop(UIScrollView scrollView);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Method(selector = "scrollViewDidChangeAdjustedContentInset:")
+    public native void scrollViewDidChangeAdjustedContentInset(UIScrollView scrollView);
     /*</methods>*/
 }

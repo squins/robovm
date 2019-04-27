@@ -60,10 +60,15 @@ import org.robovm.apple.dispatch.*;
     @MachineSizedUInt long getSize();
     @Property(selector = "usedSize")
     @MachineSizedUInt long getUsedSize();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "currentAllocatedSize")
+    @MachineSizedUInt long getCurrentAllocatedSize();
     /*</properties>*/
     /*<methods>*/
     @Method(selector = "maxAvailableSizeWithAlignment:")
-    @MachineSizedUInt long maxAvailableSizeWithAlignment(@MachineSizedUInt long alignment);
+    @MachineSizedUInt long getMaxAvailableSize(@MachineSizedUInt long alignment);
     @Method(selector = "newBufferWithLength:options:")
     MTLBuffer newBuffer(@MachineSizedUInt long length, MTLResourceOptions options);
     @Method(selector = "newTextureWithDescriptor:")

@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -141,13 +144,11 @@ import org.robovm.apple.corelocation.*;
     public UIWindow() {}
     protected UIWindow(Handle h, long handle) { super(h, handle); }
     protected UIWindow(SkipInit skipInit) { super(skipInit); }
+    @Method(selector = "initWithFrame:")
+    public UIWindow(@ByVal CGRect frame) { super(frame); }
+    @Method(selector = "initWithCoder:")
+    public UIWindow(NSCoder decoder) { super(decoder); }
     /*</constructors>*/
-    public UIWindow(CGRect frame) {
-        super(frame);
-    }
-    public UIWindow(NSCoder decoder) {
-        super(decoder);
-    }
     /*<properties>*/
     /**
      * @since Available in iOS 3.2 and later.

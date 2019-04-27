@@ -91,6 +91,16 @@ import org.robovm.apple.dispatch.*;
     @Property(selector = "setWebpageURL:")
     public native void setWebpageURL(NSURL v);
     /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "referrerURL")
+    public native NSURL getReferrerURL();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setReferrerURL:")
+    public native void setReferrerURL(NSURL v);
+    /**
      * @since Available in iOS 9.0 and later.
      */
     @Property(selector = "expirationDate")
@@ -148,6 +158,26 @@ import org.robovm.apple.dispatch.*;
      */
     @Property(selector = "setEligibleForPublicIndexing:")
     public native void setEligibleForPublicIndexing(boolean v);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "isEligibleForPrediction")
+    public native boolean isEligibleForPrediction();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "setEligibleForPrediction:")
+    public native void setEligibleForPrediction(boolean v);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "persistentIdentifier")
+    public native NSString getPersistentIdentifier();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "setPersistentIdentifier:")
+    public native void setPersistentIdentifier(NSString v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
@@ -166,5 +196,15 @@ import org.robovm.apple.dispatch.*;
     public native void invalidate();
     @Method(selector = "getContinuationStreamsWithCompletionHandler:")
     public native void getContinuationStreams(@Block VoidBlock3<NSInputStream, NSOutputStream, NSError> completionHandler);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Method(selector = "deleteSavedUserActivitiesWithPersistentIdentifiers:completionHandler:")
+    public static native void deleteSavedUserActivities(NSArray<NSString> persistentIdentifiers, @Block Runnable handler);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Method(selector = "deleteAllSavedUserActivitiesWithCompletionHandler:")
+    public static native void deleteAllSavedUserActivities(@Block Runnable handler);
     /*</methods>*/
 }

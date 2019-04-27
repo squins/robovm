@@ -34,6 +34,9 @@ import org.robovm.apple.coredata.*;
 import org.robovm.apple.coreimage.*;
 import org.robovm.apple.coretext.*;
 import org.robovm.apple.corelocation.*;
+import org.robovm.apple.cloudkit.*;
+import org.robovm.apple.fileprovider.*;
+import org.robovm.apple.intents.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -56,7 +59,9 @@ import org.robovm.apple.corelocation.*;
     @Method(selector = "initWithFrame:inputViewStyle:")
     public UIInputView(@ByVal CGRect frame, UIInputViewStyle inputViewStyle) { super((SkipInit) null); initObject(init(frame, inputViewStyle)); }
     @Method(selector = "initWithCoder:")
-    public UIInputView(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public UIInputView(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
+    @Method(selector = "initWithFrame:")
+    public UIInputView(@ByVal CGRect frame) { super(frame); }
     /*</constructors>*/
     /*<properties>*/
     @Property(selector = "inputViewStyle")
@@ -77,6 +82,6 @@ import org.robovm.apple.corelocation.*;
     @Method(selector = "initWithFrame:inputViewStyle:")
     protected native @Pointer long init(@ByVal CGRect frame, UIInputViewStyle inputViewStyle);
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     /*</methods>*/
 }

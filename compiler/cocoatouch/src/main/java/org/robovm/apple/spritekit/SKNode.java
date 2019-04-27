@@ -36,6 +36,7 @@ import org.robovm.apple.avfoundation.*;
 import org.robovm.apple.glkit.*;
 import org.robovm.apple.scenekit.*;
 import org.robovm.apple.gameplaykit.*;
+import org.robovm.apple.metal.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -44,7 +45,7 @@ import org.robovm.apple.gameplaykit.*;
 /*<annotations>*/@Library("SpriteKit") @NativeClass/*</annotations>*/
 /*<visibility>*/public/*</visibility>*/ class /*<name>*/SKNode/*</name>*/ 
     extends /*<extends>*/UIResponder/*</extends>*/ 
-    /*<implements>*/implements NSCoding, UIFocusItem/*</implements>*/ {
+    /*<implements>*/implements NSSecureCoding, UIFocusItem/*</implements>*/ {
 
     /*<ptr>*/public static class SKNodePtr extends Ptr<SKNode, SKNodePtr> {}/*</ptr>*/
     /*<bind>*/static { ObjCRuntime.bind(SKNode.class); }/*</bind>*/
@@ -55,8 +56,19 @@ import org.robovm.apple.gameplaykit.*;
     protected SKNode(Handle h, long handle) { super(h, handle); }
     protected SKNode(SkipInit skipInit) { super(skipInit); }
     @Method(selector = "initWithCoder:")
-    public SKNode(NSCoder aDecoder) { super((SkipInit) null); initObject(init(aDecoder)); }
+    public SKNode(NSCoder decoder) { super((SkipInit) null); initObject(init(decoder)); }
     public SKNode(String filename) { super((Handle) null, create(filename)); retain(getHandle()); }
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    public SKNode(String filename, NSSet<?> classes) throws NSErrorException {
+       this(filename, classes, new NSError.NSErrorPtr());
+    }
+    private SKNode(String filename, NSSet<?> classes, NSError.NSErrorPtr ptr) throws NSErrorException {
+       super((Handle) null, create(filename, classes, ptr));
+       retain(getHandle());
+       if (ptr.get() != null) { throw new NSErrorException(ptr.get()); }
+    }
     /*</constructors>*/
     public SKNode(File file) {
         this(file.getAbsolutePath());
@@ -104,6 +116,16 @@ import org.robovm.apple.gameplaykit.*;
     public native boolean isUserInteractionEnabled();
     @Property(selector = "setUserInteractionEnabled:")
     public native void setUserInteractionEnabled(boolean v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "focusBehavior")
+    public native SKNodeFocusBehavior getFocusBehavior();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setFocusBehavior:")
+    public native void setFocusBehavior(SKNodeFocusBehavior v);
     @Property(selector = "parent")
     public native SKNode getParent();
     @Property(selector = "children")
@@ -130,13 +152,39 @@ import org.robovm.apple.gameplaykit.*;
     public native NSArray<SKConstraint> getConstraints();
     @Property(selector = "setConstraints:")
     public native void setConstraints(NSArray<SKConstraint> v);
+    /**
+     * @since Available in iOS 10.0 and later.
+     * @deprecated Deprecated in iOS 10.0.
+     */
+    @Deprecated
+    @Property(selector = "attributeValues")
+    public native NSDictionary<NSString, SKAttributeValue> getAttributeValues();
+    /**
+     * @since Available in iOS 10.0 and later.
+     * @deprecated Deprecated in iOS 10.0.
+     */
+    @Deprecated
+    @Property(selector = "setAttributeValues:")
+    public native void setAttributeValues(NSDictionary<NSString, SKAttributeValue> v);
+    @Property(selector = "supportsSecureCoding")
+    public static native boolean supportsSecureCoding();
     @Property(selector = "canBecomeFocused")
     public native boolean canBecomeFocused();
     @Property(selector = "preferredFocusEnvironments")
     public native @org.robovm.rt.bro.annotation.Marshaler(NSArray.AsListMarshaler.class) List<UIFocusEnvironment> getPreferredFocusEnvironments();
     /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "parentFocusEnvironment")
+    public native UIFocusEnvironment getParentFocusEnvironment();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "focusItemContainer")
+    public native UIFocusItemContainer getFocusItemContainer();
+    /**
      * @since Available in iOS 9.0 and later.
-     * @deprecated Deprecated in iOS 10.0.
+     * @deprecated Deprecated in iOS 10.0. Use -preferredFocusEnvironments instead.
      */
     @Deprecated
     @Property(selector = "preferredFocusedView")
@@ -145,9 +193,23 @@ import org.robovm.apple.gameplaykit.*;
     /*<members>*//*</members>*/
     /*<methods>*/
     @Method(selector = "initWithCoder:")
-    protected native @Pointer long init(NSCoder aDecoder);
+    protected native @Pointer long init(NSCoder decoder);
     @Method(selector = "calculateAccumulatedFrame")
     public native @ByVal CGRect calculateAccumulatedFrame();
+    /**
+     * @since Available in iOS 10.0 and later.
+     * @deprecated Deprecated in iOS 10.0.
+     */
+    @Deprecated
+    @Method(selector = "valueForAttributeNamed:")
+    public native SKAttributeValue valueForAttributeNamed(String key);
+    /**
+     * @since Available in iOS 10.0 and later.
+     * @deprecated Deprecated in iOS 10.0.
+     */
+    @Deprecated
+    @Method(selector = "setValue:forAttributeNamed:")
+    public native void setValue(SKAttributeValue value, String key);
     @Method(selector = "setScale:")
     public native void setScale(@MachineSizedFloat double scale);
     @Method(selector = "addChild:")
@@ -206,8 +268,15 @@ import org.robovm.apple.gameplaykit.*;
     public native boolean equalsTo(SKNode node);
     @Method(selector = "nodeWithFileNamed:")
     protected static native @Pointer long create(String filename);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Method(selector = "nodeWithFileNamed:securelyWithClasses:andError:")
+    protected static native @Pointer long create(String filename, NSSet<?> classes, NSError.NSErrorPtr error);
     @Method(selector = "encodeWithCoder:")
     public native void encode(NSCoder coder);
+    @Method(selector = "didHintFocusMovement:")
+    public native void didHintFocusMovement(UIFocusMovementHint hint);
     @Method(selector = "setNeedsFocusUpdate")
     public native void setNeedsFocusUpdate();
     @Method(selector = "updateFocusIfNeeded")

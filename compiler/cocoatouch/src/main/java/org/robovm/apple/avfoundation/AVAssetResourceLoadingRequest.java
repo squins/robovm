@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -99,6 +98,11 @@ import org.robovm.apple.audiounit.*;
      */
     @Property(selector = "setRedirect:")
     public native void setRedirect(NSURLRequest v);
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "requestor")
+    public native AVAssetResourceLoadingRequestor getRequestor();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

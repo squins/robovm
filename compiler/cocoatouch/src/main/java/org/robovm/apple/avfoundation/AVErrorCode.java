@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -85,7 +84,7 @@ public enum /*<name>*/AVErrorCode/*</name>*/ implements NSErrorCode {
     ApplicationIsNotAuthorized(-11836L),
     /**
      * @since Available in iOS 4.3 and later.
-     * @deprecated Deprecated in iOS 9.0.
+     * @deprecated Deprecated in iOS 9.0. AVCaptureSession no longer produces an AVCaptureSessionRuntimeErrorNotification with this error. See AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableInBackground.
      */
     @Deprecated
     DeviceIsNotAvailableInBackground(-11837L),
@@ -138,7 +137,39 @@ public enum /*<name>*/AVErrorCode/*</name>*/ implements NSErrorCode {
     /**
      * @since Available in iOS 10.0 and later.
      */
-    OperationNotAllowed(-11862L);
+    OperationNotAllowed(-11862L),
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    ContentIsUnavailable(-11863L),
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    FormatUnsupported(-11864L),
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    MalformedDepth(-11865L),
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    ContentNotUpdated(-11866L),
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    NoLongerPlayable(-11867L),
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    NoCompatibleAlternatesForExternalDisplay(-11868L),
+    /**
+     * @since Available in iOS 11.2 and later.
+     */
+    NoSourceTrack(-11869L),
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    ExternalPlaybackNotSupportedForAsset(-11870L);
     /*</values>*/
 
     /*<bind>*/

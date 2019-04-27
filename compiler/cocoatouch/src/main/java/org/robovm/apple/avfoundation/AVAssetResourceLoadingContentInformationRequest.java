@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -64,6 +63,11 @@ import org.robovm.apple.audiounit.*;
     public native String getContentType();
     @Property(selector = "setContentType:")
     public native void setContentType(String v);
+    /**
+     * @since Available in iOS 11.2 and later.
+     */
+    @Property(selector = "allowedContentTypes")
+    public native NSArray<NSString> getAllowedContentTypes();
     @Property(selector = "contentLength")
     public native long getContentLength();
     @Property(selector = "setContentLength:")

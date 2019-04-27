@@ -63,6 +63,16 @@ import org.robovm.apple.dispatch.*;
     @Property(selector = "setThreadGroupSizeIsMultipleOfThreadExecutionWidth:")
     public native void setThreadGroupSizeMultipleOfThreadExecutionWidth(boolean v);
     /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "maxTotalThreadsPerThreadgroup")
+    public native @MachineSizedUInt long getMaxTotalThreadsPerThreadgroup();
+    /**
+     * @since Available in iOS 12.0 and later.
+     */
+    @Property(selector = "setMaxTotalThreadsPerThreadgroup:")
+    public native void setMaxTotalThreadsPerThreadgroup(@MachineSizedUInt long v);
+    /**
      * @since Available in iOS 10.0 and later.
      */
     @Property(selector = "stageInputDescriptor")
@@ -72,6 +82,11 @@ import org.robovm.apple.dispatch.*;
      */
     @Property(selector = "setStageInputDescriptor:")
     public native void setStageInputDescriptor(MTLStageInputOutputDescriptor v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "buffers")
+    public native MTLPipelineBufferDescriptorArray getBuffers();
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/

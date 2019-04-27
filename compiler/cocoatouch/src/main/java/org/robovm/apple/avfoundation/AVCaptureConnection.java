@@ -38,7 +38,6 @@ import org.robovm.apple.coremedia.*;
 import org.robovm.apple.corevideo.*;
 import org.robovm.apple.mediatoolbox.*;
 import org.robovm.apple.audiotoolbox.*;
-import org.robovm.apple.audiounit.*;
 /*</imports>*/
 
 /*<javadoc>*/
@@ -111,42 +110,42 @@ import org.robovm.apple.audiounit.*;
     public native void setVideoOrientation(AVCaptureVideoOrientation v);
     /**
      * @since Available in iOS 5.0 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Use AVCaptureDevice's activeFormat.videoSupportedFrameRateRanges instead.
      */
     @Deprecated
     @Property(selector = "isVideoMinFrameDurationSupported")
     public native boolean supportsVideoMinFrameDuration();
     /**
      * @since Available in iOS 5.0 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Use AVCaptureDevice's activeVideoMinFrameDuration instead.
      */
     @Deprecated
     @Property(selector = "videoMinFrameDuration")
     public native @ByVal CMTime getVideoMinFrameDuration();
     /**
      * @since Available in iOS 5.0 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Use AVCaptureDevice's activeVideoMinFrameDuration instead.
      */
     @Deprecated
     @Property(selector = "setVideoMinFrameDuration:")
     public native void setVideoMinFrameDuration(@ByVal CMTime v);
     /**
      * @since Available in iOS 5.0 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Use AVCaptureDevice's activeFormat.videoSupportedFrameRateRanges instead.
      */
     @Deprecated
     @Property(selector = "isVideoMaxFrameDurationSupported")
     public native boolean supportsVideoMaxFrameDuration();
     /**
      * @since Available in iOS 5.0 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Use AVCaptureDevice's activeVideoMaxFrameDuration instead.
      */
     @Deprecated
     @Property(selector = "videoMaxFrameDuration")
     public native @ByVal CMTime getVideoMaxFrameDuration();
     /**
      * @since Available in iOS 5.0 and later.
-     * @deprecated Deprecated in iOS 7.0.
+     * @deprecated Deprecated in iOS 7.0. Use AVCaptureDevice's activeVideoMaxFrameDuration instead.
      */
     @Deprecated
     @Property(selector = "setVideoMaxFrameDuration:")
@@ -188,25 +187,40 @@ import org.robovm.apple.audiounit.*;
     public native boolean supportsVideoStabilization();
     /**
      * @since Available in iOS 6.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. Use activeVideoStabilizationMode instead.
      */
     @Deprecated
     @Property(selector = "isVideoStabilizationEnabled")
     public native boolean isVideoStabilizationEnabled();
     /**
      * @since Available in iOS 6.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. Use preferredVideoStabilizationMode instead.
      */
     @Deprecated
     @Property(selector = "enablesVideoStabilizationWhenAvailable")
     public native boolean enablesVideoStabilizationWhenAvailable();
     /**
      * @since Available in iOS 6.0 and later.
-     * @deprecated Deprecated in iOS 8.0.
+     * @deprecated Deprecated in iOS 8.0. Use preferredVideoStabilizationMode instead.
      */
     @Deprecated
     @Property(selector = "setEnablesVideoStabilizationWhenAvailable:")
     public native void setEnablesVideoStabilizationWhenAvailable(boolean v);
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "isCameraIntrinsicMatrixDeliverySupported")
+    public native boolean isCameraIntrinsicMatrixDeliverySupported();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "isCameraIntrinsicMatrixDeliveryEnabled")
+    public native boolean isCameraIntrinsicMatrixDeliveryEnabled();
+    /**
+     * @since Available in iOS 11.0 and later.
+     */
+    @Property(selector = "setCameraIntrinsicMatrixDeliveryEnabled:")
+    public native void setCameraIntrinsicMatrixDeliveryEnabled(boolean v);
     /*</properties>*/
     /*<members>*//*</members>*/
     /*<methods>*/
